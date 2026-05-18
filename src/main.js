@@ -65,11 +65,7 @@ heroTl
   .from('#heroRole',  { y: 20, opacity: 0, duration: .5 }, '-=.2')
   .from('#heroCta',   { y: 20, opacity: 0, duration: .5 }, '-=.2');
 
-/* Work preview windows — staggered fly-in from corners */
-gsap.from('#ww1', { x: -60, y: -30, opacity: 0, rotation: -10, duration: 1,   delay: .9,  ease: 'back.out(1.4)' });
-gsap.from('#ww2', { x: -50, y:  40, opacity: 0, rotation:  8,  duration: 1,   delay: 1.1, ease: 'back.out(1.4)' });
-gsap.from('#ww3', { x:  60, y: -30, opacity: 0, rotation:  10, duration: 1,   delay: 1.0, ease: 'back.out(1.4)' });
-gsap.from('#ww4', { x:  50, y:  40, opacity: 0, rotation: -8,  duration: 1,   delay: 1.2, ease: 'back.out(1.4)' });
+
 
 
 /* ===================== SCROLL ANIMATIONS ===================== */
@@ -231,6 +227,31 @@ document.querySelectorAll('.work-card').forEach(card => {
     gsap.to(card.querySelector('.work-card-accent'), { width: 80, height: 80, duration: .25, ease: 'power1.out' });
   });
 });
+
+/* ===================== SHOWCASE CARD — exact-width hover ===================== */
+// Computes width = rowHeight × imageAspectRatio so object-fit:cover
+// fills edge-to-edge with zero letterboxing and zero top/bottom cropping.
+document.querySelectorAll('.sc-card').forEach(card => {
+  const img = card.querySelector('img');
+  const bar = card.querySelector('.sc-bar');
+
+  const expand = () => {
+    const rowH  = card.closest('.showcase-track-wrap').offsetHeight;
+    const barH  = bar ? bar.offsetHeight : 0;
+    const imgH  = rowH - barH;
+    const ratio = img.naturalWidth / img.naturalHeight || 1;
+    const w     = Math.min(Math.round(imgH * ratio), 700);
+    card.style.width = w + 'px';
+  };
+
+  if (img.complete && img.naturalWidth) {
+    card.addEventListener('mouseenter', expand);
+  } else {
+    img.addEventListener('load', () => card.addEventListener('mouseenter', expand));
+  }
+  card.addEventListener('mouseleave', () => { card.style.width = ''; });
+});
+
 
 /* ===================== NAV LINKS hover pixel flash ===================== */
 document.querySelectorAll('.nav-link').forEach(link => {

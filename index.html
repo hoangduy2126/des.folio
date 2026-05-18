@@ -41,11 +41,11 @@
 
       <!-- Left: Identity -->
       <div class="p-identity">
-        <div class="hero-tag mono-text" id="heroTag">[ DESIGN_PORTFOLIO_v2.0 ]</div>
+        <div class="hero-tag mono-text" id="heroTag">DUNNO WHO YOU'RE, BUT WELCOME!</div>
         <h1 class="hero-name pixel-text" id="heroName">
-          <span class="name-line">YOUR</span>
-          <span class="name-line accent-line">NAME</span>
-          <span class="name-line">HERE</span>
+          <span class="name-line">HI!</span>
+          <span class="name-line accent-line">RANDOMMOEE06</span>
+          <span class="name-line">IS HERE</span>
         </h1>
         <p class="hero-role mono-text" id="heroRole">
           <span class="role-prefix">~$ </span>
@@ -64,7 +64,7 @@
         <!-- Quick stats strip -->
         <div class="stats-strip">
           <div class="stat-item">
-            <span class="stat-num pixel-text accent2">4+</span>
+            <span class="stat-num pixel-text accent2">1+</span>
             <span class="stat-label mono-text">YRS_EXP</span>
           </div>
           <div class="stat-sep">|</div>
@@ -78,37 +78,101 @@
             <span class="stat-label mono-text">OPEN_TO_WORK</span>
           </div>
         </div>
+
+        <!-- Social Links (Minimalist Pixel Logos) -->
+        <div class="hero-social">
+          <a href="https://www.facebook.com/moeedidauuu/" target="_blank" rel="noopener" class="hero-social-link hover-fb pixel-text" title="Facebook">FACEBOOK</a>
+          <a href="https://www.instagram.com/06s_.moe" target="_blank" rel="noopener" class="hero-social-link hover-ig pixel-text" title="Instagram">INSTAGRAM</a>
+          <a href="https://www.youtube.com/@randommoee06" target="_blank" rel="noopener" class="hero-social-link hover-yt pixel-text" title="YouTube">YOUTUBE</a>
+          <a href="https://www.linkedin.com/in/duy-hoàng-720699405/" target="_blank" rel="noopener" class="hero-social-link hover-in pixel-text" title="LinkedIn">LINKEDIN</a>
+          <a href="https://www.behance.net/hoangduy2126" target="_blank" rel="noopener" class="hero-social-link hover-be pixel-text" title="Behance">BEHANCE</a>
+        </div>
       </div>
 
-      <!-- Right: Floating work polaroids -->
+      <!-- Right: Horizontal scrolling project showcase -->
       <div class="p-works-preview" aria-hidden="true">
-        <div class="ww ww-1" id="ww1">
-          <div class="ww-bar">
-            <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
-            <span class="ww-title mono-text">c3vt_logo.png</span>
+        <div class="showcase-label mono-text">// SELECTED_WORKS</div>
+
+        <!-- Row 1 — scrolls left -->
+        <div class="showcase-track-wrap">
+          <div class="showcase-track" id="track1">
+            <!-- set A -->
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">crclogo.png</span></div>
+              <img src="/works/crclogo.png" alt="CRC Logo Design">
+            </div>
+            <div class="sc-card sc-tall">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh1.png</span></div>
+              <img src="/works/anh1.png" alt="Project Anh1">
+            </div>
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">recruitsov.png</span></div>
+              <img src="/works/recruitsov.png" alt="Recruit SOV Campaign">
+            </div>
+
+            <!-- set B (duplicate for seamless loop) -->
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">crclogo.png</span></div>
+              <img src="/works/crclogo.png" alt="CRC Logo Design">
+            </div>
+            <div class="sc-card sc-tall">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh1.png</span></div>
+              <img src="/works/anh1.png" alt="Project Anh1">
+            </div>
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">recruitsov.png</span></div>
+              <img src="/works/recruitsov.png" alt="Recruit SOV Campaign">
+            </div>
+
           </div>
-          <div class="ww-img"><img src="/works/c3vt.jpg" alt="C3VT Robotic Club Logo"></div>
         </div>
-        <div class="ww ww-2" id="ww2">
-          <div class="ww-bar">
-            <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
-            <span class="ww-title mono-text">hoa_phuong_do.jpg</span>
+
+        <!-- Row 2 — scrolls right (reverse) -->
+        <div class="showcase-track-wrap">
+          <div class="showcase-track showcase-track--rev" id="track2">
+            <!-- set A -->
+            <div class="sc-card sc-tall">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">sovposter.png</span></div>
+              <img src="/works/sovposter.png" alt="SOV Poster Design">
+            </div>
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">tsmt.png</span></div>
+              <img src="/works/tsmt.png" alt="TSMT Project">
+            </div>
+            <div class="sc-card sc-tall">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh2fix.png</span></div>
+              <img src="/works/anh2fix.png" alt="Project Anh2">
+            </div>
+            <div class="sc-card sc-short">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul233h.png</span></div>
+              <img src="/works/ul233h.png" alt="UL233H Design">
+            </div>
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul23fc.png</span></div>
+              <img src="/works/ul23fc.png" alt="UL23FC Design">
+            </div>
+            <!-- set B duplicate -->
+            <div class="sc-card sc-tall">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">sovposter.png</span></div>
+              <img src="/works/sovposter.png" alt="SOV Poster Design">
+            </div>
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">tsmt.png</span></div>
+              <img src="/works/tsmt.png" alt="TSMT Project">
+            </div>
+            <div class="sc-card sc-tall">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh2fix.png</span></div>
+              <img src="/works/anh2fix.png" alt="Project Anh2">
+            </div>
+            <div class="sc-card sc-short">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul233h.png</span></div>
+              <img src="/works/ul233h.png" alt="UL233H Design">
+            </div>
+            <div class="sc-card sc-wide">
+              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul23fc.png</span></div>
+              <img src="/works/ul23fc.png" alt="UL23FC Design">
+            </div>
           </div>
-          <div class="ww-img"><img src="/works/hoa-phuong.jpg" alt="Hoa Phuong Do"></div>
-        </div>
-        <div class="ww ww-3" id="ww3">
-          <div class="ww-bar">
-            <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
-            <span class="ww-title mono-text">coreteam_2023.png</span>
-          </div>
-          <div class="ww-img"><img src="/works/coreteam.jpg" alt="Coreteam 2023"></div>
-        </div>
-        <div class="ww ww-4" id="ww4">
-          <div class="ww-bar">
-            <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
-            <span class="ww-title mono-text">thanh_nien_2023.jpg</span>
-          </div>
-          <div class="ww-img"><img src="/works/thanh-nien.jpg" alt="Thanh Nien 2023"></div>
         </div>
       </div>
     </section>
@@ -241,7 +305,7 @@
             <p class="work-desc">Full brand identity for a creative agency — logo, type system &amp; guidelines.</p>
             <div class="work-footer">
               <a href="#" class="work-link mono-text">VIEW →</a>
-              <a href="#" class="work-link mono-text">BEHANCE →</a>
+              <a href="https://github.com/hoangduy2126/BTL" target="_blank" rel="noopener" class="work-link mono-text">GITHUB →</a>
             </div>
             <div class="work-card-accent" aria-hidden="true"></div>
           </article>
@@ -317,16 +381,16 @@
 
     <!-- BOTTOM CLOCK BAR -->
     <div class="topbar" id="topbar" aria-label="Current time and date">
-      <div class="topbar-left">
-        <span class="topbar-tz mono-text">GMT+7 · INDOCHINA</span>
-        <span class="topbar-sep" aria-hidden="true">|</span>
-        <span class="topbar-date mono-text" id="tbDate">SUN · 18 MAY 2026</span>
-      </div>
-      <div class="topbar-clock">
-        <span class="topbar-digits mono-text" id="tbDigits">00<span class="topbar-colon">:</span>00<span class="topbar-colon">:</span>00</span>
-        <span class="topbar-ampm mono-text" id="tbAmpm">AM</span>
-      </div>
       <div class="topbar-cal" id="tbCal" aria-label="Mini calendar"></div>
+      <div class="topbar-right">
+        <span class="topbar-tz">GMT+7 · INDOCHINA</span>
+        <span class="topbar-sep" aria-hidden="true">|</span>
+        <span class="topbar-date" id="tbDate">SUN · 18 MAY 2026</span>
+        <div class="topbar-clock">
+          <span class="topbar-digits" id="tbDigits">00<span class="topbar-colon">:</span>00<span class="topbar-colon">:</span>00</span>
+          <span class="topbar-ampm" id="tbAmpm">AM</span>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>
