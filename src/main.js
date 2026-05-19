@@ -1,9 +1,22 @@
+import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import './style.css';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
+
+/* ===================== LENIS SMOOTH SCROLL ===================== */
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo easing
+  orientation: 'vertical',
+  smoothWheel: true,
+  syncTouch: false,
+});
+
+// Wire Lenis into GSAP ticker so ScrollTrigger stays in sync
+gsap.ticker.add(time => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
 
 /* ===================== CURSOR ===================== */
 const cursor = document.getElementById('cursor');
@@ -260,7 +273,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
   });
 });
 
-/* ===================== SMOOTH SCROLL ===================== */
+/* ===================== SMOOTH SCROLL (via Lenis) ===================== */
 const NAV_H = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -269,13 +282,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-
-    const targetY = target.getBoundingClientRect().top + window.scrollY - NAV_H;
-
-    gsap.to(window, {
-      scrollTo: { y: targetY, autoKill: false },
-      duration: 1.1,
-      ease: 'power3.inOut',
-    });
+    lenis.scrollTo(target, { offset: -NAV_H, duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
   });
 });
