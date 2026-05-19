@@ -81,7 +81,7 @@ body {
   background: var(--accent2); transition: width .25s;
 }
 .nav-link:hover::after { width: 100%; }
-.nav-status { display: flex; align-items: center; gap: .5rem; font-size: .72rem; }
+.nav-status { display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 600; }
 .status-dot {
   width: 8px; height: 8px; background: var(--green);
   animation: pulse 2s ease-in-out infinite;
@@ -130,8 +130,14 @@ body {
 }
 .name-line { display: block; overflow: hidden; }
 .accent-line {
-  background: linear-gradient(90deg, #2056D4, #8BB4F0);
+  background: linear-gradient(90deg, #2056D4, #8BB4F0, #2056D4);
+  background-size: 200% auto;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: gradient-flow 3s linear infinite;
+}
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 .hero-role { font-size: .95rem; color: var(--muted); margin-bottom: 2rem; }
 .cursor-blink { animation: blink .8s step-end infinite; }
@@ -213,9 +219,11 @@ body {
   align-items: stretch; /* cards stretch to fill the row height fully */
   height: 100%;
   width: max-content;
+  will-change: transform;
   animation: marquee-left 20s linear infinite;
 }
 .showcase-track--rev {
+  will-change: transform;
   animation: marquee-right 25s linear infinite;
 }
 /* Pause when any card inside is hovered */
@@ -225,12 +233,12 @@ body {
 }
 
 @keyframes marquee-left {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 @keyframes marquee-right {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0%   { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 /* Individual showcase card — OS window style */
@@ -298,18 +306,23 @@ body {
 /* ===== BUTTONS ===== */
 .btn-primary {
   display: inline-flex; align-items: center; gap: .5rem;
-  font-family: var(--font-mono); font-size: .8rem; letter-spacing: .1em;
+  font-family: var(--font-mono); font-size: 1rem; font-weight: 600; letter-spacing: .1em;
   background: var(--text); color: var(--bg);
   border: 2px solid var(--text); padding: .65rem 1.25rem;
   text-decoration: none; cursor: none;
   transition: background .2s, color .2s, transform .15s;
   position: relative; overflow: hidden;
 }
-.btn-primary:hover { background: linear-gradient(135deg, #2056D4, #8BB4F0); border-color: #2056D4; transform: translate(-2px,-2px); }
+.btn-primary:hover { 
+  background: linear-gradient(135deg, #2056D4, #8BB4F0, #2056D4); 
+  background-size: 200% auto;
+  animation: gradient-flow 3s linear infinite;
+  border-color: #2056D4; transform: translate(-2px,-2px); 
+}
 .btn-primary::after { content:''; position:absolute; bottom:-2px; right:-2px; width:6px; height:6px; background: var(--pink); }
 .btn-ghost {
   display: inline-flex; align-items: center; gap: .5rem;
-  font-family: var(--font-mono); font-size: .8rem; letter-spacing: .1em;
+  font-family: var(--font-mono); font-size: 1rem; font-weight: 600; letter-spacing: .1em;
   background: transparent; color: var(--text);
   border: 2px solid var(--text); padding: .65rem 1.25rem;
   text-decoration: none; cursor: none;
@@ -322,7 +335,6 @@ body {
   display: grid;
   grid-template-columns: 1.1fr 1fr 1.2fr;
   grid-template-rows: 1fr auto;
-  min-height: calc(100vh - var(--nav-h));
 }
 
 /* Bento cell base */
@@ -334,7 +346,7 @@ body {
 }
 .bento-cell:last-child { border-right: none; }
 .cell-label {
-  font-size: .55rem; letter-spacing: .14em;
+  font-size: .85rem; font-weight: 600; letter-spacing: .1em;
   color: var(--accent2); margin-bottom: 1.5rem;
   padding-bottom: .5rem;
   border-bottom: 1px solid var(--bg2);
@@ -404,7 +416,6 @@ body {
 .panel--works {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  min-height: calc(100vh - var(--nav-h));
   border-bottom: none;
 }
 .cell-works { grid-column: 1; border-right: 2px solid var(--border); border-bottom: none; }
@@ -443,8 +454,10 @@ body {
   font-size: 1.15rem; font-weight: 600; line-height: 1.45; margin-bottom: 1.25rem;
 }
 .contact-headline .accent2 {
-  background: linear-gradient(90deg, #2056D4, #8BB4F0);
+  background: linear-gradient(90deg, #2056D4, #8BB4F0, #2056D4);
+  background-size: 200% auto;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: gradient-flow 3s linear infinite;
 }
 .contact-form { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
 .form-group  { display: flex; flex-direction: column; gap: .3rem; }
