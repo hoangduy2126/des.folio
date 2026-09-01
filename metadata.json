@@ -1,0 +1,8 @@
+{
+  "name": "des.folio",
+  "description": "Graphic Designer portfolio focusing on Social Media and Branding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

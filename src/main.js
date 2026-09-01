@@ -18,29 +18,35 @@ const lenis = new Lenis({
 gsap.ticker.add(time => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
-/* ===================== CURSOR ===================== */
+/* ===================== CURSOR (Desktop Only) ===================== */
 const cursor = document.getElementById('cursor');
 const trail  = document.getElementById('cursorTrail');
-let mx = 0, my = 0, tx = 0, ty = 0;
+const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  gsap.to(cursor, { x: mx, y: my, duration: 0 });
-  gsap.to(trail,  { x: mx, y: my, duration: 0.12 });
-});
+if (!isTouchDevice && cursor && trail) {
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    gsap.to(cursor, { x: mx, y: my, duration: 0 });
+    gsap.to(trail,  { x: mx, y: my, duration: 0.12 });
+  });
 
-document.querySelectorAll('a, button, .tool-chip, .work-card, .social-link, .timeline-card').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-});
+  document.querySelectorAll('a, button, .tool-chip, .work-card, .social-link, .timeline-card, .skill-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+  });
+} else if (cursor && trail) {
+  cursor.style.display = 'none';
+  trail.style.display = 'none';
+}
 
 /* ===================== TYPEWRITER ===================== */
 const roles = [
-  'UI / UX Designer_',
+  'Graphic Designer_',
+  'Social & Branding Specialist_',
   'Brand Identity Designer_',
   'Visual Storyteller_',
-  'Motion Designer_',
-  'Creative Director_',
+  'Key Visual & Poster Artist_',
 ];
 let roleIdx = 0, charIdx = 0, deleting = false;
 const tw = document.getElementById('typewriter');
@@ -63,11 +69,42 @@ typeLoop();
 /* ===================== PIXEL AVATAR CANVAS ===================== */
 // Avatar removed — hero is now centered text-only
 
+/* ===================== THEME TOGGLE (DAY / NIGHT) ===================== */
+const themeToggleBtn = document.getElementById('themeToggle');
+const themeToggleIcon = document.getElementById('themeToggleIcon');
+const themeToggleLabel = document.getElementById('themeToggleLabel');
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('des_theme', theme);
+  const isDark = theme === 'dark';
+  if (themeToggleIcon) themeToggleIcon.textContent = isDark ? '🌙' : '☀️';
+  if (themeToggleLabel) themeToggleLabel.textContent = isDark ? 'NIGHT' : 'DAY';
+  if (themeToggleBtn) {
+    themeToggleBtn.setAttribute('title', isDark ? 'Active: Night mode (click to switch)' : 'Active: Day mode (click to switch)');
+    themeToggleBtn.setAttribute('aria-label', isDark ? 'Switch to Day mode' : 'Switch to Night mode');
+  }
+}
+
+// Initial theme determination
+const savedTheme = localStorage.getItem('des_theme');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+applyTheme(initialTheme);
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+  });
+}
+
 /* ===================== NAV SCROLL ===================== */
 ScrollTrigger.create({
   start: 80,
-  onEnter: () => document.getElementById('nav').style.boxShadow = '0 4px 16px rgba(0,0,0,.08)',
-  onLeaveBack: () => document.getElementById('nav').style.boxShadow = 'none',
+  onEnter: () => document.getElementById('nav')?.classList.add('scrolled'),
+  onLeaveBack: () => document.getElementById('nav')?.classList.remove('scrolled'),
 });
 
 /* ===================== HERO ENTRANCE ===================== */
@@ -97,21 +134,6 @@ gsap.utils.toArray('.work-card').forEach((card, i) => {
     y: 20, opacity: 0, duration: .5, delay: i * .08, ease: 'power2.out'
   });
 });
-
-
-
-// Skill bars animate when visible
-const skillObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.querySelectorAll('.skill-fill').forEach(fill => {
-      const pct = fill.dataset.pct;
-      gsap.to(fill, { width: pct + '%', duration: 1.3, ease: 'power2.out', delay: .1 });
-    });
-    skillObserver.unobserve(e.target);
-  });
-}, { threshold: 0.3 });
-document.querySelectorAll('.cell-skills').forEach(g => skillObserver.observe(g));
 
 /* ===================== PARALLAX GRID BG ===================== */
 gsap.to('.hero-grid-bg', {
@@ -241,7 +263,55 @@ document.querySelectorAll('.work-card').forEach(card => {
   });
 });
 
-/* ===================== SHOWCASE CARD — exact-width hover ===================== */
+/* ===================== MOBILE NAVIGATION DRAWER ===================== */
+const mobileMenuBtn   = document.getElementById('mobileMenuBtn');
+const mobileMenuIcon  = document.getElementById('mobileMenuIcon');
+const mobileMenuLabel = document.getElementById('mobileMenuLabel');
+const mobileDrawer    = document.getElementById('mobileDrawer');
+
+function toggleMobileMenu(force) {
+  if (!mobileDrawer || !mobileMenuBtn) return;
+  const isOpen = typeof force === 'boolean' ? force : !mobileDrawer.classList.contains('open');
+  if (isOpen) {
+    mobileDrawer.classList.add('open');
+    mobileDrawer.setAttribute('aria-hidden', 'false');
+    mobileMenuBtn.classList.add('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    if (mobileMenuIcon) mobileMenuIcon.textContent = '✕';
+    if (mobileMenuLabel) mobileMenuLabel.textContent = 'CLOSE';
+  } else {
+    mobileDrawer.classList.remove('open');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+    mobileMenuBtn.classList.remove('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    if (mobileMenuIcon) mobileMenuIcon.textContent = '☰';
+    if (mobileMenuLabel) mobileMenuLabel.textContent = 'MENU';
+  }
+}
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMobileMenu();
+  });
+}
+
+// Close mobile drawer on clicking links or outside
+document.querySelectorAll('.mobile-nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    toggleMobileMenu(false);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+    if (!mobileDrawer.contains(e.target) && !mobileMenuBtn?.contains(e.target)) {
+      toggleMobileMenu(false);
+    }
+  }
+});
+
+/* ===================== SHOWCASE CARD — exact-width hover / tap ===================== */
 // Computes width = rowHeight × imageAspectRatio so object-fit:cover
 // fills edge-to-edge with zero letterboxing and zero top/bottom cropping.
 document.querySelectorAll('.sc-card').forEach(card => {
@@ -249,22 +319,40 @@ document.querySelectorAll('.sc-card').forEach(card => {
   const bar = card.querySelector('.sc-bar');
 
   const expand = () => {
-    const rowH  = card.closest('.showcase-track-wrap').offsetHeight;
+    const rowH  = card.closest('.showcase-track-wrap')?.offsetHeight || 280;
     const barH  = bar ? bar.offsetHeight : 0;
     const imgH  = rowH - barH;
-    const ratio = img.naturalWidth / img.naturalHeight || 1;
-    const w     = Math.min(Math.round(imgH * ratio), 700);
+    const ratio = (img && img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 1;
+    const maxW  = window.innerWidth <= 600 ? 320 : 700;
+    const w     = Math.min(Math.round(imgH * ratio), maxW);
     card.style.width = w + 'px';
   };
 
-  if (img.complete && img.naturalWidth) {
-    card.addEventListener('mouseenter', expand);
-  } else {
-    img.addEventListener('load', () => card.addEventListener('mouseenter', expand));
-  }
-  card.addEventListener('mouseleave', () => { card.style.width = ''; });
-});
+  const collapse = () => {
+    card.style.width = '';
+  };
 
+  if (img) {
+    if (img.complete && img.naturalWidth) {
+      card.addEventListener('mouseenter', expand);
+    } else {
+      img.addEventListener('load', () => card.addEventListener('mouseenter', expand));
+    }
+    card.addEventListener('mouseleave', collapse);
+
+    // On touch devices, allow tapping to toggle expand state
+    card.addEventListener('click', () => {
+      if (window.matchMedia('(hover: none)').matches) {
+        if (card.style.width) {
+          collapse();
+        } else {
+          document.querySelectorAll('.sc-card').forEach(c => { if (c !== card) c.style.width = ''; });
+          expand();
+        }
+      }
+    });
+  }
+});
 
 /* ===================== NAV LINKS hover pixel flash ===================== */
 document.querySelectorAll('.nav-link').forEach(link => {
@@ -274,14 +362,16 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 /* ===================== SMOOTH SCROLL (via Lenis) ===================== */
-const NAV_H = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+const NAV_H = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
     const id = anchor.getAttribute('href');
+    if (!id || id === '#') return;
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target, { offset: -NAV_H, duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    const navOffset = window.innerWidth <= 600 ? 48 : NAV_H;
+    lenis.scrollTo(target, { offset: -navOffset, duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
   });
 });

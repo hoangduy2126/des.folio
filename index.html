@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Designer portfolio — UI/UX, branding, visual design & creative direction." />
-    <title>des.folio — Design Portfolio</title>
+    <meta name="description" content="Graphic Designer portfolio focusing on Social Media and Branding." />
+    <title>des.folio — Graphic Designer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -23,15 +23,68 @@
         <span class="pixel-text">DES</span><span class="dot">.</span><span class="pixel-text accent">FOLIO</span>
       </div>
       <ul class="nav-links">
-        <li><a href="#panel-info"  class="nav-link mono-text" data-text="INFO">INFO</a></li>
-        <li><a href="#panel-works" class="nav-link mono-text" data-text="WORKS">WORKS</a></li>
-        <li><a href="#panel-works" class="nav-link mono-text" data-text="CONTACT">CONTACT</a></li>
+        <li><a href="#panel-info"  class="nav-link pixel-text" data-text="INFO">INFO</a></li>
+        <li><a href="#panel-works" class="nav-link pixel-text" data-text="WORKS">WORKS</a></li>
+        <li><a href="#panel-works" class="nav-link pixel-text" data-text="CONTACT">CONTACT</a></li>
       </ul>
-      <div class="nav-status">
-        <span class="status-dot"></span>
-        <span class="mono-text">AVAILABLE</span>
+      <div class="nav-actions">
+        <div class="nav-status">
+          <span class="status-dot"></span>
+          <span class="pixel-text">AVAILABLE</span>
+        </div>
+        <button class="theme-toggle pixel-text" id="themeToggle" aria-label="Switch theme mode" title="Active: Day mode (click to switch)">
+          <span class="theme-toggle-icon" id="themeToggleIcon">☀️</span>
+          <span class="theme-toggle-label" id="themeToggleLabel">DAY</span>
+        </button>
+        <button class="mobile-menu-btn pixel-text" id="mobileMenuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <span class="mobile-menu-icon" id="mobileMenuIcon">☰</span>
+          <span class="mobile-menu-label" id="mobileMenuLabel">MENU</span>
+        </button>
       </div>
     </nav>
+
+    <!-- MOBILE NAV DRAWER -->
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer-inner">
+        <div class="mobile-drawer-header">
+          <span class="pixel-text mobile-drawer-title">// NAVIGATION</span>
+          <span class="mono-text mobile-drawer-status">[ ONLINE ]</span>
+        </div>
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="#hero" class="mobile-nav-link" data-text="01_SHOWCASE">
+              <span class="mono-text nav-num">01</span>
+              <span class="pixel-text nav-title">SHOWCASE</span>
+              <span class="mono-text nav-arrow">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="#panel-info" class="mobile-nav-link" data-text="02_INFO">
+              <span class="mono-text nav-num">02</span>
+              <span class="pixel-text nav-title">INFO &amp; SKILLS</span>
+              <span class="mono-text nav-arrow">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="#panel-works" class="mobile-nav-link" data-text="03_WORKS">
+              <span class="mono-text nav-num">03</span>
+              <span class="pixel-text nav-title">MY WORKS</span>
+              <span class="mono-text nav-arrow">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contact" class="mobile-nav-link" data-text="04_CONTACT">
+              <span class="mono-text nav-num">04</span>
+              <span class="pixel-text nav-title">CONTACT</span>
+              <span class="mono-text nav-arrow">→</span>
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-drawer-footer">
+          <span class="mono-text">// RANDOMMOEE06 · GRAPHIC DESIGNER</span>
+        </div>
+      </div>
+    </div>
 
     <!-- ╔══════════════════════════════╗ -->
     <!-- ║  PANEL 1 · HERO              ║ -->
@@ -203,7 +256,7 @@
       <div class="bento-cell cell-about">
         <div class="cell-label mono-text">01_ABOUT</div>
         <p class="about-bio">
-          Hey, I'm a <strong>UI/UX designer</strong> &amp; <strong>visual storyteller</strong> crafting meaningful digital experiences through thoughtful design and pixel-perfect execution.
+          Hey, I'm a <strong>Graphic Designer</strong> specializing in <strong>Social Media &amp; Branding</strong> — crafting bold brand identities, high-impact social visuals, and cohesive design systems with pixel-sharp execution.
         </p>
         <div class="about-quick-info">
           <div class="info-row">
@@ -216,7 +269,7 @@
           </div>
           <div class="info-row">
             <span class="info-key mono-text">FOCUS</span>
-            <span class="info-val">UI/UX · Branding · Motion</span>
+            <span class="info-val">Social Media · Branding · Key Visuals</span>
           </div>
         </div>
       </div>
@@ -243,49 +296,90 @@
         </div>
       </div>
 
-      <!-- C: Skills -->
+      <!-- C: Skills (Visualized) -->
       <div class="bento-cell cell-skills">
         <div class="cell-label mono-text">03_SKILLS</div>
-        <div class="skills-compact">
-          <div class="skill-bar-item">
-            <div class="skill-label"><span class="mono-text">UI Design</span><span class="skill-pct mono-text accent2">95%</span></div>
-            <div class="skill-track"><div class="skill-fill" data-pct="95"></div></div>
+        <div class="skills-visual-grid">
+          <div class="skill-card">
+            <div class="skill-card-head">
+              <span class="skill-badge pixel-text accent">BRAND</span>
+              <span class="skill-code mono-text">01</span>
+            </div>
+            <div class="skill-name">Brand Identity</div>
+            <div class="skill-desc">Logos, visual systems, guidelines &amp; brand assets.</div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-label"><span class="mono-text">UX Research</span><span class="skill-pct mono-text accent2">85%</span></div>
-            <div class="skill-track"><div class="skill-fill" data-pct="85"></div></div>
+          <div class="skill-card">
+            <div class="skill-card-head">
+              <span class="skill-badge pixel-text pink">SOCIAL</span>
+              <span class="skill-code mono-text">02</span>
+            </div>
+            <div class="skill-name">Social Media Design</div>
+            <div class="skill-desc">Feed aesthetics, campaign posts, carousels &amp; banners.</div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-label"><span class="mono-text">Prototyping</span><span class="skill-pct mono-text accent2">90%</span></div>
-            <div class="skill-track"><div class="skill-fill" data-pct="90"></div></div>
+          <div class="skill-card">
+            <div class="skill-card-head">
+              <span class="skill-badge pixel-text yellow">POSTER</span>
+              <span class="skill-code mono-text">03</span>
+            </div>
+            <div class="skill-name">Key Visual &amp; Poster</div>
+            <div class="skill-desc">Event artwork, promo posters &amp; print collaterals.</div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-label"><span class="mono-text">Brand Identity</span><span class="skill-pct mono-text pink">92%</span></div>
-            <div class="skill-track skill-track--pink"><div class="skill-fill" data-pct="92"></div></div>
+          <div class="skill-card">
+            <div class="skill-card-head">
+              <span class="skill-badge pixel-text cyan">TYPE</span>
+              <span class="skill-code mono-text">04</span>
+            </div>
+            <div class="skill-name">Typography &amp; Layout</div>
+            <div class="skill-desc">Grid systems, editorial styling &amp; font hierarchy.</div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-label"><span class="mono-text">Typography</span><span class="skill-pct mono-text pink">90%</span></div>
-            <div class="skill-track skill-track--pink"><div class="skill-fill" data-pct="90"></div></div>
+          <div class="skill-card">
+            <div class="skill-card-head">
+              <span class="skill-badge pixel-text purple">STORY</span>
+              <span class="skill-code mono-text">05</span>
+            </div>
+            <div class="skill-name">Visual Storytelling</div>
+            <div class="skill-desc">Creative direction, concept art &amp; engagement assets.</div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-label"><span class="mono-text">Motion Design</span><span class="skill-pct mono-text pink">78%</span></div>
-            <div class="skill-track skill-track--pink"><div class="skill-fill" data-pct="78"></div></div>
+          <div class="skill-card">
+            <div class="skill-card-head">
+              <span class="skill-badge pixel-text green">MOTION</span>
+              <span class="skill-code mono-text">06</span>
+            </div>
+            <div class="skill-name">Motion &amp; Video</div>
+            <div class="skill-desc">Reels, short-form editing &amp; dynamic motion graphics.</div>
           </div>
         </div>
       </div>
 
       <!-- D: Tools -->
       <div class="bento-cell cell-tools">
-        <div class="cell-label mono-text">TOOLS</div>
-        <div class="tool-chips">
-          <span class="tool-chip">Figma</span>
-          <span class="tool-chip">Adobe XD</span>
-          <span class="tool-chip">Illustrator</span>
-          <span class="tool-chip">Photoshop</span>
-          <span class="tool-chip">After Effects</span>
-          <span class="tool-chip">Blender</span>
-          <span class="tool-chip">Framer</span>
-          <span class="tool-chip">Spline</span>
+        <div class="cell-label mono-text">04_TOOLS_&amp;_TECH</div>
+        <div class="tools-container">
+          <div class="tools-group">
+            <div class="tools-group-title mono-text">// DESIGN_&amp;_CREATIVE</div>
+            <div class="tool-chips">
+              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Photoshop</span>
+              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Illustrator</span>
+              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>InDesign</span>
+              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Premiere Pro</span>
+              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>After Effects</span>
+              <span class="tool-chip"><span class="tool-dot dot-affinity"></span>Affinity</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-title mono-text">// CAD_&amp;_3D</div>
+            <div class="tool-chips">
+              <span class="tool-chip"><span class="tool-dot dot-cad"></span>SolidWorks</span>
+              <span class="tool-chip"><span class="tool-dot dot-cad"></span>AutoCAD</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-title mono-text">// BASIC_CODING</div>
+            <div class="tool-chips">
+              <span class="tool-chip"><span class="tool-dot dot-code"></span>C++</span>
+              <span class="tool-chip"><span class="tool-dot dot-code"></span>Python</span>
+            </div>
+          </div>
         </div>
       </div>
 
