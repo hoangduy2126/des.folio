@@ -1,465 +1,1665 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Graphic Designer portfolio focusing on Social Media and Branding." />
-    <title>des.folio — Graphic Designer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="/assets/26LOGO.png" />
-    <link rel="stylesheet" href="/src/style.css" />
-  </head>
-  <body>
 
-    <div class="noise-overlay" aria-hidden="true"></div>
-    <div class="cursor" id="cursor" aria-hidden="true"></div>
-    <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" id="metaDescription" content="Graphic Designer portfolio focusing on Social Media and Branding." />
+  <title id="pageTitle">des.folio — Graphic Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/png" href="/assets/26LOGO.png" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
 
-    <!-- NAV -->
-    <nav class="nav" id="nav">
-      <div class="nav-logo">
-        <span class="pixel-text">DES</span><span class="dot">.</span><span class="pixel-text accent">FOLIO</span>
+<body>
+
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo">
+      <a href="#hero" class="nav-logo-link"><span class="pixel-text">DES</span><span class="dot">.</span><span
+          class="pixel-text accent">FOLIO</span></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero" class="nav-link pixel-text" data-panel="0" data-i18n="nav_showcase" data-text="HOME">HOME</a>
+      </li>
+      <li><a href="#panel-info" class="nav-link pixel-text" data-panel="1" data-i18n="nav_info"
+          data-text="INFO">INFO</a></li>
+      <li><a href="#panel-works" class="nav-link pixel-text" data-panel="2" data-i18n="nav_works"
+          data-text="WORKS">WORKS</a></li>
+      <li><a href="#contact" class="nav-link pixel-text" data-panel="3" data-i18n="nav_contact"
+          data-text="CONTACT">CONTACT</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="mobile-menu-btn pixel-text" id="mobileMenuBtn" aria-label="Toggle Navigation Menu"
+        aria-expanded="false">
+        <span class="mobile-menu-icon" id="mobileMenuIcon">
+          <svg class="btn-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </span>
+        <span class="mobile-menu-label" id="mobileMenuLabel" data-i18n="menu">MENU</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HORIZONTAL SCROLL PROGRESS BAR -->
+  <div class="scroll-progress-bar" id="progressBar" aria-hidden="true">
+    <div class="scroll-progress-fill" id="progressFill"></div>
+  </div>
+
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="mobile-drawer-inner">
+      <div class="mobile-drawer-header">
+        <span class="pixel-text mobile-drawer-title" data-i18n="mobile_nav_title">// NAVIGATION</span>
+        <button class="lang-toggle pixel-text mobile-lang-toggle" id="mobileLangToggle" aria-label="Switch language">
+          <span class="btn-icon lang-icon" id="mobileLangToggleIcon" aria-hidden="true">
+            <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </span>
+          <span class="lang-toggle-label" id="mobileLangToggleLabel">VN</span>
+        </button>
       </div>
-      <ul class="nav-links">
-        <li><a href="#panel-info"  class="nav-link pixel-text" data-text="INFO">INFO</a></li>
-        <li><a href="#panel-works" class="nav-link pixel-text" data-text="WORKS">WORKS</a></li>
-        <li><a href="#panel-works" class="nav-link pixel-text" data-text="CONTACT">CONTACT</a></li>
+      <ul class="mobile-nav-links">
+        <li>
+          <a href="#hero" class="mobile-nav-link" data-panel="0" data-text="01_HOME">
+            <span class="mono-text nav-num">01</span>
+            <span class="pixel-text nav-title" data-i18n="nav_showcase">HOME</span>
+            <span class="mono-text nav-arrow">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="#panel-info" class="mobile-nav-link" data-panel="1" data-text="02_INFO">
+            <span class="mono-text nav-num">02</span>
+            <span class="pixel-text nav-title" data-i18n="nav_info">INFO &amp; SKILLS</span>
+            <span class="mono-text nav-arrow">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="#panel-works" class="mobile-nav-link" data-panel="2" data-text="03_WORKS">
+            <span class="mono-text nav-num">03</span>
+            <span class="pixel-text nav-title" data-i18n="nav_works">MY WORKS</span>
+            <span class="mono-text nav-arrow">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="mobile-nav-link" data-panel="3" data-text="04_CONTACT">
+            <span class="mono-text nav-num">04</span>
+            <span class="pixel-text nav-title" data-i18n="nav_contact">CONTACT</span>
+            <span class="mono-text nav-arrow">→</span>
+          </a>
+        </li>
       </ul>
-      <div class="nav-actions">
-        <div class="nav-status">
-          <span class="status-dot"></span>
-          <span class="pixel-text">AVAILABLE</span>
-        </div>
-        <button class="theme-toggle pixel-text" id="themeToggle" aria-label="Switch theme mode" title="Active: Day mode (click to switch)">
-          <span class="theme-toggle-icon" id="themeToggleIcon">☀️</span>
-          <span class="theme-toggle-label" id="themeToggleLabel">DAY</span>
-        </button>
-        <button class="mobile-menu-btn pixel-text" id="mobileMenuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
-          <span class="mobile-menu-icon" id="mobileMenuIcon">☰</span>
-          <span class="mobile-menu-label" id="mobileMenuLabel">MENU</span>
-        </button>
+      <div class="mobile-drawer-footer">
+        <span class="mono-text" data-i18n="mobile_drawer_footer">// RANDOMMOEE06 · GRAPHIC DESIGNER</span>
       </div>
-    </nav>
+    </div>
+  </div>
 
-    <!-- MOBILE NAV DRAWER -->
-    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-      <div class="mobile-drawer-inner">
-        <div class="mobile-drawer-header">
-          <span class="pixel-text mobile-drawer-title">// NAVIGATION</span>
-          <span class="mono-text mobile-drawer-status">[ ONLINE ]</span>
+  <!-- ╔══════════════════════════════════════════════╗ -->
+  <!-- ║  MAIN HORIZONTAL VIEWPORT & TRACK           ║ -->
+  <!-- ╚══════════════════════════════════════════════╝ -->
+  <main class="horizontal-viewport" id="horizontalViewport">
+    <div class="horizontal-track" id="horizontalTrack">
+
+      <!-- ╔══════════════════════════════╗ -->
+      <!-- ║  PANEL 1 · HERO & SHOWCASE   ║ -->
+      <!-- ╚══════════════════════════════╝ -->
+      <section class="panel panel--hero" id="hero" data-panel-index="0" data-panel-name="HOME">
+        <div class="hero-grid-bg" aria-hidden="true"></div>
+        <div class="scanline" aria-hidden="true"></div>
+
+        <!-- Left: Identity -->
+        <div class="p-identity">
+          <div class="card-window-bar">
+            <div class="ww-dots">
+              <span class="ww-dot r"></span>
+              <span class="ww-dot y"></span>
+              <span class="ww-dot g"></span>
+            </div>
+            <span class="window-title mono-text">hoangduy_identity.sys</span>
+            <span class="window-id mono-text">01</span>
+          </div>
+          <div class="p-identity-body">
+            <div class="hero-tag mono-text" id="heroTag" data-i18n="hero_tag">DUNNO WHO YOU ARE, BUT WELCOME!</div>
+            <h1 class="hero-name pixel-text" id="heroName">
+              <span class="name-line" data-i18n="hero_hi">HI!</span>
+              <span class="name-line accent-line">RANDOMMOEE06</span>
+              <span class="name-line" data-i18n="hero_is_here">IS HERE</span>
+            </h1>
+            <p class="hero-role mono-text" id="heroRole">
+              <span class="role-prefix">~$ </span>
+              <span class="typewriter" id="typewriter"></span>
+              <span class="cursor-blink">▊</span>
+            </p>
+            <div class="hero-cta" id="heroCta">
+              <a href="#panel-works" class="btn-primary" id="btnViewWork" data-panel="2">
+                <span class="btn-text" data-i18n="btn_view_work">VIEW_WORK</span>
+                <span class="btn-icon">
+                  <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </span>
+              </a>
+              <a href="#contact" class="btn-ghost" id="btnContact" data-panel="3">
+                <span class="btn-text" data-i18n="btn_contact">GET_IN_TOUCH</span>
+                <span class="btn-icon">
+                  <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <!-- Quick stats strip -->
+            <div class="stats-strip">
+              <div class="stat-item">
+                <span class="stat-num pixel-text accent2">1+</span>
+                <span class="stat-label mono-text" data-i18n="stat_exp">YRS_EXP</span>
+              </div>
+              <div class="stat-sep">|</div>
+              <div class="stat-item">
+                <span class="stat-num pixel-text accent2">20+</span>
+                <span class="stat-label mono-text" data-i18n="stat_projects">PROJECTS</span>
+              </div>
+              <div class="stat-sep">|</div>
+              <div class="stat-item">
+                <span class="stat-num pixel-text pink">✓</span>
+                <span class="stat-label mono-text" data-i18n="stat_open">OPEN_TO_WORK</span>
+              </div>
+            </div>
+
+            <!-- Social Links (Minimalist Pixel Logos) -->
+            <div class="hero-social">
+              <a href="https://www.facebook.com/moeedidauuu/" target="_blank" rel="noopener"
+                class="hero-social-link hover-fb pixel-text" title="Facebook">FACEBOOK</a>
+              <a href="https://www.instagram.com/06s_.moe" target="_blank" rel="noopener"
+                class="hero-social-link hover-ig pixel-text" title="Instagram">INSTAGRAM</a>
+              <a href="https://www.youtube.com/@randommoee06" target="_blank" rel="noopener"
+                class="hero-social-link hover-yt pixel-text" title="YouTube">YOUTUBE</a>
+              <a href="https://www.linkedin.com/in/duy-hoàng-720699405/" target="_blank" rel="noopener"
+                class="hero-social-link hover-in pixel-text" title="LinkedIn">LINKEDIN</a>
+              <a href="https://www.behance.net/hoangduy2126" target="_blank" rel="noopener"
+                class="hero-social-link hover-be pixel-text" title="Behance">BEHANCE</a>
+            </div>
+          </div>
         </div>
-        <ul class="mobile-nav-links">
-          <li>
-            <a href="#hero" class="mobile-nav-link" data-text="01_SHOWCASE">
-              <span class="mono-text nav-num">01</span>
-              <span class="pixel-text nav-title">SHOWCASE</span>
-              <span class="mono-text nav-arrow">→</span>
-            </a>
-          </li>
-          <li>
-            <a href="#panel-info" class="mobile-nav-link" data-text="02_INFO">
-              <span class="mono-text nav-num">02</span>
-              <span class="pixel-text nav-title">INFO &amp; SKILLS</span>
-              <span class="mono-text nav-arrow">→</span>
-            </a>
-          </li>
-          <li>
-            <a href="#panel-works" class="mobile-nav-link" data-text="03_WORKS">
-              <span class="mono-text nav-num">03</span>
-              <span class="pixel-text nav-title">MY WORKS</span>
-              <span class="mono-text nav-arrow">→</span>
-            </a>
-          </li>
-          <li>
-            <a href="#contact" class="mobile-nav-link" data-text="04_CONTACT">
-              <span class="mono-text nav-num">04</span>
-              <span class="pixel-text nav-title">CONTACT</span>
-              <span class="mono-text nav-arrow">→</span>
-            </a>
-          </li>
-        </ul>
-        <div class="mobile-drawer-footer">
-          <span class="mono-text">// RANDOMMOEE06 · GRAPHIC DESIGNER</span>
+
+        <!-- Right: Horizontal scrolling project showcase preview -->
+        <div class="p-works-preview" aria-hidden="true">
+          <div class="showcase-label mono-text" data-i18n="showcase_reel_label">// LIVE_SHOWCASE_REEL</div>
+
+          <!-- Row 1 — scrolls left -->
+          <div class="showcase-track-wrap">
+            <div class="showcase-track" id="track1">
+              <!-- set A -->
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">crc_banner.png</span>
+                </div>
+                <img src="/assets/crc_banner.png" alt="CRC Robotics Panoramic Banner" loading="eager">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">anh1.png</span>
+                </div>
+                <img src="/assets/anh1.png" alt="Our Memories Yearbook Spread" loading="eager">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">sov_milestone.png</span>
+                </div>
+                <img src="/assets/sov_milestone.png" alt="SOV Milestone Celebration" loading="eager">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">w25poster.png</span>
+                </div>
+                <img src="/assets/w25poster.png" alt="W25 Event Poster" loading="eager">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">recruitsov.png</span>
+                </div>
+                <img src="/assets/recruitsov.png" alt="Recruit SOV Campaign" loading="eager">
+              </div>
+              <div class="sc-card sc-short">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">ul23fc.png</span>
+                </div>
+                <img src="/assets/ul23fc.png" alt="Unleash Program Visual" loading="eager">
+              </div>
+
+              <!-- set B (duplicate for seamless loop) -->
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">crc_banner.png</span>
+                </div>
+                <img src="/assets/crc_banner.png" alt="CRC Robotics Panoramic Banner" loading="lazy">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">anh1.png</span>
+                </div>
+                <img src="/assets/anh1.png" alt="Our Memories Yearbook Spread" loading="lazy">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">sov_milestone.png</span>
+                </div>
+                <img src="/assets/sov_milestone.png" alt="SOV Milestone Celebration" loading="lazy">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">w25poster.png</span>
+                </div>
+                <img src="/assets/w25poster.png" alt="W25 Event Poster" loading="lazy">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">recruitsov.png</span>
+                </div>
+                <img src="/assets/recruitsov.png" alt="Recruit SOV Campaign" loading="lazy">
+              </div>
+              <div class="sc-card sc-short">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">ul23fc.png</span>
+                </div>
+                <img src="/assets/ul23fc.png" alt="Unleash Program Visual" loading="lazy">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 — scrolls right (reverse) -->
+          <div class="showcase-track-wrap">
+            <div class="showcase-track showcase-track--rev" id="track2">
+              <!-- set A -->
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">sovposter.png</span>
+                </div>
+                <img src="/assets/sovposter.png" alt="SOV Poster Key Visual" loading="eager">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">tsmt.png</span>
+                </div>
+                <img src="/assets/tsmt.png" alt="TSMT Campaign Project" loading="eager">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">crc_gen1.png</span>
+                </div>
+                <img src="/assets/crc_gen1.png" alt="CRC Robotics Gen 1 Recruitment Poster" loading="eager">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">anh2fix.png</span>
+                </div>
+                <img src="/assets/anh2fix.png" alt="Our Memories Photo Essay" loading="eager">
+              </div>
+              <div class="sc-card sc-short">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">ul233h.png</span>
+                </div>
+                <img src="/assets/ul233h.png" alt="UL233H Countdown" loading="eager">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">unleash_core.png</span>
+                </div>
+                <img src="/assets/unleash_core.png" alt="Unleash Coreteam Recruitment" loading="eager">
+              </div>
+
+              <!-- set B duplicate -->
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">sovposter.png</span>
+                </div>
+                <img src="/assets/sovposter.png" alt="SOV Poster Key Visual" loading="lazy">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">tsmt.png</span>
+                </div>
+                <img src="/assets/tsmt.png" alt="TSMT Campaign Project" loading="lazy">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">crc_gen1.png</span>
+                </div>
+                <img src="/assets/crc_gen1.png" alt="CRC Robotics Gen 1 Recruitment Poster" loading="lazy">
+              </div>
+              <div class="sc-card sc-tall">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">anh2fix.png</span>
+                </div>
+                <img src="/assets/anh2fix.png" alt="Our Memories Photo Essay" loading="lazy">
+              </div>
+              <div class="sc-card sc-short">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">ul233h.png</span>
+                </div>
+                <img src="/assets/ul233h.png" alt="UL233H Countdown" loading="lazy">
+              </div>
+              <div class="sc-card sc-wide">
+                <div class="sc-bar">
+                  <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
+                  <span class="sc-name mono-text">unleash_core.png</span>
+                </div>
+                <img src="/assets/unleash_core.png" alt="Unleash Coreteam Recruitment" loading="lazy">
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <!-- ╔═══════════════════════════════════════╗ -->
+      <!-- ║  PANEL 2 · INFO 4-BLOCK EDITORIAL     ║ -->
+      <!-- ╚═══════════════════════════════════════╝ -->
+      <!-- ╔═══════════════════════════════════════╗ -->
+      <!-- ║  PANEL 2 · INFO STUDIO BENTO DOSSIER   ║ -->
+      <!-- ╚═══════════════════════════════════════╝ -->
+      <section class="panel panel--info" id="panel-info" data-panel-index="1" data-panel-name="INFO">
+        <div class="info-scroll-zone">
+          <div class="info-bento-grid">
+
+            <!-- ── BENTO CARD 1: PROFILE DOSSIER (Dominant Pillar, Left) ── -->
+            <article class="bento-card bento-card--profile unified-card" data-reveal>
+              <!-- Chrome Header -->
+              <div class="bento-card-header">
+                <div class="bento-header-left">
+                  <span class="bento-tag mono-text">DOSSIER // 01</span>
+                  <span class="bento-crumb mono-text">ARCHIVE_REF: HOANGDUY.ME</span>
+                </div>
+                <div class="bento-status-pill mono-text">
+                  <span class="pulse-beacon"></span>
+                  <span data-i18n="stat_open">OPEN_TO_WORK</span>
+                </div>
+              </div>
+
+              <!-- Body -->
+              <div class="bento-profile-body">
+                <div class="profile-hero-block">
+                  <div class="cell-label mono-text" data-i18n="info_about_label">01_ABOUT_ME</div>
+                  <h2 class="profile-name pixel-text">HOÀNG DUY</h2>
+                  <div class="profile-meta-row mono-text">
+                    <span class="profile-alias">Randommoee06</span>
+                    <span class="profile-sep">/</span>
+                    <span class="profile-role" data-i18n="profile_role">GRAPHIC DESIGNER</span>
+                    <span class="profile-sep">/</span>
+                    <span class="profile-loc" data-i18n="profile_loc">HANOI, VN 🇻🇳</span>
+                  </div>
+                </div>
+
+                <!-- Bio Narrative -->
+                <div class="profile-narrative">
+                  <p class="profile-bio" data-i18n="info_about_bio">
+                    Hi, I'm Hoàng Duy (Randommoee06). I'm a graphic designer and design student based in Hanoi, Vietnam.
+                    To me, design has never been just about making things look cool—it's about finding honest ways to tell
+                    stories, solve problems, and connect with people.
+                  </p>
+                  <p class="profile-bio-sub" data-i18n="info_about_bio_sub">
+                    Whether building a visual identity from scratch, crafting social media campaigns, or exploring
+                    typography and brutalist aesthetics, I put care and intention into every detail. I'm constantly
+                    learning, staying curious, and looking for meaningful collaborations with people who care about what
+                    they build.
+                  </p>
+                </div>
+
+                <!-- Manifesto Card (Temporarily hidden per request) -->
+                <!--
+                <div class="profile-manifesto-box">
+                  <div class="manifesto-top-row">
+                    <span class="manifesto-pill pixel-text" data-i18n="manifesto_badge">PHILOSOPHY</span>
+                    <span class="manifesto-code mono-text">// CORE BELIEF [01]</span>
+                  </div>
+                  <blockquote class="manifesto-quote-text" data-i18n="manifesto_quote">
+                    "Good design isn't just visual decoration—it gives ideas an honest voice and creates genuine human
+                    connection."
+                  </blockquote>
+                </div>
+                -->
+
+                <!-- Stats Counters Grid -->
+                <div class="profile-stats-grid">
+                  <div class="profile-stat-box">
+                    <div class="stat-number pixel-text">01<span class="stat-plus">+</span></div>
+                    <div class="stat-desc mono-text" data-i18n="stat_exp">YRS_EXP</div>
+                  </div>
+                  <div class="profile-stat-box">
+                    <div class="stat-number pixel-text">20<span class="stat-plus">+</span></div>
+                    <div class="stat-desc mono-text" data-i18n="stat_projects">PROJECTS</div>
+                  </div>
+                  <div class="profile-stat-box">
+                    <div class="stat-number pixel-text">100<span class="stat-pct">%</span></div>
+                    <div class="stat-desc mono-text" data-i18n="stat_devotion">DEVOTION</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- ── BENTO RIGHT COLUMN (Skills + Edu + Tools) ── -->
+            <div class="info-bento-right-col">
+
+              <!-- ── BENTO CARD 2: SKILLS & CAPABILITIES MATRIX ── -->
+              <article class="bento-card bento-card--skills unified-card" data-reveal>
+                <div class="bento-card-header">
+                  <div class="bento-header-left">
+                    <span class="bento-tag mono-text">CAPABILITIES // 02</span>
+                    <span class="bento-crumb mono-text" data-i18n="info_skills_label">02_SKILLS_&amp;_EXPERTISE</span>
+                  </div>
+                  <span class="bento-badge-count mono-text" data-i18n="skills_count">// 6 CORE DISCIPLINES</span>
+                </div>
+
+                <div class="bento-skills-body">
+                  <div class="skills-card-grid">
+                    <!-- Skill 1 -->
+                    <div class="skill-tile">
+                      <div class="skill-tile-head">
+                        <span class="skill-tag skill-tag--brand pixel-text" data-i18n="skill_1_badge">BRAND</span>
+                        <span class="skill-num mono-text">01</span>
+                      </div>
+                      <div class="skill-tile-title" data-i18n="skill_1_name">Brand Identity</div>
+                      <div class="skill-tile-desc" data-i18n="skill_1_desc">Logos, visual systems, guidelines &amp; brand assets.</div>
+                    </div>
+                    <!-- Skill 2 -->
+                    <div class="skill-tile">
+                      <div class="skill-tile-head">
+                        <span class="skill-tag skill-tag--social pixel-text" data-i18n="skill_2_badge">SOCIAL</span>
+                        <span class="skill-num mono-text">02</span>
+                      </div>
+                      <div class="skill-tile-title" data-i18n="skill_2_name">Social Media Design</div>
+                      <div class="skill-tile-desc" data-i18n="skill_2_desc">Feed aesthetics, campaign posts, carousels &amp; banners.</div>
+                    </div>
+                    <!-- Skill 3 -->
+                    <div class="skill-tile">
+                      <div class="skill-tile-head">
+                        <span class="skill-tag skill-tag--poster pixel-text" data-i18n="skill_3_badge">POSTER</span>
+                        <span class="skill-num mono-text">03</span>
+                      </div>
+                      <div class="skill-tile-title" data-i18n="skill_3_name">Key Visual &amp; Poster</div>
+                      <div class="skill-tile-desc" data-i18n="skill_3_desc">Event artwork, promo posters &amp; print collaterals.</div>
+                    </div>
+                    <!-- Skill 4 -->
+                    <div class="skill-tile">
+                      <div class="skill-tile-head">
+                        <span class="skill-tag skill-tag--type pixel-text" data-i18n="skill_4_badge">TYPE</span>
+                        <span class="skill-num mono-text">04</span>
+                      </div>
+                      <div class="skill-tile-title" data-i18n="skill_4_name">Typography &amp; Layout</div>
+                      <div class="skill-tile-desc" data-i18n="skill_4_desc">Grid systems, editorial styling &amp; font hierarchy.</div>
+                    </div>
+                    <!-- Skill 5 -->
+                    <div class="skill-tile">
+                      <div class="skill-tile-head">
+                        <span class="skill-tag skill-tag--story pixel-text" data-i18n="skill_5_badge">STORY</span>
+                        <span class="skill-num mono-text">05</span>
+                      </div>
+                      <div class="skill-tile-title" data-i18n="skill_5_name">Visual Storytelling</div>
+                      <div class="skill-tile-desc" data-i18n="skill_5_desc">Creative direction, concept art &amp; engagement assets.</div>
+                    </div>
+                    <!-- Skill 6 -->
+                    <div class="skill-tile">
+                      <div class="skill-tile-head">
+                        <span class="skill-tag skill-tag--motion pixel-text" data-i18n="skill_6_badge">MOTION</span>
+                        <span class="skill-num mono-text">06</span>
+                      </div>
+                      <div class="skill-tile-title" data-i18n="skill_6_name">Motion &amp; Video</div>
+                      <div class="skill-tile-desc" data-i18n="skill_6_desc">Reels, short-form editing &amp; dynamic motion graphics.</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ── SUB-ROW: EDUCATION + TOOLS (Side-by-side) ── -->
+              <div class="info-bento-sub-row">
+
+                <!-- ── BENTO CARD 3: EDUCATION TIMELINE ── -->
+                <article class="bento-card bento-card--edu unified-card" data-reveal>
+                  <div class="bento-card-header">
+                    <div class="bento-header-left">
+                      <span class="bento-tag mono-text">TIMELINE // 03</span>
+                      <span class="bento-crumb mono-text" data-i18n="info_edu_label">03_EDUCATION_&amp;_RESEARCH</span>
+                    </div>
+                  </div>
+
+                  <div class="bento-edu-body">
+                    <div class="edu-timeline-flow">
+                      <!-- Stage 1 -->
+                      <div class="timeline-step is-active">
+                        <div class="step-indicator">
+                          <span class="step-node"></span>
+                          <span class="step-line"></span>
+                        </div>
+                        <div class="step-content">
+                          <div class="step-badge mono-text" data-i18n="edu_badge_1">2024 — 2028 · IN PROGRESS</div>
+                          <h4 class="step-degree" data-i18n="edu_deg_1">Bachelor in Industrial &amp; Graphic Design</h4>
+                          <p class="step-school mono-text" data-i18n="edu_sch_1">Univ. of Engineering and Technology · VNU · Hanoi</p>
+                          <div class="step-major">
+                            <span class="major-badge mono-text" data-i18n="edu_major_1">Major in Industrial &amp; Engineering Design</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Stage 2 -->
+                      <div class="timeline-step">
+                        <div class="step-indicator">
+                          <span class="step-node"></span>
+                        </div>
+                        <div class="step-content">
+                          <div class="step-badge mono-text" data-i18n="edu_badge_2">2021 — 2024 · GRADUATED</div>
+                          <h4 class="step-degree" data-i18n="edu_deg_2">High School Diploma</h4>
+                          <p class="step-school mono-text" data-i18n="edu_sch_2">Viet Tri High School · Vietnam</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="edu-academic-callout">
+                      <div class="academic-note-title mono-text" data-i18n="academic_note_title">// ACADEMIC_FOCUS</div>
+                      <p class="academic-note-p" data-i18n="academic_note_p">
+                        Focusing on visual communication, industrial ergonomics, human-centered design principles, and modern digital branding methodology.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- ── BENTO CARD 4: TOOLS & TECH ARSENAL ── -->
+                <article class="bento-card bento-card--tools unified-card" data-reveal>
+                  <div class="bento-card-header">
+                    <div class="bento-header-left">
+                      <span class="bento-tag mono-text">STACK // 04</span>
+                      <span class="bento-crumb mono-text" data-i18n="info_tools_label">04_TOOLS_&amp;_STACK</span>
+                    </div>
+                  </div>
+
+                  <div class="bento-tools-body">
+                    <!-- Creative Suite -->
+                    <div class="tool-section">
+                      <div class="tool-section-head mono-text" data-i18n="tools_creative_title">// CREATIVE_SUITE</div>
+                      <div class="tool-chips-grid">
+                        <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Photoshop</span>
+                        <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Illustrator</span>
+                        <span class="tool-chip"><span class="tool-dot dot-adobe"></span>InDesign</span>
+                        <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Premiere</span>
+                        <span class="tool-chip"><span class="tool-dot dot-adobe"></span>After Effects</span>
+                        <span class="tool-chip"><span class="tool-dot dot-affinity"></span>Affinity</span>
+                      </div>
+                    </div>
+
+                    <!-- 3D CAD & Code -->
+                    <div class="tool-section">
+                      <div class="tool-section-head mono-text" data-i18n="tools_tech_title">// 3D_CAD_&amp;_CODE</div>
+                      <div class="tool-chips-grid">
+                        <span class="tool-chip"><span class="tool-dot dot-cad"></span>SolidWorks</span>
+                        <span class="tool-chip"><span class="tool-dot dot-cad"></span>AutoCAD</span>
+                        <span class="tool-chip"><span class="tool-dot dot-code"></span>C++</span>
+                        <span class="tool-chip"><span class="tool-dot dot-code"></span>Python</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+              </div><!-- end info-bento-sub-row -->
+
+            </div><!-- end info-bento-right-col -->
+
+          </div><!-- end info-bento-grid -->
+        </div><!-- end info-scroll-zone -->
+      </section>
+
+      <!-- ╔══════════════════════════════╗ -->
+      <!-- ║  PANEL 3 · WORKS SHOWCASE    ║ -->
+      <!-- ╚══════════════════════════════╝ -->
+      <section class="panel panel--works" id="panel-works" data-panel-index="2" data-panel-name="WORKS">
+        <div class="works-panel-container">
+
+          <!-- Project Windows Scroll Zone -->
+          <div class="works-timeline-zone" id="worksTimeline" aria-label="Projects Timeline">
+
+            <!-- ── PROJECT 1: Our Memories — Kỷ Yếu THPT Việt Trì ── -->
+            <article class="timeline-project social-post-card unified-card" data-work-id="3">
+              <div class="card-window-bar">
+                <div class="ww-dots">
+                  <span class="ww-dot r"></span>
+                  <span class="ww-dot y"></span>
+                  <span class="ww-dot g"></span>
+                </div>
+                <span class="window-title mono-text">01_our_memories_yearbook.sys</span>
+                <div class="window-post-badge mono-text">
+                  <span class="social-live-dot"></span>
+                  <span>FEED_POST // 01</span>
+                </div>
+              </div>
+
+              <div class="social-post-body">
+                <!-- Post Author Header -->
+                <div class="social-post-header">
+                  <div class="social-author-left">
+                    <div class="social-avatar-wrap">
+                      <div class="social-avatar">
+                        <span class="avatar-initials">HD</span>
+                      </div>
+                      <span class="social-story-ring"></span>
+                    </div>
+                    <div class="social-author-meta">
+                      <div class="social-name-row">
+                        <span class="social-author-name">Hoàng Duy</span>
+                        <span class="social-author-handle mono-text">@randommoee06</span>
+                        <span class="social-verified-badge" title="Verified Creator">✦</span>
+                      </div>
+                      <div class="social-sub-row mono-text">
+                        <span class="social-client-name" data-i18n="work_3_client">Class A4K59 · Viet Tri High School × Hola Studio</span>
+                        <span class="social-meta-sep">•</span>
+                        <span class="social-post-date">05/2024</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-header-right">
+                    <span class="social-category-chip mono-text" data-i18n="work_3_cat">EDITORIAL · YEARBOOK · VISUAL STORYTELLING</span>
+                    <button class="social-more-btn" type="button" aria-label="Post Options" title="Project Archive">•••</button>
+                  </div>
+                </div>
+
+                <!-- Main Grid: Media Carousel on Left, Narrative & Actions on Right -->
+                <div class="social-post-content-grid">
+                  <!-- Media Carousel Column -->
+                  <div class="social-media-col">
+                    <div class="social-carousel" data-carousel-id="3">
+                      <div class="social-carousel-viewport">
+                        <div class="social-carousel-slides">
+                          <div class="social-slide is-active" data-slide-index="0">
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/1.png" alt="Our Memories Yearbook Master Cover Layout" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p3_slide_1">// SLIDE 01 · MASTER DOUBLE-PAGE SPREAD</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="1">
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%201.png" alt="Our Memories Yearbook Photo Spread 1" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p3_slide_2">// SLIDE 02 · SPREAD 01 "OUR YOUTH"</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="2">
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%202%20fix.png" alt="Our Memories Yearbook Photo Spread 2" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p3_slide_3">// SLIDE 03 · SPREAD 02 "FRIENDSHIP MOMENTS"</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="3">
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%203.png" alt="Our Memories Yearbook Photo Spread 3" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p3_slide_4">// SLIDE 04 · SPREAD 03 "CLASSROOM NOSTALGIA"</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="4">
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%204.png" alt="Our Memories Yearbook Photo Spread 4" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p3_slide_5">// SLIDE 05 · SPREAD 04 "GRADUATION MEMOIR"</div>
+                          </div>
+                        </div>
+
+                        <!-- Slide Counter Badge in Top Right -->
+                        <div class="social-counter-badge mono-text">
+                          <span class="current-slide">1</span> / <span class="total-slides">5</span>
+                        </div>
+
+                        <!-- Carousel Nav Arrows -->
+                        <button class="carousel-arrow carousel-arrow--prev" type="button" aria-label="Previous Slide">‹</button>
+                        <button class="carousel-arrow carousel-arrow--next" type="button" aria-label="Next Slide">›</button>
+                      </div>
+
+                      <!-- Carousel Dots Navigation -->
+                      <div class="social-carousel-dots">
+                        <button class="carousel-dot is-active" data-index="0" aria-label="Slide 1"></button>
+                        <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+                        <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
+                        <button class="carousel-dot" data-index="3" aria-label="Slide 4"></button>
+                        <button class="carousel-dot" data-index="4" aria-label="Slide 5"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Info & Social Interaction Column -->
+                  <div class="social-info-col">
+                    <!-- Social Action Bar -->
+                    <div class="social-action-row">
+                      <div class="social-actions-left">
+                        <button class="social-action-btn btn-like" type="button" aria-label="Like Post">
+                          <svg class="action-icon heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                          </svg>
+                          <span class="like-count mono-text">3.2k</span>
+                        </button>
+                        <button class="social-action-btn btn-comment" type="button" aria-label="Comments">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                          </svg>
+                          <span class="comment-count mono-text">112</span>
+                        </button>
+                        <button class="social-action-btn btn-share" type="button" aria-label="Share Post">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
+                        </button>
+                      </div>
+                      <div class="social-actions-right">
+                        <button class="social-action-btn btn-bookmark" type="button" aria-label="Bookmark Post">
+                          <svg class="action-icon bookmark-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Caption & Specs -->
+                    <div class="social-caption-area">
+                      <h3 class="social-post-title pixel-text" data-i18n="work_3_title">Dự án kỷ yếu Our Memories - A4K59 X HOLASTUDIO</h3>
+                      <p class="social-post-text" data-i18n="work_3_desc">
+                        Full editorial design, typographic curation, and photographic post-processing for the graduation yearbook "Our Memories". Built balanced grid layouts, rich tonal color-grading, and commemorative photo spreads capturing the nostalgic essence of youth.
+                      </p>
+
+                      <div class="social-specs-list">
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_role">Role:</span>
+                          <span class="spec-v" data-i18n="work_3_role">Lên Concept &amp; Thiết Kế Kỷ Yếu</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_deliv">Deliverables:</span>
+                          <span class="spec-v" data-i18n="work_3_deliv">Bộ 05 Ảnh Kỷ Yếu Thiết Kế Hoàn Chỉnh, Định Hướng Concept, Bố Cục Typography</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_org">Organization:</span>
+                          <span class="spec-v" data-i18n="work_3_org">Class A4K59 · Viet Tri High School × Hola Studio</span>
+                        </div>
+                      </div>
+
+                      <div class="social-hashtags">
+                        <span class="social-tag">#Yearbook</span>
+                        <span class="social-tag">#EditorialDesign</span>
+                        <span class="social-tag">#LayoutDesign</span>
+                        <span class="social-tag">#Typography</span>
+                        <span class="social-tag">#PhotoRetouching</span>
+                      </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="social-footer-cta">
+                      <button class="btn-primary timeline-see-more-btn mono-text" data-work-id="3" type="button" aria-label="See full project details for Our Memories Yearbook">
+                        <span data-i18n="btn_see_more">SEE MORE [FULL VIEW]</span>
+                        <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- ── PROJECT 2: CRC — CLB Robotics THPT Việt Trì ── -->
+            <article class="timeline-project social-post-card unified-card" data-work-id="1">
+              <div class="card-window-bar">
+                <div class="ww-dots">
+                  <span class="ww-dot r"></span>
+                  <span class="ww-dot y"></span>
+                  <span class="ww-dot g"></span>
+                </div>
+                <span class="window-title mono-text">02_crc_robotics.sys</span>
+                <div class="window-post-badge mono-text">
+                  <span class="social-live-dot"></span>
+                  <span>FEED_POST // 02</span>
+                </div>
+              </div>
+
+              <div class="social-post-body">
+                <!-- Post Author Header -->
+                <div class="social-post-header">
+                  <div class="social-author-left">
+                    <div class="social-avatar-wrap">
+                      <div class="social-avatar">
+                        <span class="avatar-initials">HD</span>
+                      </div>
+                      <span class="social-story-ring"></span>
+                    </div>
+                    <div class="social-author-meta">
+                      <div class="social-name-row">
+                        <span class="social-author-name">Hoàng Duy</span>
+                        <span class="social-author-handle mono-text">@randommoee06</span>
+                        <span class="social-verified-badge" title="Verified Creator">✦</span>
+                      </div>
+                      <div class="social-sub-row mono-text">
+                        <span class="social-client-name" data-i18n="work_1_client">CRC Robotics Club · Viet Tri High School</span>
+                        <span class="social-meta-sep">•</span>
+                        <span class="social-post-date">09/2023 — 05/2024</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-header-right">
+                    <span class="social-category-chip mono-text" data-i18n="work_1_cat">BRAND IDENTITY · ROBOTICS CLUB · VIET TRI HIGH SCHOOL</span>
+                    <button class="social-more-btn" type="button" aria-label="Post Options" title="Project Archive">•••</button>
+                  </div>
+                </div>
+
+                <!-- Main Grid: Media Carousel on Left, Narrative & Actions on Right -->
+                <div class="social-post-content-grid">
+                  <!-- Media Carousel Column -->
+                  <div class="social-media-col">
+                    <div class="social-carousel" data-carousel-id="1">
+                      <div class="social-carousel-viewport">
+                        <div class="social-carousel-slides">
+                          <div class="social-slide is-active" data-slide-index="0">
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Banner.png" alt="CRC Robotics Official Banner" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p1_slide_1">// SLIDE 01 · OFFICIAL CLUB BANNER</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="1">
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/LOGO.png" alt="CRC Robotics Geometric Vector Logo" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p1_slide_2">// SLIDE 02 · VECTOR LOGO MARK</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="2">
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Recruitment.png" alt="CRC Gen 1 Recruitment Poster" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p1_slide_3">// SLIDE 03 · GEN 1 RECRUITMENT POSTER</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="3">
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%202%20Recruitment.png" alt="CRC Gen 2 Recruitment Poster" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p1_slide_4">// SLIDE 04 · GEN 2 RECRUITMENT POSTER</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="4">
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Members.png" alt="CRC Gen 1 Members Infographic" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p1_slide_5">// SLIDE 05 · MEMBER ROSTER INFOGRAPHIC</div>
+                          </div>
+                        </div>
+
+                        <!-- Slide Counter Badge in Top Right -->
+                        <div class="social-counter-badge mono-text">
+                          <span class="current-slide">1</span> / <span class="total-slides">5</span>
+                        </div>
+
+                        <!-- Carousel Nav Arrows -->
+                        <button class="carousel-arrow carousel-arrow--prev" type="button" aria-label="Previous Slide">‹</button>
+                        <button class="carousel-arrow carousel-arrow--next" type="button" aria-label="Next Slide">›</button>
+                      </div>
+
+                      <!-- Carousel Dots Navigation -->
+                      <div class="social-carousel-dots">
+                        <button class="carousel-dot is-active" data-index="0" aria-label="Slide 1"></button>
+                        <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+                        <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
+                        <button class="carousel-dot" data-index="3" aria-label="Slide 4"></button>
+                        <button class="carousel-dot" data-index="4" aria-label="Slide 5"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Info & Social Interaction Column -->
+                  <div class="social-info-col">
+                    <!-- Social Action Bar -->
+                    <div class="social-action-row">
+                      <div class="social-actions-left">
+                        <button class="social-action-btn btn-like" type="button" aria-label="Like Post">
+                          <svg class="action-icon heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                          </svg>
+                          <span class="like-count mono-text">1.4k</span>
+                        </button>
+                        <button class="social-action-btn btn-comment" type="button" aria-label="Comments">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                          </svg>
+                          <span class="comment-count mono-text">42</span>
+                        </button>
+                        <button class="social-action-btn btn-share" type="button" aria-label="Share Post">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
+                        </button>
+                      </div>
+                      <div class="social-actions-right">
+                        <button class="social-action-btn btn-bookmark" type="button" aria-label="Bookmark Post">
+                          <svg class="action-icon bookmark-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Caption & Specs -->
+                    <div class="social-caption-area">
+                      <h3 class="social-post-title pixel-text" data-i18n="work_1_title">CRC — CLB Robotics THPT Việt Trì</h3>
+                      <p class="social-post-text" data-i18n="work_1_desc">
+                        Comprehensive brand identity system and multi-generation recruitment media for the robotics club at Viet Tri High School. Engineered the official geometric vector logo mark, branded social banners, and high-impact recruitment collateral for Gen 1 and Gen 2.
+                      </p>
+
+                      <div class="social-specs-list">
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_role">Role:</span>
+                          <span class="spec-v" data-i18n="work_1_role">Trưởng ban Media / Lead Designer</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_deliv">Deliverables:</span>
+                          <span class="spec-v" data-i18n="work_1_deliv">Vector Logo Mark, Brand Banner, Gen 1 &amp; 2 Recruitment Posters</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_org">Organization:</span>
+                          <span class="spec-v" data-i18n="work_1_org">CRC Robotics Club · Viet Tri High School</span>
+                        </div>
+                      </div>
+
+                      <div class="social-hashtags">
+                        <span class="social-tag">#BrandIdentity</span>
+                        <span class="social-tag">#RoboticsClub</span>
+                        <span class="social-tag">#VisualDesign</span>
+                        <span class="social-tag">#PosterDesign</span>
+                        <span class="social-tag">#VietTri</span>
+                      </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="social-footer-cta">
+                      <button class="btn-primary timeline-see-more-btn mono-text" data-work-id="1" type="button" aria-label="See full project details for CRC Robotics">
+                        <span data-i18n="btn_see_more">SEE MORE [FULL VIEW]</span>
+                        <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- ── PROJECT 3: Unleash — Creative Event & Recruitment Campaign ── -->
+            <article class="timeline-project social-post-card unified-card" data-work-id="4">
+              <div class="card-window-bar">
+                <div class="ww-dots">
+                  <span class="ww-dot r"></span>
+                  <span class="ww-dot y"></span>
+                  <span class="ww-dot g"></span>
+                </div>
+                <span class="window-title mono-text">03_unleash_campaign.sys</span>
+                <div class="window-post-badge mono-text">
+                  <span class="social-live-dot"></span>
+                  <span>FEED_POST // 03</span>
+                </div>
+              </div>
+
+              <div class="social-post-body">
+                <!-- Post Author Header -->
+                <div class="social-post-header">
+                  <div class="social-author-left">
+                    <div class="social-avatar-wrap">
+                      <div class="social-avatar">
+                        <span class="avatar-initials">HD</span>
+                      </div>
+                      <span class="social-story-ring"></span>
+                    </div>
+                    <div class="social-author-meta">
+                      <div class="social-name-row">
+                        <span class="social-author-name">Hoàng Duy</span>
+                        <span class="social-author-handle mono-text">@randommoee06</span>
+                        <span class="social-verified-badge" title="Verified Creator">✦</span>
+                      </div>
+                      <div class="social-sub-row mono-text">
+                        <span class="social-client-name" data-i18n="work_4_client">Unleash — Viet Tri High School</span>
+                        <span class="social-meta-sep">•</span>
+                        <span class="social-post-date">06/2023 — 07/2023</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-header-right">
+                    <span class="social-category-chip mono-text" data-i18n="work_4_cat">EVENT · CAMPAIGN · VISUAL IDENTITY · RECRUITMENT</span>
+                    <button class="social-more-btn" type="button" aria-label="Post Options" title="Project Archive">•••</button>
+                  </div>
+                </div>
+
+                <!-- Main Grid: Media Carousel on Left, Narrative & Actions on Right -->
+                <div class="social-post-content-grid">
+                  <!-- Media Carousel Column -->
+                  <div class="social-media-col">
+                    <div class="social-carousel" data-carousel-id="4">
+                      <div class="social-carousel-viewport">
+                        <div class="social-carousel-slides">
+                          <div class="social-slide is-active" data-slide-index="0">
+                            <img src="/assets/Projects/Unleash/Coreteam%20Recruitment.png" alt="Unleash Coreteam Recruitment Poster" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p4_slide_1">// SLIDE 01 · CORETEAM RECRUITMENT HERO POSTER</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="1">
+                            <img src="/assets/Projects/Unleash/3h%20left.png" alt="Unleash 3h Left Countdown Teaser" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p4_slide_2">// SLIDE 02 · 3-HOUR COUNTDOWN URGENCY VISUAL</div>
+                          </div>
+                          <div class="social-slide" data-slide-index="2">
+                            <img src="/assets/Projects/Unleash/Form%20Closed.png" alt="Unleash Registration Form Closed Visual" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p4_slide_3">// SLIDE 03 · FORM CLOSURE ANNOUNCEMENT</div>
+                          </div>
+                        </div>
+
+                        <!-- Slide Counter Badge in Top Right -->
+                        <div class="social-counter-badge mono-text">
+                          <span class="current-slide">1</span> / <span class="total-slides">3</span>
+                        </div>
+
+                        <!-- Carousel Nav Arrows -->
+                        <button class="carousel-arrow carousel-arrow--prev" type="button" aria-label="Previous Slide">‹</button>
+                        <button class="carousel-arrow carousel-arrow--next" type="button" aria-label="Next Slide">›</button>
+                      </div>
+
+                      <!-- Carousel Dots Navigation -->
+                      <div class="social-carousel-dots">
+                        <button class="carousel-dot is-active" data-index="0" aria-label="Slide 1"></button>
+                        <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+                        <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Info & Social Interaction Column -->
+                  <div class="social-info-col">
+                    <!-- Social Action Bar -->
+                    <div class="social-action-row">
+                      <div class="social-actions-left">
+                        <button class="social-action-btn btn-like" type="button" aria-label="Like Post">
+                          <svg class="action-icon heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                          </svg>
+                          <span class="like-count mono-text">2.8k</span>
+                        </button>
+                        <button class="social-action-btn btn-comment" type="button" aria-label="Comments">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                          </svg>
+                          <span class="comment-count mono-text">74</span>
+                        </button>
+                        <button class="social-action-btn btn-share" type="button" aria-label="Share Post">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
+                        </button>
+                      </div>
+                      <div class="social-actions-right">
+                        <button class="social-action-btn btn-bookmark" type="button" aria-label="Bookmark Post">
+                          <svg class="action-icon bookmark-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Caption & Specs -->
+                    <div class="social-caption-area">
+                      <h3 class="social-post-title pixel-text" data-i18n="work_4_title">Unleash - Chương trình chào tân học sinh Trường THPT Việt Trì</h3>
+                      <p class="social-post-text" data-i18n="work_4_desc">
+                        Creative visual direction and media publication design for the transition phase of the "Unleash" freshmen orientation program, crafted with a bold cyber-neon aesthetic.
+                      </p>
+
+                      <div class="social-specs-list">
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_role">Role:</span>
+                          <span class="spec-v" data-i18n="work_4_role">Cố vấn Media Unleash 2023</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_deliv">Deliverables:</span>
+                          <span class="spec-v" data-i18n="work_4_deliv">Ấn phẩm truyền thông trong giai đoạn chuyển giao</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_org">Organization:</span>
+                          <span class="spec-v" data-i18n="work_4_org">Viet Tri High School · Unleash Organizing Committee</span>
+                        </div>
+                      </div>
+
+                      <div class="social-hashtags">
+                        <span class="social-tag">#KeyVisual</span>
+                        <span class="social-tag">#CyberAesthetic</span>
+                        <span class="social-tag">#EventBranding</span>
+                        <span class="social-tag">#PosterDesign</span>
+                        <span class="social-tag">#Unleash</span>
+                      </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="social-footer-cta">
+                      <button class="btn-primary timeline-see-more-btn mono-text" data-work-id="4" type="button" aria-label="See full project details for Unleash">
+                        <span data-i18n="btn_see_more">SEE MORE [FULL VIEW]</span>
+                        <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- ── PROJECT 4: SOV Media — Comprehensive Brand & Media Ecosystem ── -->
+            <article class="timeline-project social-post-card unified-card" data-work-id="2">
+              <div class="card-window-bar">
+                <div class="ww-dots">
+                  <span class="ww-dot r"></span>
+                  <span class="ww-dot y"></span>
+                  <span class="ww-dot g"></span>
+                </div>
+                <span class="window-title mono-text">04_sov_media_ecosystem.sys</span>
+                <div class="window-post-badge mono-text">
+                  <span class="social-live-dot"></span>
+                  <span data-i18n="work_2_badge">COLLECTION // 04 [3 MODULES]</span>
+                </div>
+              </div>
+
+              <div class="social-post-body">
+                <!-- Post Author Header -->
+                <div class="social-post-header">
+                  <div class="social-author-left">
+                    <div class="social-avatar-wrap">
+                      <div class="social-avatar">
+                        <span class="avatar-initials">HD</span>
+                      </div>
+                      <span class="social-story-ring"></span>
+                    </div>
+                    <div class="social-author-meta">
+                      <div class="social-name-row">
+                        <span class="social-author-name">Hoàng Duy</span>
+                        <span class="social-author-handle mono-text">@randommoee06</span>
+                        <span class="social-verified-badge" title="Verified Creator">✦</span>
+                      </div>
+                      <div class="social-sub-row mono-text">
+                        <span class="social-client-name" data-i18n="work_2_client">SOV Media Club · Viet Tri High School</span>
+                        <span class="social-meta-sep">•</span>
+                        <span class="social-post-date">02/2023 — 07/2024</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-header-right">
+                    <span class="social-category-chip mono-text" data-i18n="work_2_cat">BRAND ECOSYSTEM · MULTI-DISCIPLINARY ARCHIVE</span>
+                    <button class="social-more-btn" type="button" aria-label="Project Archive" title="Project Archive">•••</button>
+                  </div>
+                </div>
+
+                <!-- Sub-Division Navigation Tabs for SOV Modules -->
+                <div class="social-division-nav" role="tablist" aria-label="SOV Project Modules">
+                  <button class="division-tab is-active mono-text" data-division="all" type="button" role="tab" aria-selected="true">
+                    <span data-i18n="sov_tab_all">✦ ALL (15)</span>
+                  </button>
+                  <button class="division-tab mono-text" data-division="campaigns" type="button" role="tab" aria-selected="false">
+                    <span data-i18n="sov_tab_campaigns">📢 01 · CAMPAIGNS (7)</span>
+                  </button>
+                  <button class="division-tab mono-text" data-division="certificates" type="button" role="tab" aria-selected="false">
+                    <span data-i18n="sov_tab_awards">🏆 02 · AWARDS (4)</span>
+                  </button>
+                  <button class="division-tab mono-text" data-division="frames" type="button" role="tab" aria-selected="false">
+                    <span data-i18n="sov_tab_frames">🎨 03 · FRAMES & FAREWELL (4)</span>
+                  </button>
+                </div>
+
+                <!-- Main Grid: Media Carousel on Left, Narrative & Actions on Right -->
+                <div class="social-post-content-grid">
+                  <!-- Media Carousel Column -->
+                  <div class="social-media-col">
+                    <div class="social-carousel" data-carousel-id="2">
+                      <div class="social-carousel-viewport">
+                        <div class="social-carousel-slides">
+                          <!-- SLIDE 01: 26.3.2 (Tháng Thanh Niên 2023 - Fit-Width Hero Banner) -->
+                          <div class="social-slide social-slide--fit-width is-active" data-slide-index="0" data-division="campaigns">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.2.png" alt="SOV Tháng Thanh Niên 2023 Key Visual" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_1">// [CAMPAIGNS] 01 · THÁNG THANH NIÊN 2023 KEY VISUAL</div>
+                          </div>
+
+                          <!-- SLIDE 02: Milestone (2:1 Panoramic Banner) -->
+                          <div class="social-slide" data-slide-index="1" data-division="campaigns">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Milestone.png" alt="SOV Milestone Achievement Banner" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_2">// [CAMPAIGNS] 02 · 2:1 PANORAMIC MILESTONE BANNER</div>
+                          </div>
+
+                          <!-- SLIDE 03: Poster (3D Angled Mockup) -->
+                          <div class="social-slide" data-slide-index="2" data-division="campaigns">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Poster.png" alt="SOV Flagship Campaign Poster" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_3">// [CAMPAIGNS] 03 · 3D DUAL-FLYER EVENT POSTER</div>
+                          </div>
+
+                          <!-- SLIDE 04: SOV Award Gen 1 (Gold Foil A4) -->
+                          <div class="social-slide" data-slide-index="3" data-division="certificates">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%201.png" alt="SOV Award Certificate Gen 1" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_4">// [AWARDS] 04 · GEN 1 EXCELLENCE AWARD (A4 FOIL)</div>
+                          </div>
+
+                          <!-- SLIDE 05: SOV Award Gen 2 (Gold Foil A4) -->
+                          <div class="social-slide" data-slide-index="4" data-division="certificates">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%202.png" alt="SOV Award Certificate Gen 2" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_5">// [AWARDS] 05 · GEN 2 EXCELLENCE AWARD (A4 FOIL)</div>
+                          </div>
+
+                          <!-- SLIDE 06: TSMT (Vibrant Summer Scrapbook) -->
+                          <div class="social-slide" data-slide-index="5" data-division="campaigns">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/TSMT.png" alt="SOV Tiếp Sức Mùa Thi Campaign" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_6">// [CAMPAIGNS] 06 · TIẾP SỨC MÙA THI EXAM SUPPORT</div>
+                          </div>
+
+                          <!-- SLIDE 07: Radio 2 (Bokeh Podcast Cover) -->
+                          <div class="social-slide" data-slide-index="6" data-division="campaigns">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Radio%202.jpg" alt="SOV Radio Series Visual" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_7">// [CAMPAIGNS] 07 · SOV RADIO PODCAST COVER</div>
+                          </div>
+
+                          <!-- SLIDE 08: ĐHĐB LXI (Congress Profile Avatar Frame) -->
+                          <div class="social-slide" data-slide-index="7" data-division="frames">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/%C4%90H%C4%90B%20LXI.png" alt="ĐHĐB LXI Avatar Campaign Frame" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_8">// [FRAMES] 08 · ĐHĐB LXI CONGRESS CAMPAIGN FRAME</div>
+                          </div>
+
+                          <!-- SLIDE 09: Tháng thanh niên 2023 Frame -->
+                          <div class="social-slide" data-slide-index="8" data-division="frames">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/Th%C3%A1ng%20thanh%20ni%C3%AAn%202023.png" alt="Youth Month 2023 Avatar Frame" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_9">// [FRAMES] 09 · YOUTH MONTH 2023 AVATAR FRAME</div>
+                          </div>
+
+                          <!-- SLIDE 10: Request Radio -->
+                          <div class="social-slide" data-slide-index="9" data-division="campaigns">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Request%20Radio.png" alt="SOV Request Radio Interactive Feed" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_10">// [CAMPAIGNS] 10 · REQUEST RADIO INTERACTIVE FEED</div>
+                          </div>
+
+                          <!-- SLIDE 11: 26.3 Part 1 -->
+                          <div class="social-slide" data-slide-index="10" data-division="campaigns">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.png" alt="SOV 26.3 Commemorative Visual Part 1" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_11">// [CAMPAIGNS] 11 · 26/3 YOUTH MONTH SERIES (PART I)</div>
+                          </div>
+
+                          <!-- SLIDE 12: K58 Farewell -->
+                          <div class="social-slide" data-slide-index="11" data-division="frames">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K58.png" alt="K58 Graduation Commemorative Graphic" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_12">// [FAREWELL] 12 · K58 SENIOR FAREWELL COMMEMORATION</div>
+                          </div>
+
+                          <!-- SLIDE 13: K59 Farewell -->
+                          <div class="social-slide" data-slide-index="12" data-division="frames">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K59.png" alt="K59 Graduation Commemorative Graphic" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_13">// [FAREWELL] 13 · K59 SENIOR FAREWELL COMMEMORATION</div>
+                          </div>
+
+                          <!-- SLIDE 14: SOV GEN 1 Member -->
+                          <div class="social-slide" data-slide-index="13" data-division="certificates">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%201.png" alt="SOV Member Certificate Gen 1" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_14">// [AWARDS] 14 · GEN 1 MEMBER RECOGNITION CERTIFICATE</div>
+                          </div>
+
+                          <!-- SLIDE 15: SOV GEN 2 Member -->
+                          <div class="social-slide" data-slide-index="14" data-division="certificates">
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%202.png" alt="SOV Member Certificate Gen 2" loading="lazy" />
+                            <div class="social-slide-caption mono-text" data-i18n="p2_slide_15">// [AWARDS] 15 · GEN 2 MEMBER RECOGNITION CERTIFICATE</div>
+                          </div>
+                        </div>
+
+                        <!-- Slide Counter Badge in Top Right -->
+                        <div class="social-counter-badge mono-text">
+                          <span class="current-slide">1</span> / <span class="total-slides">15</span>
+                        </div>
+
+                        <!-- Carousel Nav Arrows -->
+                        <button class="carousel-arrow carousel-arrow--prev" type="button" aria-label="Previous Slide">‹</button>
+                        <button class="carousel-arrow carousel-arrow--next" type="button" aria-label="Next Slide">›</button>
+                      </div>
+
+                      <!-- Carousel Dots Navigation -->
+                      <div class="social-carousel-dots">
+                        <button class="carousel-dot is-active" data-index="0" aria-label="Slide 1"></button>
+                        <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+                        <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
+                        <button class="carousel-dot" data-index="3" aria-label="Slide 4"></button>
+                        <button class="carousel-dot" data-index="4" aria-label="Slide 5"></button>
+                        <button class="carousel-dot" data-index="5" aria-label="Slide 6"></button>
+                        <button class="carousel-dot" data-index="6" aria-label="Slide 7"></button>
+                        <button class="carousel-dot" data-index="7" aria-label="Slide 8"></button>
+                        <button class="carousel-dot" data-index="8" aria-label="Slide 9"></button>
+                        <button class="carousel-dot" data-index="9" aria-label="Slide 10"></button>
+                        <button class="carousel-dot" data-index="10" aria-label="Slide 11"></button>
+                        <button class="carousel-dot" data-index="11" aria-label="Slide 12"></button>
+                        <button class="carousel-dot" data-index="12" aria-label="Slide 13"></button>
+                        <button class="carousel-dot" data-index="13" aria-label="Slide 14"></button>
+                        <button class="carousel-dot" data-index="14" aria-label="Slide 15"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Info & Social Interaction Column -->
+                  <div class="social-info-col">
+                    <!-- Social Action Bar -->
+                    <div class="social-action-row">
+                      <div class="social-actions-left">
+                        <button class="social-action-btn btn-like" type="button" aria-label="Like Post">
+                          <svg class="action-icon heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                          </svg>
+                          <span class="like-count mono-text">3.8k</span>
+                        </button>
+                        <button class="social-action-btn btn-comment" type="button" aria-label="Comments">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                          </svg>
+                          <span class="comment-count mono-text">92</span>
+                        </button>
+                        <button class="social-action-btn btn-share" type="button" aria-label="Share Post">
+                          <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
+                        </button>
+                      </div>
+                      <div class="social-actions-right">
+                        <button class="social-action-btn btn-bookmark" type="button" aria-label="Bookmark Post">
+                          <svg class="action-icon bookmark-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Caption & Specs -->
+                    <div class="social-caption-area">
+                      <h3 class="social-post-title pixel-text" data-i18n="work_2_title">SOV - CLB Truyền thông THPT Việt Trì</h3>
+                      <p class="social-post-text" data-i18n="work_2_desc">
+                        Comprehensive visual direction, campaign architecture, and recognition systems for the premier media club of Viet Tri High School across 2022–2024. Logically structured into three creative modules: major event campaigns (26/3, Tiếp Sức Mùa Thi, SOV Radio), official member excellence certificates (Gen 1 & 2), and school-wide interactive avatar frames celebrating Youth Congresses and Cohort Farewells.
+                      </p>
+
+                      <div class="social-specs-list">
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_role">Role:</span>
+                          <span class="spec-v" data-i18n="work_2_role">Thành viên chủ lực ban Media Gen 1, Cố vấn Media Gen 2</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_deliv">Deliverables:</span>
+                          <span class="spec-v" data-i18n="work_2_deliv">01. Campaigns (Key Visual, 26/3, TSMT, Radio) · 02. Certificates (Gen 1 &amp; 2 Awards) · 03. Frames &amp; Farewells (Congress, K58, K59)</span>
+                        </div>
+                        <div class="social-spec-item">
+                          <span class="spec-k" data-i18n="work_spec_org">Organization:</span>
+                          <span class="spec-v" data-i18n="work_2_org">SOV Media Club · Viet Tri High School</span>
+                        </div>
+                      </div>
+
+                      <div class="social-hashtags">
+                        <span class="social-tag">#SOVMedia</span>
+                        <span class="social-tag">#BrandEcosystem</span>
+                        <span class="social-tag">#SocialCampaigns</span>
+                        <span class="social-tag">#CertificateDesign</span>
+                        <span class="social-tag">#AvatarFrames</span>
+                        <span class="social-tag">#EditorialDesign</span>
+                      </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="social-footer-cta">
+                      <button class="btn-primary timeline-see-more-btn mono-text" data-work-id="2" type="button" aria-label="See full project details for SOV Media Ecosystem">
+                        <span data-i18n="btn_see_more">SEE MORE [FULL VIEW]</span>
+                        <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div><!-- end works-timeline-zone -->
+
+          <!-- ── DETAIL OVERLAY (initially hidden, slides in on scroll after zoom-select) ── -->
+          <div class="works-detail-overlay" id="worksDetailOverlay" aria-hidden="true">
+            <div class="detail-chrome-bar">
+              <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span
+                    class="ww-dot g"></span></div>
+              <span class="detail-file-name mono-text" id="detailFileName">project.png</span>
+              <button class="detail-close-btn pixel-text" id="detailCloseBtn" aria-label="Close project detail">ESC
+                ✕</button>
+            </div>
+            <div class="detail-scroll-area" id="detailScrollArea">
+              <div class="detail-body">
+                <div class="detail-header-block">
+                  <div class="detail-meta-row">
+                    <div class="detail-tags-area" id="detailTags"></div>
+                    <span class="detail-year mono-text" id="detailYear">2023 — 2024</span>
+                  </div>
+                  <div class="detail-title-wrap">
+                    <h2 class="detail-title pixel-text" id="detailTitle"></h2>
+                    <p class="detail-client mono-text" id="detailClient"></p>
+                  </div>
+                </div>
+
+                <!-- 2-Column Overview: Process on Left, Results on Right -->
+                <div class="detail-overview-grid">
+                  <div class="detail-overview-col">
+                    <div class="detail-section-label mono-text" data-i18n="detail_process_label">// PROCESS &amp; APPROACH</div>
+                    <p class="detail-section-text" id="detailProcess"></p>
+                  </div>
+                  <div class="detail-overview-col">
+                    <div class="detail-section-label mono-text" data-i18n="detail_results_label">// RESULTS &amp; OUTCOME</div>
+                    <p class="detail-section-text" id="detailResults"></p>
+                  </div>
+                </div>
+
+                <!-- Full-width 2-column Gallery filling both sides -->
+                <div class="detail-gallery-section">
+                  <div class="detail-gallery-header-row">
+                    <div class="detail-section-label mono-text" data-i18n="detail_gallery_label">// GALLERY &amp; ASSETS</div>
+                    <span class="detail-gallery-count mono-text" id="detailGalleryCount"></span>
+                  </div>
+                  <div class="detail-gallery" id="detailGallery"></div>
+                </div>
+
+                <div class="detail-footer-row">
+                  <a class="btn-primary mono-text" id="detailLink" href="#" target="_blank" rel="noopener">
+                    <span data-i18n="view_asset">VIEW_ASSET</span>
+                    <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </a>
+                  <button class="btn-ghost detail-dismiss-btn mono-text" id="detailDismissBtn" type="button" aria-label="Close project detail" data-i18n="btn_close_detail">CLOSE [ESC]</button>
+                </div>
+              </div>
+            </div>
+          </div><!-- end works-detail-overlay -->
+
+        </div>
+      </section>
+      <!-- ╔══════════════════════════════╗ -->
+      <!-- ║  PANEL 4 · CONTACT & OUTRO   ║ -->
+      <!-- ╚══════════════════════════════╝ -->
+      <section class="panel panel--contact" id="contact" data-panel-index="3" data-panel-name="CONTACT">
+        <div class="contact-panel-inner">
+          <div class="cell-label mono-text" data-i18n="contact_label">04_CONTACT_&amp;_COLLABORATE</div>
+
+          <div class="contact-body">
+            <!-- Availability + Headline -->
+            <div class="contact-pitch" data-reveal>
+              <div class="contact-avail-pill mono-text">
+                <span class="pulse-beacon"></span>
+                <span data-i18n="contact_status">● Đang nhận dự án mới</span>
+              </div>
+              <h2 class="contact-big-headline" data-i18n="contact_headline">Có ý tưởng hay dự án mới?<br>Nhắn <span class="accent2">Duy</span> ngay nhé.</h2>
+              <p class="contact-tagline mono-text" data-i18n="contact_tagline">// liên hệ qua mail hoặc zalo — phản hồi nhanh, không form phức tạp.</p>
+            </div>
+
+            <!-- Primary Channel Cards -->
+            <div class="contact-cards" data-reveal>
+
+              <!-- Email Card -->
+              <div class="reach-card reach-card--email">
+                <div class="reach-card-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="reach-card-content">
+                  <span class="reach-card-label mono-text" data-i18n="contact_email_label">Email</span>
+                  <a href="mailto:hoangduy2126@gmail.com" class="reach-card-val mono-text" id="emailDisplayVal">hoangduy2126@gmail.com</a>
+                </div>
+                <div class="reach-card-actions">
+                  <a href="mailto:hoangduy2126@gmail.com" class="reach-btn reach-btn--primary mono-text" id="btnSendMail" data-i18n="contact_btn_mail">Gửi mail</a>
+                  <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="hoangduy2126@gmail.com" id="btnCopyEmail">
+                    <svg class="copy-icon-default" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span class="copy-btn-text" data-i18n="contact_btn_copy">Sao chép</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Phone / Zalo Card -->
+              <div class="reach-card reach-card--phone">
+                <div class="reach-card-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div class="reach-card-content">
+                  <span class="reach-card-label mono-text" data-i18n="contact_phone_label">Zalo / Hotline</span>
+                  <a href="tel:0987654321" class="reach-card-val mono-text" id="phoneDisplayVal">+84 (0) 987 654 321</a>
+                </div>
+                <div class="reach-card-actions">
+                  <a href="https://zalo.me/0987654321" target="_blank" rel="noopener" class="reach-btn reach-btn--zalo mono-text" id="btnChatZalo" data-i18n="contact_btn_zalo">Chat Zalo</a>
+                  <a href="tel:0987654321" class="reach-btn reach-btn--ghost mono-text" id="btnCall" data-i18n="contact_btn_call">Gọi ngay</a>
+                  <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="0987654321" id="btnCopyPhone">
+                    <svg class="copy-icon-default" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span class="copy-btn-text" data-i18n="contact_btn_copy">Sao chép</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Social / DM Strip -->
+            <div class="contact-socials" data-reveal>
+              <span class="contact-socials-label mono-text" data-i18n="contact_socials_label">// hoặc tìm mình ở đây —</span>
+              <div class="contact-socials-links">
+                <a href="https://m.me/moeedidauuu/" target="_blank" rel="noopener" class="social-link hover-msg pixel-text">MESSENGER</a>
+                <a href="https://www.facebook.com/moeedidauuu/" target="_blank" rel="noopener" class="social-link hover-fb pixel-text">FACEBOOK</a>
+                <a href="https://www.instagram.com/06s_.moe" target="_blank" rel="noopener" class="social-link hover-ig pixel-text">INSTAGRAM</a>
+                <a href="https://www.behance.net/hoangduy2126" target="_blank" rel="noopener" class="social-link hover-be pixel-text">BEHANCE</a>
+                <a href="https://www.linkedin.com/in/duy-ho%C3%A0ng-720699405/" target="_blank" rel="noopener" class="social-link hover-in pixel-text">LINKEDIN</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <footer class="footer-inline" data-reveal>
+            <div class="footer-inner">
+              <span class="pixel-text footer-logo">DES<span class="dot">.</span><span class="accent">FOLIO</span></span>
+              <span class="mono-text footer-copy" data-i18n="footer_copy">© 2026 — Crafted with ♥ &amp; lots of ☕</span>
+              <span class="mono-text footer-version" data-i18n="footer_version">v2.2.0 · HORIZONTAL PAN</span>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+    </div><!-- end horizontal-track -->
+  </main><!-- end horizontal-viewport -->
+
+  <!-- FLOATING MOVING NAVIGATION ARROWS (ACROSS ALL 4 TABS) -->
+  <aside class="tab-floating-nav" id="tabFloatingNav" aria-label="Section Navigation Arrows">
+    <button class="tab-nav-arrow tab-nav-arrow--prev mono-text is-disabled" id="tabNavArrowPrev" aria-label="Previous tab" title="Previous tab (or Left arrow key)">
+      <span class="arrow-bob arrow-bob--left" aria-hidden="true">◀</span>
+      <span class="arrow-text" id="arrowTextPrev">HOME</span>
+    </button>
+    <button class="tab-nav-arrow tab-nav-arrow--next mono-text" id="tabNavArrowNext" aria-label="Next tab" title="Next tab (or Right arrow key)">
+      <span class="arrow-text" id="arrowTextNext">INFO</span>
+      <span class="arrow-bob arrow-bob--right" aria-hidden="true">▶</span>
+    </button>
+  </aside>
+
+  <!-- BOTTOM STATUS BAR -->
+  <footer class="topbar" id="topbar" aria-label="System status, navigation and time">
+    <!-- Left: Status, Language & Theme Controls -->
+    <div class="topbar-left" id="bottomSidebar">
+      <div class="sidebar-status-wrap">
+        <div class="nav-status sidebar-status" id="sidebarStatus" title="Status: Available for work">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="pixel-text status-text" data-i18n="nav_status">AVAILABLE</span>
+        </div>
+      </div>
+      <span class="topbar-sep" aria-hidden="true">|</span>
+      <div class="topbar-actions">
+        <button class="lang-toggle topbar-btn" id="langToggle" aria-label="Switch language (VN / EN)" title="Switch language / Chuyển ngôn ngữ"><span class="btn-icon lang-icon" id="langToggleIcon" aria-hidden="true"><svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></span><span class="lang-toggle-label" id="langToggleLabel">VN</span></button>
+        <button class="theme-toggle topbar-btn" id="themeToggle" aria-label="Switch theme mode" title="Active: Day mode (click to switch)"><span class="btn-icon theme-icon" id="themeToggleIcon" aria-hidden="true"><svg class="btn-svg icon-sun" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span><span class="theme-toggle-label" id="themeToggleLabel" data-i18n="theme_day">DAY</span></button>
       </div>
     </div>
 
-    <!-- ╔══════════════════════════════╗ -->
-    <!-- ║  PANEL 1 · HERO              ║ -->
-    <!-- ╚══════════════════════════════╝ -->
-    <section class="panel panel--hero" id="hero">
-      <div class="hero-grid-bg" aria-hidden="true"></div>
-      <div class="scanline" aria-hidden="true"></div>
-
-      <!-- Left: Identity -->
-      <div class="p-identity">
-        <div class="hero-tag mono-text" id="heroTag">DUNNO WHO YOU'RE, BUT WELCOME!</div>
-        <h1 class="hero-name pixel-text" id="heroName">
-          <span class="name-line">HI!</span>
-          <span class="name-line accent-line">RANDOMMOEE06</span>
-          <span class="name-line">IS HERE</span>
-        </h1>
-        <p class="hero-role mono-text" id="heroRole">
-          <span class="role-prefix">~$ </span>
-          <span class="typewriter" id="typewriter"></span>
-          <span class="cursor-blink">▊</span>
-        </p>
-        <div class="hero-cta" id="heroCta">
-          <a href="#panel-works" class="btn-primary" id="btnViewWork">
-            <span class="btn-text">VIEW_WORK</span>
-            <span class="btn-icon">→</span>
-          </a>
-          <a href="#panel-works" class="btn-ghost" id="btnContact">
-            <span class="btn-text">GET_IN_TOUCH</span>
-          </a>
-        </div>
-        <!-- Quick stats strip -->
-        <div class="stats-strip">
-          <div class="stat-item">
-            <span class="stat-num pixel-text accent2">1+</span>
-            <span class="stat-label mono-text">YRS_EXP</span>
-          </div>
-          <div class="stat-sep">|</div>
-          <div class="stat-item">
-            <span class="stat-num pixel-text accent2">20+</span>
-            <span class="stat-label mono-text">PROJECTS</span>
-          </div>
-          <div class="stat-sep">|</div>
-          <div class="stat-item">
-            <span class="stat-num pixel-text pink">✓</span>
-            <span class="stat-label mono-text">OPEN_TO_WORK</span>
-          </div>
-        </div>
-
-        <!-- Social Links (Minimalist Pixel Logos) -->
-        <div class="hero-social">
-          <a href="https://www.facebook.com/moeedidauuu/" target="_blank" rel="noopener" class="hero-social-link hover-fb pixel-text" title="Facebook">FACEBOOK</a>
-          <a href="https://www.instagram.com/06s_.moe" target="_blank" rel="noopener" class="hero-social-link hover-ig pixel-text" title="Instagram">INSTAGRAM</a>
-          <a href="https://www.youtube.com/@randommoee06" target="_blank" rel="noopener" class="hero-social-link hover-yt pixel-text" title="YouTube">YOUTUBE</a>
-          <a href="https://www.linkedin.com/in/duy-hoàng-720699405/" target="_blank" rel="noopener" class="hero-social-link hover-in pixel-text" title="LinkedIn">LINKEDIN</a>
-          <a href="https://www.behance.net/hoangduy2126" target="_blank" rel="noopener" class="hero-social-link hover-be pixel-text" title="Behance">BEHANCE</a>
-        </div>
-      </div>
-
-      <!-- Right: Horizontal scrolling project showcase -->
-      <div class="p-works-preview" aria-hidden="true">
-        <div class="showcase-label mono-text">// SELECTED_WORKS</div>
-
-        <!-- Row 1 — scrolls left -->
-        <div class="showcase-track-wrap">
-          <div class="showcase-track" id="track1">
-            <!-- set A -->
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul23fc.png</span></div>
-              <img src="/works/ul23fc.png" alt="UL23FC Design">
-            </div>
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh1.png</span></div>
-              <img src="/works/anh1.png" alt="Project Anh1">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">recruitsov.png</span></div>
-              <img src="/works/recruitsov.png" alt="Recruit SOV Campaign">
-            </div>
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">w25poster.png</span></div>
-              <img src="/assets/w25poster.png" alt="W25 Poster">
-            </div>
-
-            <!-- set B (duplicate for seamless loop) -->
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul23fc.png</span></div>
-              <img src="/works/ul23fc.png" alt="UL23FC Design">
-            </div>
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh1.png</span></div>
-              <img src="/works/anh1.png" alt="Project Anh1">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">recruitsov.png</span></div>
-              <img src="/works/recruitsov.png" alt="Recruit SOV Campaign">
-            </div>
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">w25poster.png</span></div>
-              <img src="/assets/w25poster.png" alt="W25 Poster">
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Row 2 — scrolls right (reverse) -->
-        <div class="showcase-track-wrap">
-          <div class="showcase-track showcase-track--rev" id="track2">
-            <!-- set A -->
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">sovposter.png</span></div>
-              <img src="/works/sovposter.png" alt="SOV Poster Design">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">tsmt.png</span></div>
-              <img src="/works/tsmt.png" alt="TSMT Project">
-            </div>
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh2fix.png</span></div>
-              <img src="/works/anh2fix.png" alt="Project Anh2">
-            </div>
-            <div class="sc-card sc-short">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul233h.png</span></div>
-              <img src="/works/ul233h.png" alt="UL233H Design">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">crclogo.png</span></div>
-              <img src="/works/crclogo.png" alt="CRC Logo Design">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">books.jpeg</span></div>
-              <img src="/assets/books.jpeg" alt="Books Project">
-            </div>
-            <!-- set B duplicate -->
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">sovposter.png</span></div>
-              <img src="/works/sovposter.png" alt="SOV Poster Design">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">tsmt.png</span></div>
-              <img src="/works/tsmt.png" alt="TSMT Project">
-            </div>
-            <div class="sc-card sc-tall">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">anh2fix.png</span></div>
-              <img src="/works/anh2fix.png" alt="Project Anh2">
-            </div>
-            <div class="sc-card sc-short">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">ul233h.png</span></div>
-              <img src="/works/ul233h.png" alt="UL233H Design">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">crclogo.png</span></div>
-              <img src="/works/crclogo.png" alt="CRC Logo Design">
-            </div>
-            <div class="sc-card sc-wide">
-              <div class="sc-bar"><div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div><span class="sc-name mono-text">books.jpeg</span></div>
-              <img src="/assets/books.jpeg" alt="Books Project">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ╔══════════════════════════════╗ -->
-    <!-- ║  PANEL 2 · INFO BENTO        ║ -->
-    <!-- ╚══════════════════════════════╝ -->
-    <div class="panel panel--info" id="panel-info">
-
-      <!-- A: About -->
-      <div class="bento-cell cell-about">
-        <div class="cell-label mono-text">01_ABOUT</div>
-        <p class="about-bio">
-          Hey, I'm a <strong>Graphic Designer</strong> specializing in <strong>Social Media &amp; Branding</strong> — crafting bold brand identities, high-impact social visuals, and cohesive design systems with pixel-sharp execution.
-        </p>
-        <div class="about-quick-info">
-          <div class="info-row">
-            <span class="info-key mono-text">LOCATION</span>
-            <span class="info-val">Vietnam 🇻🇳</span>
-          </div>
-          <div class="info-row">
-            <span class="info-key mono-text">STATUS</span>
-            <span class="info-val status-green">Open to opportunities</span>
-          </div>
-          <div class="info-row">
-            <span class="info-key mono-text">FOCUS</span>
-            <span class="info-val">Social Media · Branding · Key Visuals</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- B: Education -->
-      <div class="bento-cell cell-education">
-        <div class="cell-label mono-text">02_EDUCATION</div>
-        <div class="edu-item">
-          <div class="edu-period mono-text">2024 — 2028</div>
-          <div class="edu-degree">Bachelor in Industrial and Graphic Design</div>
-          <div class="edu-school mono-text">Univ. of Engineering and Technology · VNU · Hanoi</div>
-          <div class="timeline-tags">
-            <span class="tag">Interior</span><span class="tag">Graphics</span><span class="tag">Design</span>
-          </div>
-        </div>
-        <div class="edu-divider"></div>
-        <div class="edu-item">
-          <div class="edu-period mono-text">2011 — 2024</div>
-          <div class="edu-degree">High School Diploma</div>
-          <div class="edu-school mono-text">Viet Tri High School · Vietnam</div>
-          <div class="timeline-tags">
-            <span class="tag">Math</span><span class="tag">Physics</span><span class="tag">Coding</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- C: Skills (Visualized) -->
-      <div class="bento-cell cell-skills">
-        <div class="cell-label mono-text">03_SKILLS</div>
-        <div class="skills-visual-grid">
-          <div class="skill-card">
-            <div class="skill-card-head">
-              <span class="skill-badge pixel-text accent">BRAND</span>
-              <span class="skill-code mono-text">01</span>
-            </div>
-            <div class="skill-name">Brand Identity</div>
-            <div class="skill-desc">Logos, visual systems, guidelines &amp; brand assets.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card-head">
-              <span class="skill-badge pixel-text pink">SOCIAL</span>
-              <span class="skill-code mono-text">02</span>
-            </div>
-            <div class="skill-name">Social Media Design</div>
-            <div class="skill-desc">Feed aesthetics, campaign posts, carousels &amp; banners.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card-head">
-              <span class="skill-badge pixel-text yellow">POSTER</span>
-              <span class="skill-code mono-text">03</span>
-            </div>
-            <div class="skill-name">Key Visual &amp; Poster</div>
-            <div class="skill-desc">Event artwork, promo posters &amp; print collaterals.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card-head">
-              <span class="skill-badge pixel-text cyan">TYPE</span>
-              <span class="skill-code mono-text">04</span>
-            </div>
-            <div class="skill-name">Typography &amp; Layout</div>
-            <div class="skill-desc">Grid systems, editorial styling &amp; font hierarchy.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card-head">
-              <span class="skill-badge pixel-text purple">STORY</span>
-              <span class="skill-code mono-text">05</span>
-            </div>
-            <div class="skill-name">Visual Storytelling</div>
-            <div class="skill-desc">Creative direction, concept art &amp; engagement assets.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card-head">
-              <span class="skill-badge pixel-text green">MOTION</span>
-              <span class="skill-code mono-text">06</span>
-            </div>
-            <div class="skill-name">Motion &amp; Video</div>
-            <div class="skill-desc">Reels, short-form editing &amp; dynamic motion graphics.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- D: Tools -->
-      <div class="bento-cell cell-tools">
-        <div class="cell-label mono-text">04_TOOLS_&amp;_TECH</div>
-        <div class="tools-container">
-          <div class="tools-group">
-            <div class="tools-group-title mono-text">// DESIGN_&amp;_CREATIVE</div>
-            <div class="tool-chips">
-              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Photoshop</span>
-              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Illustrator</span>
-              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>InDesign</span>
-              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>Premiere Pro</span>
-              <span class="tool-chip"><span class="tool-dot dot-adobe"></span>After Effects</span>
-              <span class="tool-chip"><span class="tool-dot dot-affinity"></span>Affinity</span>
-            </div>
-          </div>
-          <div class="tools-group">
-            <div class="tools-group-title mono-text">// CAD_&amp;_3D</div>
-            <div class="tool-chips">
-              <span class="tool-chip"><span class="tool-dot dot-cad"></span>SolidWorks</span>
-              <span class="tool-chip"><span class="tool-dot dot-cad"></span>AutoCAD</span>
-            </div>
-          </div>
-          <div class="tools-group">
-            <div class="tools-group-title mono-text">// BASIC_CODING</div>
-            <div class="tool-chips">
-              <span class="tool-chip"><span class="tool-dot dot-code"></span>C++</span>
-              <span class="tool-chip"><span class="tool-dot dot-code"></span>Python</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end panel--info -->
-
-    <!-- ╔══════════════════════════════╗ -->
-    <!-- ║  PANEL 3 · WORKS + CONTACT   ║ -->
-    <!-- ╚══════════════════════════════╝ -->
-    <div class="panel panel--works" id="panel-works">
-
-      <!-- Works grid -->
-      <div class="bento-cell cell-works">
-        <div class="cell-label mono-text">04_MY_WORKS</div>
-        <div class="works-grid">
-          <article class="work-card" data-animate>
-            <div class="work-num mono-text">001</div>
-            <div class="work-tags">
-              <span class="tag tag-purple">Branding</span><span class="tag tag-pink">Identity</span><span class="tag tag-blue">Print</span>
-            </div>
-            <h3 class="work-title">VRTX Studio</h3>
-            <p class="work-desc">Full brand identity for a creative agency — logo, type system &amp; guidelines.</p>
-            <div class="work-footer">
-              <a href="#" class="work-link mono-text">VIEW →</a>
-              <a href="https://github.com/hoangduy2126/BTL" target="_blank" rel="noopener" class="work-link mono-text">GITHUB →</a>
-            </div>
-            <div class="work-card-accent" aria-hidden="true"></div>
-          </article>
-        </div>
-      </div>
-
-      <!-- Contact -->
-      <div class="bento-cell cell-contact" id="contact">
-        <div class="cell-label mono-text">05_CONTACT</div>
-        <p class="contact-headline">Let's create something <span class="accent2">beautiful</span> together.</p>
-        <form class="contact-form" id="contactForm">
-          <div class="form-group">
-            <label class="form-label mono-text" for="name">NAME</label>
-            <input type="text" id="name" name="name" class="form-input mono-text" placeholder="Your Name" autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label class="form-label mono-text" for="email">EMAIL</label>
-            <input type="email" id="email" name="email" class="form-input mono-text" placeholder="your@email.com" autocomplete="email" />
-          </div>
-          <div class="form-group">
-            <label class="form-label mono-text" for="message">MESSAGE</label>
-            <textarea id="message" name="message" class="form-textarea mono-text" rows="4" placeholder="Say something..."></textarea>
-          </div>
-          <button type="submit" class="btn-primary form-submit" id="formSubmit">
-            <span class="btn-text">SEND_MESSAGE</span>
-            <span class="btn-icon">→</span>
-          </button>
-        </form>
-
-      </div>
-
-    </div><!-- end panel--works -->
-
-    <!-- FOOTER STRIP -->
-    <footer class="footer">
-      <div class="footer-inner">
-        <span class="pixel-text footer-logo">DES<span class="dot">.</span><span class="accent">FOLIO</span></span>
-        <span class="mono-text footer-copy">© 2026 — Crafted with ♥ &amp; lots of ☕</span>
-        <span class="mono-text footer-version">v2.0.0</span>
-      </div>
-    </footer>
-
-    <!-- BOTTOM CLOCK BAR -->
-    <div class="topbar" id="topbar" aria-label="Current time and date">
-      <div class="topbar-cal" id="tbCal" aria-label="Mini calendar"></div>
-      <div class="topbar-right">
-        <span class="topbar-tz">GMT+7 · INDOCHINA</span>
-        <span class="topbar-sep" aria-hidden="true">|</span>
-        <span class="topbar-date" id="tbDate">SUN · 18 MAY 2026</span>
-        <div class="topbar-clock">
-          <span class="topbar-digits" id="tbDigits">00<span class="topbar-colon">:</span>00<span class="topbar-colon">:</span>00</span>
-          <span class="topbar-ampm" id="tbAmpm">AM</span>
-        </div>
-      </div>
+    <!-- Center: Horizontal Slide Controls -->
+    <div class="topbar-center h-nav-controls" id="hNavControls" aria-label="Horizontal Navigation Controls">
+      <button class="h-nav-btn topbar-btn" id="hPrevBtn" title="Previous section (or Left arrow key)"
+        aria-label="Previous section">
+        <svg class="btn-svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="h-nav-indicator pixel-text" id="hIndicator">01 / 04 <span class="h-nav-title">HOME</span></div>
+      <button class="h-nav-btn topbar-btn" id="hNextBtn" title="Next section (or Right arrow key)"
+        aria-label="Next section">
+        <svg class="btn-svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </div>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    <!-- Right: Indochina Time & Date -->
+    <div class="topbar-right">
+      <span class="topbar-tz" data-i18n="topbar_tz">GMT+7 · INDOCHINA</span>
+      <span class="topbar-sep" aria-hidden="true">|</span>
+      <span class="topbar-date" id="tbDate">SUN · 18 MAY 2026</span>
+      <div class="topbar-clock">
+        <span class="topbar-digits" id="tbDigits">00<span class="topbar-colon">:</span>00<span
+            class="topbar-colon">:</span>00</span>
+        <span class="topbar-ampm" id="tbAmpm">AM</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── FULLSCREEN LIGHTBOX MODAL ── -->
+  <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog" aria-label="Fullscreen Image View">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-dialog">
+      <div class="lightbox-chrome-bar">
+        <div class="ww-dots">
+          <span class="ww-dot r"></span>
+          <span class="ww-dot y"></span>
+          <span class="ww-dot g"></span>
+        </div>
+        <span class="lightbox-filename mono-text" id="lightboxFilename">asset.png</span>
+        <button class="lightbox-close-btn pixel-text" id="lightboxCloseBtn" aria-label="Close lightbox">ESC ✕</button>
+      </div>
+      <div class="lightbox-content">
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Zoomed view" />
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
