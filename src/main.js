@@ -1,6 +1,15 @@
 import { gsap } from 'gsap';
 import './style.css';
 
+/* ===================== HAPTIC FEEDBACK (Mobile) ===================== */
+function triggerHaptic(duration = 10) {
+  if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+    try {
+      navigator.vibrate(duration);
+    } catch (_) {}
+  }
+}
+
 /* ===================== CURSOR (Desktop Only) ===================== */
 const cursor = document.getElementById('cursor');
 const trail  = document.getElementById('cursorTrail');
@@ -441,24 +450,48 @@ function restartTypewriter() {
 }
 
 /* ===================== THEME TOGGLE (DAY / NIGHT) ===================== */
-const themeToggleBtn = document.getElementById('themeToggle');
-const themeToggleIcon = document.getElementById('themeToggleIcon');
-const themeToggleLabel = document.getElementById('themeToggleLabel');
+const themeToggleBtn       = document.getElementById('themeToggle');
+const themeToggleIcon      = document.getElementById('themeToggleIcon');
+const themeToggleLabel     = document.getElementById('themeToggleLabel');
+const mobileThemeToggleBtn = document.getElementById('mobileThemeToggle');
+const mobileThemeToggleIcon = document.getElementById('mobileThemeToggleIcon');
+const mobileThemeToggleLabel = document.getElementById('mobileThemeToggleLabel');
+const navThemeToggleBtn    = document.getElementById('navThemeToggle');
+const navThemeToggleIcon   = document.getElementById('navThemeToggleIcon');
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('des_theme', theme);
   const isDark = theme === 'dark';
-  if (themeToggleIcon) {
-    themeToggleIcon.innerHTML = isDark
-      ? `<svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
-      : `<svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-  }
+  const iconSvg = isDark
+    ? `<svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
+    : `<svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+
+  if (themeToggleIcon) themeToggleIcon.innerHTML = iconSvg;
+  if (mobileThemeToggleIcon) mobileThemeToggleIcon.innerHTML = iconSvg;
+  if (navThemeToggleIcon) navThemeToggleIcon.innerHTML = iconSvg;
+
   const labelKey = isDark ? 'theme_night' : 'theme_day';
-  if (themeToggleLabel) themeToggleLabel.textContent = translations[currentLang][labelKey];
+  const dict = translations[currentLang] || translations.en;
+  const labelText = dict[labelKey] || (isDark ? 'NIGHT' : 'DAY');
+
+  if (themeToggleLabel) themeToggleLabel.textContent = labelText;
+  if (mobileThemeToggleLabel) mobileThemeToggleLabel.textContent = labelText;
+
+  const titleText = isDark ? 'Active: Night mode (click to switch)' : 'Active: Day mode (click to switch)';
+  const ariaText = isDark ? 'Switch to Day mode' : 'Switch to Night mode';
+
   if (themeToggleBtn) {
-    themeToggleBtn.setAttribute('title', isDark ? 'Active: Night mode (click to switch)' : 'Active: Day mode (click to switch)');
-    themeToggleBtn.setAttribute('aria-label', isDark ? 'Switch to Day mode' : 'Switch to Night mode');
+    themeToggleBtn.setAttribute('title', titleText);
+    themeToggleBtn.setAttribute('aria-label', ariaText);
+  }
+  if (mobileThemeToggleBtn) {
+    mobileThemeToggleBtn.setAttribute('title', titleText);
+    mobileThemeToggleBtn.setAttribute('aria-label', ariaText);
+  }
+  if (navThemeToggleBtn) {
+    navThemeToggleBtn.setAttribute('title', titleText);
+    navThemeToggleBtn.setAttribute('aria-label', ariaText);
   }
 }
 
@@ -468,19 +501,23 @@ const urlTheme = new URLSearchParams(window.location.search).get('theme');
 const initialTheme = urlTheme || savedTheme || (prefersDark ? 'dark' : 'light');
 applyTheme(initialTheme);
 
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'light';
-    const next = current === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-  });
+function handleThemeToggle() {
+  triggerHaptic(10);
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
 }
 
+themeToggleBtn?.addEventListener('click', handleThemeToggle);
+mobileThemeToggleBtn?.addEventListener('click', handleThemeToggle);
+navThemeToggleBtn?.addEventListener('click', handleThemeToggle);
+
 /* ===================== LANGUAGE TOGGLE CONTROLLER ===================== */
-const langToggleBtn = document.getElementById('langToggle');
-const langToggleLabel = document.getElementById('langToggleLabel');
+const langToggleBtn       = document.getElementById('langToggle');
+const langToggleLabel     = document.getElementById('langToggleLabel');
 const mobileLangToggleBtn = document.getElementById('mobileLangToggle');
 const mobileLangToggleLabel = document.getElementById('mobileLangToggleLabel');
+const navLangToggleBtn    = document.getElementById('navLangToggle');
 
 function applyLanguage(lang) {
   currentLang = lang;
@@ -523,11 +560,13 @@ function applyLanguage(lang) {
   if (mobileLangToggleLabel) mobileLangToggleLabel.textContent = targetLabel;
   if (mobileLangToggleBtn) mobileLangToggleBtn.setAttribute('title', targetTitle);
 
+  if (navLangToggleBtn) navLangToggleBtn.setAttribute('title', targetTitle);
+
   // Refresh theme button text
   const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-  if (themeToggleLabel) {
-    themeToggleLabel.textContent = dict[currentTheme === 'dark' ? 'theme_night' : 'theme_day'];
-  }
+  const themeText = dict[currentTheme === 'dark' ? 'theme_night' : 'theme_day'];
+  if (themeToggleLabel) themeToggleLabel.textContent = themeText;
+  if (mobileThemeToggleLabel) mobileThemeToggleLabel.textContent = themeText;
 
   // Refresh mobile menu button text
   if (mobileMenuLabel) {
@@ -550,12 +589,14 @@ function applyLanguage(lang) {
 }
 
 function toggleLanguage() {
+  triggerHaptic(10);
   const nextLang = currentLang === 'en' ? 'vi' : 'en';
   applyLanguage(nextLang);
 }
 
 langToggleBtn?.addEventListener('click', toggleLanguage);
 mobileLangToggleBtn?.addEventListener('click', toggleLanguage);
+navLangToggleBtn?.addEventListener('click', toggleLanguage);
 
 /* ===================== FULL-SCREEN PAGE-TRANSITION SCROLL ENGINE ===================== */
 const viewport        = document.getElementById('horizontalViewport');
@@ -567,6 +608,16 @@ const prevBtn         = document.getElementById('hPrevBtn');
 const nextBtn         = document.getElementById('hNextBtn');
 const desktopNavLinks = document.querySelectorAll('.nav-links .nav-link');
 const mobileNavLinks  = document.querySelectorAll('.mobile-nav-links .mobile-nav-link');
+
+// Mobile Retro Phone Navigation DOM elements
+const retroPhoneNav    = document.getElementById('retroPhoneNav');
+const retroPrevBtn     = document.getElementById('retroPrevBtn');
+const retroPrevLabel   = document.getElementById('retroPrevLabel');
+const retroHomeBtn     = document.getElementById('retroHomeBtn');
+const retroIndicator   = document.getElementById('retroIndicator');
+const retroSectionName = document.getElementById('retroSectionName');
+const retroNextBtn     = document.getElementById('retroNextBtn');
+const retroNextLabel   = document.getElementById('retroNextLabel');
 
 const tabNavArrowPrev = document.getElementById('tabNavArrowPrev');
 const tabNavArrowNext = document.getElementById('tabNavArrowNext');
@@ -655,6 +706,22 @@ function updateUIStates(idx) {
   // 4. Bottom Control Buttons Disabled States
   if (prevBtn) prevBtn.disabled = idx === 0;
   if (nextBtn) nextBtn.disabled = idx === panels.length - 1;
+
+  // 4b. Mobile Retro Phone Navigation Bar States
+  if (retroIndicator) {
+    const num = String(idx + 1).padStart(2, '0');
+    const total = String(panels.length).padStart(2, '0');
+    retroIndicator.textContent = `${num} / ${total}`;
+  }
+  if (retroSectionName) {
+    retroSectionName.textContent = getPanelName(idx);
+  }
+  if (retroPrevBtn) retroPrevBtn.disabled = idx === 0;
+  if (retroNextBtn) retroNextBtn.disabled = idx === panels.length - 1;
+
+  const isVi = currentLang === 'vi';
+  if (retroPrevLabel) retroPrevLabel.textContent = isVi ? 'TRƯỚC' : 'PREV';
+  if (retroNextLabel) retroNextLabel.textContent = isVi ? 'TIẾP' : 'NEXT';
 
   // 5. Reveal states for panels
   panels.forEach((p, i) => {
@@ -748,6 +815,7 @@ function goToSection(targetIdx, direction = 'next') {
   if (targetIdx === currentSection) return;
 
   isTransitioning = true;
+  triggerHaptic(12);
   const prevIdx = currentSection;
   currentSection = targetIdx;
 
@@ -948,7 +1016,9 @@ let touchStartX = 0;
 let touchActive = false;
 
 window.addEventListener('touchstart', e => {
-  if (e.target.closest('input, textarea, button, a')) return;
+  if (e.target.closest('input, textarea, button, a, [role="button"], .tab-nav-arrow')) return;
+  // Do not track section swipe inside carousels, showcase reels, or overlays
+  if (e.target.closest('.social-carousel, .showcase-track-wrap, .lightbox-modal, .works-detail-overlay, .mobile-drawer')) return;
   touchStartY = e.touches[0].clientY;
   touchStartX = e.touches[0].clientX;
   touchActive = true;
@@ -957,7 +1027,7 @@ window.addEventListener('touchstart', e => {
 window.addEventListener('touchmove', e => {
   if (!touchActive || isTransitioning) return;
   if (detailOverlayOpen) { touchActive = false; return; }
-  if (e.target.closest && e.target.closest('.mobile-drawer, .works-detail-overlay')) {
+  if (e.target.closest && e.target.closest('.mobile-drawer, .works-detail-overlay, .social-carousel, .showcase-track-wrap, .lightbox-modal')) {
     touchActive = false;
     return;
   }
@@ -967,17 +1037,20 @@ window.addEventListener('touchmove', e => {
   const absDy = Math.abs(dy);
   const absDx = Math.abs(dx);
 
-  // Horizontal swipes trigger section transition
-  if (absDx > absDy && absDx > 44) {
+  // If user is scrolling vertically or diagonal with vertical intent, immediately yield to native vertical scroll
+  if (absDy > 10 && absDy * 1.25 > absDx) {
+    touchActive = false;
+    return;
+  }
+
+  // Only trigger horizontal section switch on a decisive horizontal swipe
+  if (absDx > 60 && absDx > absDy * 1.85) {
     touchActive = false;
     if (dx > 0 && currentSection < panels.length - 1) {
       goToSection(currentSection + 1, 'next');
     } else if (dx < 0 && currentSection > 0) {
       goToSection(currentSection - 1, 'prev');
     }
-  } else if (absDy > absDx && absDy > 30) {
-    // Vertical swipe: allow native vertical scroll inside panel
-    touchActive = false;
   }
 }, { passive: true });
 
@@ -1020,6 +1093,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Bottom Control Buttons
 prevBtn?.addEventListener('click', () => goToSection(currentSection - 1, 'prev'));
 nextBtn?.addEventListener('click', () => goToSection(currentSection + 1, 'next'));
+
+// Mobile Retro Phone Navigation Bar Softkeys
+retroPrevBtn?.addEventListener('click', () => {
+  triggerHaptic(12);
+  if (currentSection > 0) {
+    goToSection(currentSection - 1, 'prev');
+  }
+});
+retroNextBtn?.addEventListener('click', () => {
+  triggerHaptic(12);
+  if (currentSection < panels.length - 1) {
+    goToSection(currentSection + 1, 'next');
+  }
+});
+retroHomeBtn?.addEventListener('click', () => {
+  triggerHaptic(15);
+  if (currentSection !== 0) {
+    goToSection(0, 'prev');
+  } else {
+    toggleMobileMenu();
+  }
+});
 
 // Floating Navigation Arrows
 tabNavArrowPrev?.addEventListener('click', () => {
@@ -1422,8 +1517,11 @@ function openDetail(id) {
 
 function closeDetail() {
   if (!worksDetailOverlay || !detailOverlayOpen) return;
+  triggerHaptic(8);
   worksDetailOverlay.classList.remove('is-visible');
   worksDetailOverlay.setAttribute('aria-hidden', 'true');
+  worksDetailOverlay.style.transform = '';
+  worksDetailOverlay.style.transition = '';
   detailOverlayOpen = false;
   currentWorkId = null;
 }
@@ -1431,6 +1529,7 @@ function closeDetail() {
 /* Lightbox Modal Controller */
 function openLightbox(src, name) {
   if (!lightboxModal || !lightboxImg) return;
+  triggerHaptic(10);
   lightboxImg.src = src;
   lightboxImg.alt = name || 'Enlarged project asset';
   if (lightboxFilename) lightboxFilename.textContent = name || decodeURIComponent(src).split('/').pop() || 'asset.png';
@@ -1440,10 +1539,74 @@ function openLightbox(src, name) {
 
 function closeLightbox() {
   if (!lightboxModal) return;
+  triggerHaptic(8);
   lightboxModal.classList.remove('is-open');
   lightboxModal.setAttribute('aria-hidden', 'true');
   if (lightboxImg) lightboxImg.src = '';
 }
+
+/* Swipe-down-to-dismiss gestures for mobile detail modal and lightbox */
+let detailTouchStartY = 0;
+let detailTouchStartX = 0;
+let detailIsPulling = false;
+
+worksDetailOverlay?.addEventListener('touchstart', e => {
+  if (!detailOverlayOpen || !e.touches || !e.touches[0]) return;
+  detailTouchStartY = e.touches[0].clientY;
+  detailTouchStartX = e.touches[0].clientX;
+  detailIsPulling = false;
+}, { passive: true });
+
+worksDetailOverlay?.addEventListener('touchmove', e => {
+  if (!detailOverlayOpen || !e.touches || !e.touches[0]) return;
+  const dy = e.touches[0].clientY - detailTouchStartY;
+  const dx = Math.abs(e.touches[0].clientX - detailTouchStartX);
+
+  const isAtTop = !detailScrollArea || detailScrollArea.scrollTop <= 2;
+  const isHeaderTarget = Boolean(e.target.closest && e.target.closest('.detail-chrome-bar, .detail-swipe-indicator'));
+
+  if ((isAtTop || isHeaderTarget) && dy > 12 && dy > dx * 1.3) {
+    detailIsPulling = true;
+    if (dy > 0 && dy < 250) {
+      worksDetailOverlay.style.transform = `translateY(${Math.round(dy * 0.72)}px)`;
+      worksDetailOverlay.style.transition = 'none';
+    }
+  }
+}, { passive: true });
+
+worksDetailOverlay?.addEventListener('touchend', e => {
+  if (!detailOverlayOpen || !detailIsPulling) return;
+  detailIsPulling = false;
+  const endY = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : 0;
+  const diffY = endY - detailTouchStartY;
+
+  worksDetailOverlay.style.transition = '';
+  worksDetailOverlay.style.transform = '';
+
+  if (diffY > 65) {
+    triggerHaptic(12);
+    closeDetail();
+  }
+}, { passive: true });
+
+let lightboxTouchStartY = 0;
+let lightboxTouchStartX = 0;
+
+lightboxModal?.addEventListener('touchstart', e => {
+  if (!lightboxModal.classList.contains('is-open') || !e.touches || !e.touches[0]) return;
+  lightboxTouchStartY = e.touches[0].clientY;
+  lightboxTouchStartX = e.touches[0].clientX;
+}, { passive: true });
+
+lightboxModal?.addEventListener('touchend', e => {
+  if (!lightboxModal.classList.contains('is-open') || !e.changedTouches || !e.changedTouches[0]) return;
+  const dy = e.changedTouches[0].clientY - lightboxTouchStartY;
+  const dx = Math.abs(e.changedTouches[0].clientX - lightboxTouchStartX);
+  if (dy > 60 && dy > dx * 1.3) {
+    triggerHaptic(10);
+    closeLightbox();
+  }
+}, { passive: true });
 
 // Lightbox click delegation on detail gallery items
 detailGallery?.addEventListener('click', e => {
@@ -1585,33 +1748,55 @@ function initSocialCarousels() {
       goToSlide(currentIndex + 1);
     });
 
-    // Clicking on slide image directly opens detail modal
-    allSlides.forEach(slide => {
-      slide.addEventListener('click', e => {
-        if (e.target.closest('.carousel-arrow')) return;
-        const c = carousel.closest('.timeline-project');
-        const id = c ? parseInt(c.dataset.workId, 10) : null;
-        if (id) openDetail(id);
-      });
-    });
-
-    // Mobile touch swipe support
+    // Mobile touch swipe support with false-tap protection
     let touchStartX = 0;
+    let touchStartY = 0;
+    let isSwiping = false;
+    let totalMoved = 0;
+
     carousel.addEventListener('touchstart', e => {
-      if (e.changedTouches && e.changedTouches[0]) {
-        touchStartX = e.changedTouches[0].screenX;
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        isSwiping = false;
+        totalMoved = 0;
+      }
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', e => {
+      if (!e.touches || !e.touches[0]) return;
+      const dx = touchStartX - e.touches[0].clientX;
+      const dy = touchStartY - e.touches[0].clientY;
+      totalMoved += Math.hypot(dx, dy);
+      if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+        isSwiping = true;
       }
     }, { passive: true });
 
     carousel.addEventListener('touchend', e => {
       if (e.changedTouches && e.changedTouches[0]) {
-        const diff = touchStartX - e.changedTouches[0].screenX;
-        if (Math.abs(diff) > 40) {
-          if (diff > 0) goToSlide(currentIndex + 1);
+        const diffX = touchStartX - e.changedTouches[0].clientX;
+        const diffY = touchStartY - e.changedTouches[0].clientY;
+        if (Math.abs(diffX) > 28 && Math.abs(diffX) > Math.abs(diffY) * 1.1) {
+          isSwiping = true;
+          triggerHaptic(8);
+          if (diffX > 0) goToSlide(currentIndex + 1);
           else goToSlide(currentIndex - 1);
         }
       }
+      setTimeout(() => { isSwiping = false; totalMoved = 0; }, 220);
     }, { passive: true });
+
+    // Clicking on slide image directly opens detail modal (only when genuinely tapping, not swiping)
+    allSlides.forEach(slide => {
+      slide.addEventListener('click', e => {
+        if (isSwiping || totalMoved > 10) return;
+        if (e.target.closest('.carousel-arrow, .carousel-dot')) return;
+        const c = carousel.closest('.timeline-project');
+        const id = c ? parseInt(c.dataset.workId, 10) : null;
+        if (id) openDetail(id);
+      });
+    });
   });
 }
 
@@ -1620,6 +1805,7 @@ function initSocialInteractions() {
   document.querySelectorAll('.btn-like').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
+      triggerHaptic(12);
       const countEl = btn.querySelector('.like-count');
       const isLiked = btn.classList.toggle('is-liked');
       if (countEl) {
@@ -1639,6 +1825,7 @@ function initSocialInteractions() {
   document.querySelectorAll('.btn-bookmark').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
+      triggerHaptic(12);
       btn.classList.toggle('is-bookmarked');
     });
   });
@@ -1647,6 +1834,7 @@ function initSocialInteractions() {
   document.querySelectorAll('.btn-share').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
+      triggerHaptic(10);
       const card = btn.closest('.timeline-project');
       const title = card?.querySelector('.social-post-title')?.textContent || 'Hoàng Duy Design Portfolio';
       if (navigator.share) {
@@ -1701,6 +1889,7 @@ gsap.from('#heroCta',   { y: 20, opacity: 0, duration: .5, delay: .5 });
 /* ===================== CONTACT COPY TRIGGERS ===================== */
 document.querySelectorAll('.copy-trigger').forEach(btn => {
   btn.addEventListener('click', () => {
+    triggerHaptic(14);
     const target = btn.getAttribute('data-copy-target');
     if (!target) return;
 
@@ -1782,10 +1971,11 @@ function glitchLogo() {
 setInterval(glitchLogo, 4500);
 
 /* ===================== MOBILE NAVIGATION DRAWER ===================== */
-const mobileMenuBtn   = document.getElementById('mobileMenuBtn');
-const mobileMenuIcon  = document.getElementById('mobileMenuIcon');
-const mobileMenuLabel = document.getElementById('mobileMenuLabel');
-const mobileDrawer    = document.getElementById('mobileDrawer');
+const mobileMenuBtn       = document.getElementById('mobileMenuBtn');
+const mobileMenuIcon      = document.getElementById('mobileMenuIcon');
+const mobileMenuLabel     = document.getElementById('mobileMenuLabel');
+const mobileDrawer        = document.getElementById('mobileDrawer');
+const mobileDrawerBackdrop = document.getElementById('mobileDrawerBackdrop');
 
 const hamburgerSvg = `<svg class="btn-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
 const closeSvg = `<svg class="btn-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
@@ -1796,17 +1986,25 @@ function toggleMobileMenu(force) {
   const dict = translations[currentLang] || translations.en;
 
   if (isOpen) {
+    triggerHaptic(12);
     mobileDrawer.classList.add('open');
     mobileDrawer.setAttribute('aria-hidden', 'false');
+    mobileDrawerBackdrop?.classList.add('is-active');
+    mobileDrawerBackdrop?.setAttribute('aria-hidden', 'false');
     mobileMenuBtn.classList.add('active');
     mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('mobile-nav-open');
     if (mobileMenuIcon) mobileMenuIcon.innerHTML = closeSvg;
     if (mobileMenuLabel) mobileMenuLabel.textContent = dict.menu_close;
   } else {
+    triggerHaptic(8);
     mobileDrawer.classList.remove('open');
     mobileDrawer.setAttribute('aria-hidden', 'true');
+    mobileDrawerBackdrop?.classList.remove('is-active');
+    mobileDrawerBackdrop?.setAttribute('aria-hidden', 'true');
     mobileMenuBtn.classList.remove('active');
     mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mobile-nav-open');
     if (mobileMenuIcon) mobileMenuIcon.innerHTML = hamburgerSvg;
     if (mobileMenuLabel) mobileMenuLabel.textContent = dict.menu;
   }
@@ -1818,6 +2016,10 @@ if (mobileMenuBtn) {
     toggleMobileMenu();
   });
 }
+
+mobileDrawerBackdrop?.addEventListener('click', () => {
+  toggleMobileMenu(false);
+});
 
 document.querySelectorAll('.mobile-nav-link').forEach(link => {
   link.addEventListener('click', () => {

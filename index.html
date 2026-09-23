@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" id="metaDescription" content="Graphic Designer portfolio focusing on Social Media and Branding." />
   <title id="pageTitle">des.folio — Graphic Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,6 +38,30 @@
           data-text="CONTACT">CONTACT</a></li>
     </ul>
     <div class="nav-actions">
+      <button class="lang-toggle nav-action-btn" id="navLangToggle" aria-label="Switch language" title="Switch language / Chuyển ngôn ngữ">
+        <span class="btn-icon lang-icon" id="navLangToggleIcon" aria-hidden="true">
+          <svg class="btn-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+        </span>
+      </button>
+      <button class="theme-toggle nav-action-btn" id="navThemeToggle" aria-label="Switch theme mode" title="Switch theme mode">
+        <span class="btn-icon theme-icon" id="navThemeToggleIcon" aria-hidden="true">
+          <svg class="btn-svg icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </span>
+      </button>
       <button class="mobile-menu-btn pixel-text" id="mobileMenuBtn" aria-label="Toggle Navigation Menu"
         aria-expanded="false">
         <span class="mobile-menu-icon" id="mobileMenuIcon">
@@ -63,16 +87,34 @@
     <div class="mobile-drawer-inner">
       <div class="mobile-drawer-header">
         <span class="pixel-text mobile-drawer-title" data-i18n="mobile_nav_title">// NAVIGATION</span>
-        <button class="lang-toggle pixel-text mobile-lang-toggle" id="mobileLangToggle" aria-label="Switch language">
-          <span class="btn-icon lang-icon" id="mobileLangToggleIcon" aria-hidden="true">
-            <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-          </span>
-          <span class="lang-toggle-label" id="mobileLangToggleLabel">VN</span>
-        </button>
+        <div class="mobile-drawer-controls">
+          <button class="theme-toggle pixel-text mobile-theme-toggle" id="mobileThemeToggle" aria-label="Switch theme mode" title="Switch theme mode">
+            <span class="btn-icon theme-icon" id="mobileThemeToggleIcon" aria-hidden="true">
+              <svg class="btn-svg icon-sun" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </span>
+            <span class="theme-toggle-label" id="mobileThemeToggleLabel" data-i18n="theme_day">DAY</span>
+          </button>
+          <button class="lang-toggle pixel-text mobile-lang-toggle" id="mobileLangToggle" aria-label="Switch language">
+            <span class="btn-icon lang-icon" id="mobileLangToggleIcon" aria-hidden="true">
+              <svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
+            <span class="lang-toggle-label" id="mobileLangToggleLabel">VN</span>
+          </button>
+        </div>
       </div>
       <ul class="mobile-nav-links">
         <li>
@@ -109,6 +151,7 @@
       </div>
     </div>
   </div>
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" aria-hidden="true"></div>
 
   <!-- ╔══════════════════════════════════════════════╗ -->
   <!-- ║  MAIN HORIZONTAL VIEWPORT & TRACK           ║ -->
@@ -409,10 +452,6 @@
                 <div class="bento-header-left">
                   <span class="bento-tag mono-text">DOSSIER // 01</span>
                   <span class="bento-crumb mono-text">ARCHIVE_REF: HOANGDUY.ME</span>
-                </div>
-                <div class="bento-status-pill mono-text">
-                  <span class="pulse-beacon"></span>
-                  <span data-i18n="stat_open">OPEN_TO_WORK</span>
                 </div>
               </div>
 
@@ -1437,6 +1476,7 @@
 
           <!-- ── DETAIL OVERLAY (initially hidden, slides in on scroll after zoom-select) ── -->
           <div class="works-detail-overlay" id="worksDetailOverlay" aria-hidden="true">
+            <div class="detail-swipe-indicator" id="detailSwipeIndicator" aria-hidden="true"><span class="detail-swipe-bar"></span></div>
             <div class="detail-chrome-bar">
               <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span
                     class="ww-dot g"></span></div>
@@ -1640,6 +1680,21 @@
     </div>
   </footer>
 
+  <!-- ── MOBILE RETRO PHONE NAV BAR (≤ 900px) ── -->
+  <nav class="retro-phone-nav" id="retroPhoneNav" aria-label="Mobile Navigation Bar">
+    <button class="retro-nav-btn retro-btn--prev" id="retroPrevBtn" aria-label="Previous Section">
+      <span class="retro-btn-arrow" aria-hidden="true">◀</span>
+      <span class="retro-btn-label mono-text" id="retroPrevLabel">PREV</span>
+    </button>
+    <button class="retro-nav-btn retro-btn--home" id="retroHomeBtn" aria-label="Current Section / Home">
+      <span class="retro-home-indicator pixel-text" id="retroIndicator">01 / 04</span>
+      <span class="retro-home-name mono-text" id="retroSectionName">HOME</span>
+    </button>
+    <button class="retro-nav-btn retro-btn--next" id="retroNextBtn" aria-label="Next Section">
+      <span class="retro-btn-label mono-text" id="retroNextLabel">NEXT</span>
+      <span class="retro-btn-arrow" aria-hidden="true">▶</span>
+    </button>
+  </nav>
   <!-- ── FULLSCREEN LIGHTBOX MODAL ── -->
   <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog" aria-label="Fullscreen Image View">
     <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
