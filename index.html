@@ -1,22 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-physics="false">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" id="metaDescription" content="Graphic Designer portfolio focusing on Social Media and Branding." />
-  <title id="pageTitle">des.folio — Graphic Designer</title>
+  <meta name="description" id="metaDescription" content="The Moee’s Lab — a creative laboratory by Hoàng Duy. Explore experiments in graphic design, branding and visual communication." />
+  <title id="pageTitle">The Moee’s Lab — Design & Visual Experiments</title>
+  <meta name="theme-color" content="#0F1115" />
+  <meta property="og:title" content="The Moee’s Lab" />
+  <meta property="og:description" content="Design, branding and visual experiments by Hoàng Duy." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Silkscreen&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="icon" type="image/png" href="/assets/web_icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/lab-icon.svg" />
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 
 <body>
 
+  <a class="skip-link" href="#hero">Skip to content</a>
+  <div class="lab-boot" id="labBoot" role="status" aria-live="polite" hidden>
+    <span class="mono-text">LAB INITIALIZING <span id="bootValue">00%</span></span>
+    <progress id="bootProgress" max="100" value="0" aria-label="Lab initialization"></progress>
+  </div>
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
   <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
@@ -24,8 +33,7 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-logo">
-      <a href="#hero" class="nav-logo-link"><span class="pixel-text">DES</span><span class="dot">.</span><span
-          class="pixel-text accent">FOLIO</span></a>
+      <a href="#hero" class="nav-logo-link"><span class="lab-mark" aria-hidden="true">[m]</span><span class="lab-wordmark">The Moee’s Lab<span class="lab-logo-caption">DESIGN / EXPERIMENT / REPEAT</span></span></a>
     </div>
     <ul class="nav-links">
       <li><a href="#hero" class="nav-link pixel-text" data-panel="0" data-i18n="nav_showcase" data-text="HOME">HOME</a>
@@ -38,6 +46,14 @@
           data-text="CONTACT">CONTACT</a></li>
     </ul>
     <div class="nav-actions">
+      <details class="lab-settings"><summary aria-label="Lab interaction settings">[ LAB ]</summary>
+        <div class="lab-settings-panel">
+          <span class="mono-text">INTERACTION SETTINGS</span>
+          <button id="physicsToggle" type="button" aria-pressed="false">Physics: OFF</button>
+          <button id="feedbackToggle" type="button" aria-pressed="false">Haptics: OFF</button>
+          <small>Native scrolling always active. Motion respects your device preferences.</small>
+        </div>
+      </details>
       <button class="lang-toggle nav-action-btn" id="navLangToggle" aria-label="Switch language" title="Switch language / Chuyển ngôn ngữ">
         <span class="btn-icon lang-icon" id="navLangToggleIcon" aria-hidden="true">
           <svg class="btn-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -174,15 +190,15 @@
               <span class="ww-dot y"></span>
               <span class="ww-dot g"></span>
             </div>
-            <span class="window-title mono-text">hoangduy_identity.sys</span>
+            <span class="window-title mono-text">moee_lab / identity.sys</span>
             <span class="window-id mono-text">01</span>
           </div>
           <div class="p-identity-body">
-            <div class="hero-tag mono-text" id="heroTag" data-i18n="hero_tag">DUNNO WHO YOU ARE, BUT WELCOME!</div>
+            <div class="hero-tag mono-text" id="heroTag" data-i18n="hero_tag">// INDEPENDENT DESIGN LAB · HANOI, VN</div>
             <h1 class="hero-name pixel-text" id="heroName">
-              <span class="name-line" data-i18n="hero_hi">HI!</span>
-              <span class="name-line accent-line">RANDOMMOEE06</span>
-              <span class="name-line" data-i18n="hero_is_here">IS HERE</span>
+              <span class="name-line" data-i18n="hero_hi">The</span>
+              <span class="name-line accent-line">Moee’s</span>
+              <span class="name-line" data-i18n="hero_is_here">Lab.</span>
             </h1>
             <p class="hero-role mono-text" id="heroRole">
               <span class="role-prefix">~$ </span>
@@ -209,6 +225,7 @@
                 </span>
               </a>
             </div>
+            <p class="lab-intro" data-i18n="lab_intro">A space for curious ideas, precise design and visual experiments. Built by Hoàng Duy.</p>
             <!-- Quick stats strip -->
             <div class="stats-strip">
               <div class="stat-item">
@@ -245,7 +262,7 @@
 
         <!-- Right: Horizontal scrolling project showcase preview -->
         <div class="p-works-preview" aria-hidden="true">
-          <div class="showcase-label mono-text" data-i18n="showcase_reel_label">// LIVE_SHOWCASE_REEL</div>
+          <div class="showcase-label mono-text" data-i18n="showcase_reel_label">// EXPERIMENT ARCHIVE / SELECTED WORK</div>
 
           <!-- Row 1 — scrolls left -->
           <div class="showcase-track-wrap">
@@ -1610,9 +1627,9 @@
           <!-- Footer -->
           <footer class="footer-inline" data-reveal>
             <div class="footer-inner">
-              <span class="pixel-text footer-logo">DES<span class="dot">.</span><span class="accent">FOLIO</span></span>
-              <span class="mono-text footer-copy" data-i18n="footer_copy">© 2026 — Crafted with ♥ &amp; lots of ☕</span>
-              <span class="mono-text footer-version" data-i18n="footer_version">v2.2.0 · HORIZONTAL PAN</span>
+              <span class="pixel-text footer-logo">The Moee’s Lab</span>
+              <span class="mono-text footer-copy" data-i18n="footer_copy">© 2026 The Moee’s Lab · Hoàng Duy</span>
+              <span class="mono-text footer-version" data-i18n="footer_version">LAB / V3.0 · SYSTEM ONLINE</span>
             </div>
           </footer>
         </div>

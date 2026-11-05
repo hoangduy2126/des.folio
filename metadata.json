@@ -1,6 +1,6 @@
 {
-  "name": "des.folio",
-  "description": "Graphic Designer portfolio focusing on Social Media and Branding.",
+  "name": "The Moee's Lab",
+  "description": "A creative laboratory by Hoàng Duy: graphic design, branding and visual experiments.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
