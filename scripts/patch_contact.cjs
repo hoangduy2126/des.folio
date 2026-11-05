@@ -101,8 +101,8 @@ const newSection = `<!-- ╔═════════════════�
           <!-- Footer -->
           <footer class="footer-inline" data-reveal>
             <div class="footer-inner">
-              <span class="pixel-text footer-logo">DES<span class="dot">.</span><span class="accent">FOLIO</span></span>
-              <span class="mono-text footer-copy" data-i18n="footer_copy">© 2026 — Crafted with ♥ &amp; lots of ☕</span>
+              <span class="pixel-text footer-logo">The Moee’s Lab</span>
+              <span class="mono-text footer-copy" data-i18n="footer_copy">© 2026 The Moee’s Lab · Hoàng Duy</span>
               <span class="mono-text footer-version" data-i18n="footer_version">v2.2.0 · HORIZONTAL PAN</span>
             </div>
           </footer>

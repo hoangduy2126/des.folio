@@ -1,60 +1,66 @@
 import { gsap } from 'gsap';
 import './style.css';
+import './lab.css';
 
-/* ===================== HAPTIC FEEDBACK (Mobile) ===================== */
+/* Explicit opt-in motion and feedback; storage is optional in private browsing. */
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+const preferences = {
+  get(key) { try { return localStorage.getItem(key); } catch { return null; } },
+  read(key) { try { return localStorage.getItem(key) === 'true'; } catch { return false; } },
+  write(key, value) { try { localStorage.setItem(key, String(value)); } catch {} },
+};
+let physicsEnabled = preferences.read('moee.physics') && !reducedMotion.matches && finePointer.matches;
+let feedbackEnabled = preferences.read('moee.haptics');
 function triggerHaptic(duration = 10) {
-  if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
-    try {
-      navigator.vibrate(duration);
-    } catch (_) {}
+  if (feedbackEnabled && navigator.vibrate) { try { navigator.vibrate(duration); } catch {} }
+}
+function syncLabSettings() {
+  document.documentElement.dataset.physics = String(physicsEnabled);
+  gsap.globalTimeline.timeScale(!physicsEnabled ? 1000 : 1);
+  for (const [id, label, enabled] of [
+    ['physicsToggle', 'Physics', physicsEnabled], ['feedbackToggle', 'Haptics', feedbackEnabled],
+  ]) {
+    const button = document.getElementById(id);
+    button.textContent = `${label}: ${enabled ? 'ON' : 'OFF'}`;
+    button.setAttribute('aria-pressed', String(enabled));
   }
+  document.getElementById('physicsToggle').disabled = reducedMotion.matches || !finePointer.matches;
 }
-
-/* ===================== CURSOR (Desktop Only) ===================== */
-const cursor = document.getElementById('cursor');
-const trail  = document.getElementById('cursorTrail');
-const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-
-if (!isTouchDevice && cursor && trail) {
-  let mx = 0, my = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    gsap.to(cursor, { x: mx, y: my, duration: 0 });
-    gsap.to(trail,  { x: mx, y: my, duration: 0.12 });
-  });
-
-  document.addEventListener('mouseleave', () => {
-    cursor.style.opacity = '0';
-    trail.style.opacity = '0';
-  });
-
-  document.addEventListener('mouseenter', () => {
-    cursor.style.opacity = '1';
-    trail.style.opacity = '0.4';
-  });
-
-  const hoverSelector = 'a, button, input, textarea, select, .tool-chip, .sc-card, .skill-card, .skill-tile, .profile-stat-box, .bento-chip, .h-nav-btn, .topbar-btn, .timeline-see-more-btn, .tab-nav-arrow, .detail-close-btn, .lang-toggle, .theme-toggle, .detail-gallery-item, .lightbox-close-btn, .social-action-btn, .carousel-arrow, .carousel-dot, .division-tab, .social-tag, .social-slide img';
-  document.addEventListener('mouseover', e => {
-    if (e.target.closest && e.target.closest(hoverSelector)) {
-      cursor.classList.add('hovered');
-    }
-  });
-
-  document.addEventListener('mouseout', e => {
-    if (e.target.closest && e.target.closest(hoverSelector)) {
-      cursor.classList.remove('hovered');
-    }
-  });
-} else if (cursor && trail) {
-  cursor.style.display = 'none';
-  trail.style.display = 'none';
-}
+document.getElementById('physicsToggle').addEventListener('click', () => {
+  physicsEnabled = !physicsEnabled;
+  preferences.write('moee.physics', physicsEnabled);
+  syncLabSettings();
+});
+document.getElementById('feedbackToggle').addEventListener('click', () => {
+  feedbackEnabled = !feedbackEnabled;
+  preferences.write('moee.haptics', feedbackEnabled);
+  syncLabSettings();
+  triggerHaptic();
+});
+for (const media of [reducedMotion, finePointer]) media.addEventListener('change', () => {
+  physicsEnabled = preferences.read('moee.physics') && !reducedMotion.matches && finePointer.matches;
+  syncLabSettings();
+});
+syncLabSettings();
+document.addEventListener('click', e => {
+  if (e.target.closest('a, button')) triggerHaptic();
+});
+document.addEventListener('pointermove', e => {
+  if (!physicsEnabled || e.pointerType !== 'mouse') return;
+  const card = e.target.closest('.p-identity');
+  if (card) {
+    // Quantized movement is bounded to a single 4px grid step.
+    const x = Math.round((e.clientX / innerWidth - .5) * 2) * 4;
+    card.style.setProperty('--lab-shift', `${x}px`);
+  }
+}, { passive: true });
 
 /* ===================== BILINGUAL TRANSLATION SYSTEM (EN / VN) ===================== */
 const translations = {
   en: {
-    page_title: 'des.folio — Graphic Designer',
-    meta_description: 'Graphic Designer portfolio focusing on Social Media and Branding.',
+    page_title: "The Moee’s Lab — Design & Visual Experiments",
+    meta_description: 'The Moee’s Lab — graphic design, branding and visual experiments by Hoàng Duy.',
     nav_showcase: 'HOME',
     nav_info: 'INFO & SKILLS',
     nav_works: 'MY WORKS',
@@ -66,9 +72,10 @@ const translations = {
     menu_close: 'CLOSE',
     mobile_nav_title: '// NAVIGATION',
     mobile_drawer_footer: '// HOÀNG DUY · GRAPHIC DESIGNER',
-    hero_tag: 'DUNNO WHO YOU ARE, BUT WELCOME!',
-    hero_hi: 'HI!',
-    hero_is_here: 'IS HERE',
+    hero_tag: '// INDEPENDENT DESIGN LAB · HANOI, VN',
+    lab_intro: 'A space for curious ideas, precise design and visual experiments. Built by Hoàng Duy.',
+    hero_hi: 'The',
+    hero_is_here: 'Lab.',
     btn_view_work: 'VIEW_WORK',
     btn_contact: 'GET_IN_TOUCH',
     stat_exp: 'YRS_EXP',
@@ -77,7 +84,7 @@ const translations = {
     stat_devotion: 'DEVOTION',
     profile_role: 'GRAPHIC DESIGNER',
     profile_loc: 'HANOI, VN 🇻🇳',
-    showcase_reel_label: '// LIVE_SHOWCASE_REEL',
+    showcase_reel_label: '// EXPERIMENT ARCHIVE / SELECTED WORK',
     info_about_label: '01_ABOUT_ME',
     info_about_bio: "Hi, I'm Hoàng Duy (Randommoee06). I'm a graphic designer and design student based in Hanoi, Vietnam. To me, design has never been just about making things look cool—it's about finding honest ways to tell stories, solve problems, and connect with people.",
     info_about_bio_sub: "Whether building a visual identity from scratch, crafting social media campaigns, or exploring typography and brutalist aesthetics, I put care and intention into every detail. I'm constantly learning, staying curious, and looking for meaningful collaborations with people who care about what they build.",
@@ -218,7 +225,8 @@ const translations = {
     contact_btn_copy: 'Copy',
     contact_btn_copied: 'Copied ✓',
     contact_socials_label: '// or find me here —',
-    footer_version: 'v2.2.0 · HORIZONTAL PAN',
+    footer_copy: '© 2026 The Moee’s Lab · Hoàng Duy',
+    footer_version: 'LAB / V3.0 · SYSTEM ONLINE',
     topbar_tz: 'GMT+7 · INDOCHINA',
     panel_name_0: 'HOME',
     panel_name_1: 'INFO',
@@ -226,8 +234,8 @@ const translations = {
     panel_name_3: 'CONTACT',
   },
   vi: {
-    page_title: 'des.folio — Nhà Thiết Kế Đồ Hoạ',
-    meta_description: 'Portfolio Nhà thiết kế Đồ hoạ chuyên sâu về Social Media và Nhận diện Thương hiệu.',
+    page_title: "The Moee’s Lab — Thiết kế & Thử nghiệm thị giác",
+    meta_description: 'The Moee’s Lab — thiết kế đồ hoạ, nhận diện thương hiệu và thử nghiệm thị giác của Hoàng Duy.',
     nav_showcase: 'TRANG CHỦ',
     nav_info: 'GIỚI THIỆU & KỸ NĂNG',
     nav_works: 'DỰ ÁN TIÊU BIỂU',
@@ -239,9 +247,10 @@ const translations = {
     menu_close: 'ĐÓNG',
     mobile_nav_title: '// ĐIỀU HƯỚNG',
     mobile_drawer_footer: '// HOÀNG DUY · NHÀ THIẾT KẾ ĐỒ HOẠ',
-    hero_tag: 'CHƯA BIẾT BẠN LÀ AI, NHƯNG CHÀO MỪNG NHÉ!',
-    hero_hi: 'XIN CHÀO!',
-    hero_is_here: 'ĐÃ Ở ĐÂY',
+    hero_tag: '// PHÒNG THỬ NGHIỆM THIẾT KẾ · HÀ NỘI',
+    lab_intro: 'Không gian cho ý tưởng mới, thiết kế chỉn chu và thử nghiệm thị giác. Thực hiện bởi Hoàng Duy.',
+    hero_hi: 'The',
+    hero_is_here: 'Lab.',
     btn_view_work: 'XEM_DỰ_ÁN',
     btn_contact: 'LIÊN_HỆ_NGAY',
     stat_exp: 'NĂM_KN',
@@ -391,7 +400,8 @@ const translations = {
     contact_btn_copy: 'Sao chép',
     contact_btn_copied: 'Đã chép ✓',
     contact_socials_label: '// hoặc tìm mình ở đây —',
-    footer_version: 'v2.2.0 · CUỘN NGANG',
+    footer_copy: '© 2026 The Moee’s Lab · Hoàng Duy',
+    footer_version: 'LAB / V3.0 · ĐANG HOẠT ĐỘNG',
     topbar_tz: 'GMT+7 · ĐÔNG DƯƠNG',
     panel_name_0: 'TRANG CHỦ',
     panel_name_1: 'GIỚI THIỆU',
@@ -415,7 +425,7 @@ const rolesVi = [
   'Thiết Kế Key Visual & Poster',
 ];
 
-let currentLang = localStorage.getItem('des_lang') || 'en';
+let currentLang = preferences.get('moee.language') || 'en';
 let roles = currentLang === 'vi' ? rolesVi : rolesEn;
 
 /* ===================== TYPEWRITER ===================== */
@@ -425,6 +435,7 @@ let typeTimer = null;
 
 function typeLoop() {
   if (!tw) return;
+  if (!physicsEnabled) { tw.textContent = roles[0]; typeTimer = setTimeout(typeLoop, 500); return; }
   const current = roles[roleIdx] || roles[0];
   tw.textContent = deleting ? current.slice(0, charIdx--) : current.slice(0, ++charIdx);
   if (!deleting && charIdx === current.length) {
@@ -461,7 +472,7 @@ const navThemeToggleIcon   = document.getElementById('navThemeToggleIcon');
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('des_theme', theme);
+  preferences.write('moee.theme', theme);
   const isDark = theme === 'dark';
   const iconSvg = isDark
     ? `<svg class="btn-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
@@ -495,7 +506,7 @@ function applyTheme(theme) {
   }
 }
 
-const savedTheme = localStorage.getItem('des_theme');
+const savedTheme = preferences.get('moee.theme');
 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 const urlTheme = new URLSearchParams(window.location.search).get('theme');
 const initialTheme = urlTheme || savedTheme || (prefersDark ? 'dark' : 'light');
@@ -521,7 +532,7 @@ const navLangToggleBtn    = document.getElementById('navLangToggle');
 
 function applyLanguage(lang) {
   currentLang = lang;
-  localStorage.setItem('des_lang', lang);
+  preferences.write('moee.language', lang);
   document.documentElement.setAttribute('lang', lang);
 
   const dict = translations[lang] || translations.en;
@@ -648,10 +659,6 @@ const lightboxFilename   = document.getElementById('lightboxFilename');
 const lightboxImg        = document.getElementById('lightboxImg');
 
 let currentSection   = 0;
-let isTransitioning  = false;
-let wheelDeltaBuffer = 0;
-let wheelCooldown    = null;
-const WHEEL_THRESHOLD = 20;
 
 let detailOverlayOpen = false;
 let currentWorkId     = null;
@@ -661,9 +668,9 @@ const urlParams = new URLSearchParams(window.location.search);
 const initialParam = parseInt(urlParams.get('panel') ?? urlParams.get('section'), 10);
 if (!isNaN(initialParam) && initialParam >= 0 && initialParam < panels.length) {
   currentSection = initialParam;
-  gsap.set(track, { x: -currentSection * window.innerWidth, force3D: true });
+  requestAnimationFrame(() => panels[currentSection].scrollIntoView({ block: 'start' }));
 } else {
-  gsap.set(track, { x: 0, force3D: true });
+  gsap.set(track, { x: 0 });
 }
 
 function getPanelName(idx) {
@@ -751,317 +758,24 @@ function updateUIStates(idx) {
 // Initial UI synchronization
 updateUIStates(currentSection);
 
-/**
- * Staggered parallax motion on media elements
- */
-function animateSectionParallax(targetIdx, prevIdx, direction) {
-  const currentPanel = panels[targetIdx];
-  const previousPanel = panels[prevIdx];
-
-  if (currentPanel) {
-    const mediaElements = currentPanel.querySelectorAll(
-      '.editorial-block, .timeline-project, .contact-meta-card'
-    );
-    if (mediaElements.length > 0) {
-      const startY = direction === 'next' ? 24 : -24;
-      gsap.fromTo(
-        mediaElements,
-        { y: startY, opacity: 0.4 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.85,
-          stagger: 0.05,
-          ease: 'power3.out',
-          overwrite: 'auto',
-        }
-      );
-    }
-
-    const leftPane = currentPanel.querySelector('.contact-info-col');
-    if (leftPane) {
-      const startY = direction === 'next' ? 24 : -24;
-      gsap.fromTo(
-        leftPane,
-        { y: startY, opacity: 0.65 },
-        { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out', overwrite: 'auto' }
-      );
-    }
-  }
-
-  // Outgoing panel counter-parallax
-  if (previousPanel && previousPanel !== currentPanel) {
-    const outMedia = previousPanel.querySelectorAll('.skill-card, .timeline-project');
-    if (outMedia.length > 0) {
-      const exitX = direction === 'next' ? -40 : 40;
-      gsap.to(outMedia, {
-        x: exitX,
-        duration: 0.75,
-        ease: 'power3.in',
-        overwrite: 'auto',
-        onComplete: () => {
-          gsap.set(outMedia, { x: 0 });
-        },
-      });
-    }
-  }
-}
-
-/**
- * One-Scroll-Per-Section Transition Engine
- */
 function goToSection(targetIdx, direction = 'next') {
-  if (targetIdx < 0 || targetIdx >= panels.length || isTransitioning) return;
-  if (targetIdx === currentSection) return;
-
-  isTransitioning = true;
-  triggerHaptic(12);
-  const prevIdx = currentSection;
+  if (targetIdx < 0 || targetIdx >= panels.length) return;
+  if (detailOverlayOpen && targetIdx !== 2) closeDetail();
   currentSection = targetIdx;
-
-  // Clean up Works interaction state if leaving the Works panel
-  if (prevIdx === 2 && targetIdx !== 2 && detailOverlayOpen) {
-    closeDetail();
-  }
-
-  // Immediately update UI states
-  updateUIStates(currentSection);
-
-  const targetX = -targetIdx * window.innerWidth;
-  track.classList.add('is-accelerating');
-
-  // Trigger parallax motion
-  animateSectionParallax(targetIdx, prevIdx, direction);
-
-  // Accelerated transition with GSAP power4.inOut
-  gsap.to(track, {
-    x: targetX,
-    duration: 1.15,
-    ease: 'power4.inOut',
-    force3D: true,
-    overwrite: 'auto',
-    onComplete: () => {
-      track.classList.remove('is-accelerating');
-      setTimeout(() => {
-        isTransitioning = false;
-      }, 50);
-    },
-  });
+  updateUIStates(targetIdx);
+  panels[targetIdx].scrollIntoView({ behavior: physicsEnabled ? 'smooth' : 'instant', block: 'start' });
 }
 
-/* ===================== GESTURE DETECTION & SCROLL HIJACKING ===================== */
-
-/**
- * Checks whether an element or any of its scrollable ancestors has room to scroll vertically in deltaY direction
- */
-function canScrollVertically(el, deltaY) {
-  let curr = el;
-  while (curr && curr !== document.body && curr !== document.documentElement) {
-    // Avoid treating worksTimeline as a generic vertical scroll container
-    // (Works section has dedicated scoping between post cards and whitespace)
-    if (curr.id === 'worksTimeline' || curr.classList.contains('works-timeline-zone')) {
-      return false;
-    }
-    const style = window.getComputedStyle(curr);
-    const overflowY = style.overflowY;
-    if ((overflowY === 'auto' || overflowY === 'scroll') && curr.scrollHeight > curr.clientHeight + 2) {
-      if (deltaY > 0 && curr.scrollTop + curr.clientHeight < curr.scrollHeight - 2) return true;
-      if (deltaY < 0 && curr.scrollTop > 2) return true;
-    }
-    curr = curr.parentElement;
-  }
-  return false;
-}
-
-// Mouse Wheel & Trackpad Gesture Hijacking
-window.addEventListener('wheel', e => {
-  // Do not hijack inside editable text fields or mobile drawer
-  if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-  if (e.target?.closest && e.target.closest('.mobile-drawer')) return;
-
-  // When project detail full view is open: let it scroll naturally with full momentum, never switch section!
-  if (detailOverlayOpen) {
-    return;
-  }
-
-  // Works Showcase (Panel 2) Scope-Specific Scrolling:
-  // 1. TRONG CÁC Ô THUỘC PHẠM VI BÀI VIẾT (.timeline-project / .social-post-card):
-  //    Cuộn lên xuống để xem các bài viết; tuyệt đối không chuyển trang khi đang ở phạm vi bài viết.
-  // 2. KHOẢNG TRẮNG KHÔNG THUỘC PHẠM VI BÀI VIẾT:
-  //    Ngăn cuộn dọc bài viết, chuyển hướng cuộn ngang trái/phải để chuyển đổi giữa các trang website.
-  const postCard = e.target?.closest && e.target.closest('.timeline-project, .social-post-card');
-  const inWorksZone = Boolean(e.target?.closest && e.target.closest('#panel-works, .panel--works, .works-panel-container, .works-timeline-zone'));
-
-  if (currentSection === 2 || inWorksZone) {
-    if (postCard) {
-      // Trong phạm vi bài viết: cuộn dọc xem bài viết, không chuyển section
-      return;
-    } else {
-      // Trong khoảng trắng: cuộn ngang trái/phải để xem các trang khác của website
-      e.preventDefault();
-      if (isTransitioning) return;
-
-      const isHorizWheel = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-      const delta = isHorizWheel ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) < 6) return;
-
-      wheelDeltaBuffer += delta;
-
-      clearTimeout(wheelCooldown);
-      wheelCooldown = setTimeout(() => {
-        wheelDeltaBuffer = 0;
-      }, 120);
-
-      if (wheelDeltaBuffer > WHEEL_THRESHOLD) {
-        wheelDeltaBuffer = 0;
-        if (currentSection < panels.length - 1) {
-          goToSection(currentSection + 1, 'next');
-        }
-      } else if (wheelDeltaBuffer < -WHEEL_THRESHOLD) {
-        wheelDeltaBuffer = 0;
-        if (currentSection > 0) {
-          goToSection(currentSection - 1, 'prev');
-        }
-      }
-      return;
+// Native document scrolling keeps touch, wheel, keyboard and assistive input consistent.
+const panelObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      currentSection = panels.indexOf(entry.target);
+      updateUIStates(currentSection);
     }
   }
-
-  // If the target element or any parent container has vertical room to scroll, let it scroll smoothly!
-  if (canScrollVertically(e.target, e.deltaY)) {
-    return;
-  }
-
-  // If transition is currently animating, prevent default to lock position
-  e.preventDefault();
-  if (isTransitioning) return;
-
-  // Extract vertical or horizontal scroll intent
-  const isHorizWheel = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-  const delta = isHorizWheel ? e.deltaX : e.deltaY;
-  if (Math.abs(delta) < 6) return;
-
-  wheelDeltaBuffer += delta;
-
-  clearTimeout(wheelCooldown);
-  wheelCooldown = setTimeout(() => {
-    wheelDeltaBuffer = 0;
-  }, 120);
-
-  // Trigger section transition when buffer threshold is reached
-  if (wheelDeltaBuffer > WHEEL_THRESHOLD) {
-    wheelDeltaBuffer = 0;
-    if (currentSection < panels.length - 1) {
-      goToSection(currentSection + 1, 'next');
-    }
-  } else if (wheelDeltaBuffer < -WHEEL_THRESHOLD) {
-    wheelDeltaBuffer = 0;
-    if (currentSection > 0) {
-      goToSection(currentSection - 1, 'prev');
-    }
-  }
-}, { passive: false });
-
-// Keyboard Navigation
-window.addEventListener('keydown', e => {
-  if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-  if (isTransitioning) return;
-
-  // When project full view is open, arrow/page keys scroll detail area naturally
-  if (detailOverlayOpen) {
-    if (e.key === 'ArrowDown') {
-      if (detailScrollArea) detailScrollArea.scrollTop += 60;
-      e.preventDefault();
-    } else if (e.key === 'ArrowUp') {
-      if (detailScrollArea) detailScrollArea.scrollTop -= 60;
-      e.preventDefault();
-    } else if (e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
-      if (detailScrollArea) detailScrollArea.scrollTop += 320;
-      e.preventDefault();
-    } else if (e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
-      if (detailScrollArea) detailScrollArea.scrollTop -= 320;
-      e.preventDefault();
-    } else if (e.key === 'Home') {
-      if (detailScrollArea) detailScrollArea.scrollTop = 0;
-      e.preventDefault();
-    } else if (e.key === 'End') {
-      if (detailScrollArea) detailScrollArea.scrollTop = detailScrollArea.scrollHeight;
-      e.preventDefault();
-    }
-    return;
-  }
-
-  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
-    e.preventDefault();
-    if (currentSection < panels.length - 1) {
-      goToSection(currentSection + 1, 'next');
-    }
-  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
-    e.preventDefault();
-    if (currentSection > 0) {
-      goToSection(currentSection - 1, 'prev');
-    }
-  } else if (e.key === 'Home') {
-    e.preventDefault();
-    goToSection(0, 'prev');
-  } else if (e.key === 'End') {
-    e.preventDefault();
-    goToSection(panels.length - 1, 'next');
-  }
-});
-
-// Mobile / Tablet Touch Swipe Support
-let touchStartY = 0;
-let touchStartX = 0;
-let touchActive = false;
-
-window.addEventListener('touchstart', e => {
-  if (e.target.closest('input, textarea, button, a, [role="button"], .tab-nav-arrow')) return;
-  // Do not track section swipe inside carousels, showcase reels, or overlays
-  if (e.target.closest('.social-carousel, .showcase-track-wrap, .lightbox-modal, .works-detail-overlay, .mobile-drawer')) return;
-  touchStartY = e.touches[0].clientY;
-  touchStartX = e.touches[0].clientX;
-  touchActive = true;
-}, { passive: true });
-
-window.addEventListener('touchmove', e => {
-  if (!touchActive || isTransitioning) return;
-  if (detailOverlayOpen) { touchActive = false; return; }
-  if (e.target.closest && e.target.closest('.mobile-drawer, .works-detail-overlay, .social-carousel, .showcase-track-wrap, .lightbox-modal')) {
-    touchActive = false;
-    return;
-  }
-
-  const dy = touchStartY - e.touches[0].clientY;
-  const dx = touchStartX - e.touches[0].clientX;
-  const absDy = Math.abs(dy);
-  const absDx = Math.abs(dx);
-
-  // If user is scrolling vertically or diagonal with vertical intent, immediately yield to native vertical scroll
-  if (absDy > 10 && absDy * 1.25 > absDx) {
-    touchActive = false;
-    return;
-  }
-
-  // Only trigger horizontal section switch on a decisive horizontal swipe
-  if (absDx > 60 && absDx > absDy * 1.85) {
-    touchActive = false;
-    if (dx > 0 && currentSection < panels.length - 1) {
-      goToSection(currentSection + 1, 'next');
-    } else if (dx < 0 && currentSection > 0) {
-      goToSection(currentSection - 1, 'prev');
-    }
-  }
-}, { passive: true });
-
-window.addEventListener('touchend', () => {
-  touchActive = false;
-}, { passive: true });
-
-// Window Resize Handling
-window.addEventListener('resize', () => {
-  gsap.set(track, { x: -currentSection * window.innerWidth });
-});
+}, { rootMargin: '-15% 0px -65% 0px', threshold: 0 });
+panels.forEach(panel => panelObserver.observe(panel));
 
 // Navigation Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1511,6 +1225,7 @@ function openDetail(id) {
   if (detailScrollArea) detailScrollArea.scrollTop = 0;
 
   worksDetailOverlay.classList.add('is-visible');
+  document.body.classList.add('lab-detail-open');
   worksDetailOverlay.setAttribute('aria-hidden', 'false');
   detailOverlayOpen = true;
 }
@@ -1519,6 +1234,7 @@ function closeDetail() {
   if (!worksDetailOverlay || !detailOverlayOpen) return;
   triggerHaptic(8);
   worksDetailOverlay.classList.remove('is-visible');
+  document.body.classList.remove('lab-detail-open');
   worksDetailOverlay.setAttribute('aria-hidden', 'true');
   worksDetailOverlay.style.transform = '';
   worksDetailOverlay.style.transition = '';
@@ -1551,14 +1267,14 @@ let detailTouchStartX = 0;
 let detailIsPulling = false;
 
 worksDetailOverlay?.addEventListener('touchstart', e => {
-  if (!detailOverlayOpen || !e.touches || !e.touches[0]) return;
+  if (!physicsEnabled || !detailOverlayOpen || !e.touches || !e.touches[0]) return;
   detailTouchStartY = e.touches[0].clientY;
   detailTouchStartX = e.touches[0].clientX;
   detailIsPulling = false;
 }, { passive: true });
 
 worksDetailOverlay?.addEventListener('touchmove', e => {
-  if (!detailOverlayOpen || !e.touches || !e.touches[0]) return;
+  if (!physicsEnabled || !detailOverlayOpen || !e.touches || !e.touches[0]) return;
   const dy = e.touches[0].clientY - detailTouchStartY;
   const dx = Math.abs(e.touches[0].clientX - detailTouchStartX);
 
@@ -1568,7 +1284,7 @@ worksDetailOverlay?.addEventListener('touchmove', e => {
   if ((isAtTop || isHeaderTarget) && dy > 12 && dy > dx * 1.3) {
     detailIsPulling = true;
     if (dy > 0 && dy < 250) {
-      worksDetailOverlay.style.transform = `translateY(${Math.round(dy * 0.72)}px)`;
+      worksDetailOverlay.style.transform = `translateY(${Math.round(dy * 0.72 / 8) * 8}px)`;
       worksDetailOverlay.style.transition = 'none';
     }
   }
@@ -1836,7 +1552,7 @@ function initSocialInteractions() {
       e.stopPropagation();
       triggerHaptic(10);
       const card = btn.closest('.timeline-project');
-      const title = card?.querySelector('.social-post-title')?.textContent || 'Hoàng Duy Design Portfolio';
+      const title = card?.querySelector('.social-post-title')?.textContent || 'The Moee’s Lab';
       if (navigator.share) {
         navigator.share({
           title,
@@ -1962,7 +1678,7 @@ setInterval(updateTopbarClock, 1000);
 /* Glitch logo */
 const logo = document.querySelector('.nav-logo');
 function glitchLogo() {
-  if (!logo) return;
+  if (!logo || !physicsEnabled) return;
   gsap.timeline()
     .to(logo, { skewX: 8, duration: .05 })
     .to(logo, { skewX: -8, duration: .05 })
@@ -2073,3 +1789,29 @@ document.querySelectorAll('.sc-card').forEach(card => {
 
 // Initialize language (restores saved language or defaults to 'en')
 applyLanguage(currentLang);
+
+// Real readiness milestones, with no blocking overlay or artificial boot delay.
+const boot = document.getElementById('labBoot');
+const bootProgress = document.getElementById('bootProgress');
+const bootValue = document.getElementById('bootValue');
+function setBootProgress(value) {
+  bootProgress.value = value;
+  bootValue.textContent = `${value}%`;
+}
+boot.hidden = false;
+setBootProgress(60);
+Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 1500))]).then(() => {
+  setBootProgress(100);
+  setTimeout(() => { boot.hidden = true; }, 400);
+});
+
+const labSettings = document.querySelector('.lab-settings');
+document.addEventListener('pointerdown', event => {
+  if (!labSettings.contains(event.target)) labSettings.open = false;
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && labSettings.open) {
+    labSettings.open = false;
+    labSettings.querySelector('summary').focus();
+  }
+});
