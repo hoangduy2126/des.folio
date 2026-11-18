@@ -53,7 +53,7 @@ if (!isTouchDevice && cursor && trail) {
 /* ===================== BILINGUAL TRANSLATION SYSTEM (EN / VN) ===================== */
 const translations = {
   en: {
-    page_title: 'des.folio — Graphic Designer',
+    page_title: "Desfolio - The Moee's Lab",
     meta_description: 'Graphic Designer portfolio focusing on Social Media and Branding.',
     nav_showcase: 'HOME',
     nav_info: 'INFO & SKILLS',
@@ -226,7 +226,7 @@ const translations = {
     panel_name_3: 'CONTACT',
   },
   vi: {
-    page_title: 'des.folio — Nhà Thiết Kế Đồ Hoạ',
+    page_title: 'Desfolio - Phòng thí nghiệm của Moee',
     meta_description: 'Portfolio Nhà thiết kế Đồ hoạ chuyên sâu về Social Media và Nhận diện Thương hiệu.',
     nav_showcase: 'TRANG CHỦ',
     nav_info: 'GIỚI THIỆU & KỸ NĂNG',

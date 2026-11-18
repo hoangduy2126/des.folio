@@ -945,6 +945,8 @@ body.mobile-nav-open .mobile-drawer-backdrop {
 .hover-yt:hover { background: #FF0000; border-color: #FF0000; }
 .hover-in:hover { background: #0A66C2; border-color: #0A66C2; }
 .hover-be:hover { background: #1769FF; border-color: #1769FF; }
+.hover-gh:hover { background: #24292e; border-color: #24292e; }
+[data-theme="dark"] .hover-gh:hover { background: #30363d; border-color: #8b949e; }
 
 /* Hero Right Marquee Showcase */
 .p-works-preview {
@@ -3315,6 +3317,8 @@ body.mobile-nav-open .mobile-drawer-backdrop {
 .hover-be:hover  { background: #1769ff; border-color: #1769ff; }
 .hover-in:hover  { background: #0a66c2; border-color: #0a66c2; }
 .hover-yt:hover  { background: #ff0000; border-color: #ff0000; }
+.hover-gh:hover  { background: #24292e; border-color: #24292e; }
+[data-theme="dark"] .hover-gh:hover { background: #30363d; border-color: #8b949e; }
 
 /* Inline Footer */
 .footer-inline {
@@ -4011,13 +4015,6 @@ body.mobile-nav-open .mobile-drawer-backdrop {
     border-radius: 3px;
     text-align: center;
   }
-  /* Center the 5th social button (Behance) */
-  .hero-social-link:nth-child(5) {
-    grid-column: 1 / -1;
-    max-width: 175px;
-    margin: 0 auto;
-    width: 100%;
-  }
   .p-works-preview {
     height: 220px;
     min-height: 220px;
@@ -4266,10 +4263,6 @@ body.mobile-nav-open .mobile-drawer-backdrop {
   }
   .hero-social {
     grid-template-columns: 1fr;
-  }
-  .hero-social-link:nth-child(5) {
-    grid-column: span 1;
-    max-width: 100%;
   }
   .contact-socials-links {
     grid-template-columns: 1fr;
