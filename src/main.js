@@ -1,5 +1,27 @@
 import { gsap } from 'gsap';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import './style.css';
+
+/* ===================== SMOOTH SCROLL (LENIS) ===================== */
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  orientation: 'vertical',
+  gestureOrientation: 'vertical',
+  smoothWheel: true,
+  wheelMultiplier: 1,
+  touchMultiplier: 1.2,
+  infinite: false,
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+window.lenis = lenis;
 
 /* ===================== HAPTIC FEEDBACK (Mobile) ===================== */
 function triggerHaptic(duration = 10) {
@@ -218,7 +240,7 @@ const translations = {
     contact_btn_copy: 'Copy',
     contact_btn_copied: 'Copied ✓',
     contact_socials_label: '// or find me here —',
-    footer_version: 'v2.2.0 · HORIZONTAL PAN',
+    footer_version: 'v3.0.0 · VERTICAL FLOW',
     topbar_tz: 'GMT+7 · INDOCHINA',
     panel_name_0: 'HOME',
     panel_name_1: 'INFO',
@@ -391,7 +413,7 @@ const translations = {
     contact_btn_copy: 'Sao chép',
     contact_btn_copied: 'Đã chép ✓',
     contact_socials_label: '// hoặc tìm mình ở đây —',
-    footer_version: 'v2.2.0 · CUỘN NGANG',
+    footer_version: 'v3.0.0 · CUỘN DỌC TỰ NHIÊN',
     topbar_tz: 'GMT+7 · ĐÔNG DƯƠNG',
     panel_name_0: 'TRANG CHỦ',
     panel_name_1: 'GIỚI THIỆU',
@@ -598,31 +620,13 @@ langToggleBtn?.addEventListener('click', toggleLanguage);
 mobileLangToggleBtn?.addEventListener('click', toggleLanguage);
 navLangToggleBtn?.addEventListener('click', toggleLanguage);
 
-/* ===================== FULL-SCREEN PAGE-TRANSITION SCROLL ENGINE ===================== */
-const viewport        = document.getElementById('horizontalViewport');
-const track           = document.getElementById('horizontalTrack');
-const panels          = gsap.utils.toArray('.panel');
+/* ===================== NATURAL VERTICAL SCROLL & NAVIGATION ENGINE ===================== */
+const panels          = Array.from(document.querySelectorAll('.panel'));
 const progressFill    = document.getElementById('progressFill');
 const hIndicator      = document.getElementById('hIndicator');
-const prevBtn         = document.getElementById('hPrevBtn');
-const nextBtn         = document.getElementById('hNextBtn');
+const scrollTopBtn    = document.getElementById('scrollTopBtn');
 const desktopNavLinks = document.querySelectorAll('.nav-links .nav-link');
 const mobileNavLinks  = document.querySelectorAll('.mobile-nav-links .mobile-nav-link');
-
-// Mobile Retro Phone Navigation DOM elements
-const retroPhoneNav    = document.getElementById('retroPhoneNav');
-const retroPrevBtn     = document.getElementById('retroPrevBtn');
-const retroPrevLabel   = document.getElementById('retroPrevLabel');
-const retroHomeBtn     = document.getElementById('retroHomeBtn');
-const retroIndicator   = document.getElementById('retroIndicator');
-const retroSectionName = document.getElementById('retroSectionName');
-const retroNextBtn     = document.getElementById('retroNextBtn');
-const retroNextLabel   = document.getElementById('retroNextLabel');
-
-const tabNavArrowPrev = document.getElementById('tabNavArrowPrev');
-const tabNavArrowNext = document.getElementById('tabNavArrowNext');
-const arrowTextPrev   = document.getElementById('arrowTextPrev');
-const arrowTextNext   = document.getElementById('arrowTextNext');
 
 // Detail Overlay DOM elements & interaction state
 const worksDetailOverlay = document.getElementById('worksDetailOverlay');
@@ -647,24 +651,9 @@ const lightboxCloseBtn   = document.getElementById('lightboxCloseBtn');
 const lightboxFilename   = document.getElementById('lightboxFilename');
 const lightboxImg        = document.getElementById('lightboxImg');
 
-let currentSection   = 0;
-let isTransitioning  = false;
-let wheelDeltaBuffer = 0;
-let wheelCooldown    = null;
-const WHEEL_THRESHOLD = 20;
-
+let currentSection    = 0;
 let detailOverlayOpen = false;
 let currentWorkId     = null;
-
-// Initial hardware acceleration setup & immediate URL parameter routing
-const urlParams = new URLSearchParams(window.location.search);
-const initialParam = parseInt(urlParams.get('panel') ?? urlParams.get('section'), 10);
-if (!isNaN(initialParam) && initialParam >= 0 && initialParam < panels.length) {
-  currentSection = initialParam;
-  gsap.set(track, { x: -currentSection * window.innerWidth, force3D: true });
-} else {
-  gsap.set(track, { x: 0, force3D: true });
-}
 
 function getPanelName(idx) {
   const dict = translations[currentLang] || translations.en;
@@ -675,7 +664,10 @@ function getPanelName(idx) {
  * Synchronize all UI states across the interface
  */
 function updateUIStates(idx) {
-  // 1. Bottom Live Progress Indicator ("01 / 04 HOME")
+  if (idx < 0 || idx >= panels.length) return;
+  currentSection = idx;
+
+  // 1. Bottom status bar indicator ("01 / 04 HOME")
   if (hIndicator) {
     const num = String(idx + 1).padStart(2, '0');
     const total = String(panels.length).padStart(2, '0');
@@ -683,19 +675,7 @@ function updateUIStates(idx) {
     hIndicator.innerHTML = `${num} / ${total} <span class="h-nav-title">${name}</span>`;
   }
 
-  // 2. Live Progress Fill Bar
-  if (progressFill) {
-    const total = panels.length - 1;
-    const pct = total > 0 ? (idx / total) * 100 : 0;
-    gsap.to(progressFill, {
-      width: `${pct}%`,
-      duration: 1.0,
-      ease: 'power2.out',
-      overwrite: 'auto',
-    });
-  }
-
-  // 3. Navigation Active State (Desktop & Mobile)
+  // 2. Navigation Active State (Desktop & Mobile)
   desktopNavLinks.forEach((link, i) => {
     link.classList.toggle('active', i === idx);
   });
@@ -703,386 +683,94 @@ function updateUIStates(idx) {
     link.classList.toggle('active', i === idx);
   });
 
-  // 4. Bottom Control Buttons Disabled States
-  if (prevBtn) prevBtn.disabled = idx === 0;
-  if (nextBtn) nextBtn.disabled = idx === panels.length - 1;
-
-  // 4b. Mobile Retro Phone Navigation Bar States
-  if (retroIndicator) {
-    const num = String(idx + 1).padStart(2, '0');
-    const total = String(panels.length).padStart(2, '0');
-    retroIndicator.textContent = `${num} / ${total}`;
-  }
-  if (retroSectionName) {
-    retroSectionName.textContent = getPanelName(idx);
-  }
-  if (retroPrevBtn) retroPrevBtn.disabled = idx === 0;
-  if (retroNextBtn) retroNextBtn.disabled = idx === panels.length - 1;
-
-  const isVi = currentLang === 'vi';
-  if (retroPrevLabel) retroPrevLabel.textContent = isVi ? 'TRƯỚC' : 'PREV';
-  if (retroNextLabel) retroNextLabel.textContent = isVi ? 'TIẾP' : 'NEXT';
-
-  // 5. Reveal states for panels
+  // 3. Reveal states for panels (permanent once entered, prevents effect reload)
   panels.forEach((p, i) => {
-    p.classList.toggle('panel--revealed', i === idx);
-  });
-
-  // 6. Floating Navigation Arrows Across 4 Tabs
-  if (tabNavArrowPrev && tabNavArrowNext) {
-    if (idx === 0) {
-      tabNavArrowPrev.classList.add('is-disabled');
-      if (arrowTextPrev) arrowTextPrev.textContent = '';
-    } else {
-      tabNavArrowPrev.classList.remove('is-disabled');
-      if (arrowTextPrev) arrowTextPrev.textContent = getPanelName(idx - 1);
+    if (i <= idx) {
+      p.classList.add('panel--revealed');
     }
-
-    if (idx === panels.length - 1) {
-      tabNavArrowNext.classList.add('is-disabled');
-      if (arrowTextNext) arrowTextNext.textContent = '';
-    } else {
-      tabNavArrowNext.classList.remove('is-disabled');
-      if (arrowTextNext) arrowTextNext.textContent = getPanelName(idx + 1);
-    }
-  }
-}
-
-// Initial UI synchronization
-updateUIStates(currentSection);
-
-/**
- * Staggered parallax motion on media elements
- */
-function animateSectionParallax(targetIdx, prevIdx, direction) {
-  const currentPanel = panels[targetIdx];
-  const previousPanel = panels[prevIdx];
-
-  if (currentPanel) {
-    const mediaElements = currentPanel.querySelectorAll(
-      '.editorial-block, .timeline-project, .contact-meta-card'
-    );
-    if (mediaElements.length > 0) {
-      const startY = direction === 'next' ? 24 : -24;
-      gsap.fromTo(
-        mediaElements,
-        { y: startY, opacity: 0.4 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.85,
-          stagger: 0.05,
-          ease: 'power3.out',
-          overwrite: 'auto',
-        }
-      );
-    }
-
-    const leftPane = currentPanel.querySelector('.contact-info-col');
-    if (leftPane) {
-      const startY = direction === 'next' ? 24 : -24;
-      gsap.fromTo(
-        leftPane,
-        { y: startY, opacity: 0.65 },
-        { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out', overwrite: 'auto' }
-      );
-    }
-  }
-
-  // Outgoing panel counter-parallax
-  if (previousPanel && previousPanel !== currentPanel) {
-    const outMedia = previousPanel.querySelectorAll('.skill-card, .timeline-project');
-    if (outMedia.length > 0) {
-      const exitX = direction === 'next' ? -40 : 40;
-      gsap.to(outMedia, {
-        x: exitX,
-        duration: 0.75,
-        ease: 'power3.in',
-        overwrite: 'auto',
-        onComplete: () => {
-          gsap.set(outMedia, { x: 0 });
-        },
-      });
-    }
-  }
-}
-
-/**
- * One-Scroll-Per-Section Transition Engine
- */
-function goToSection(targetIdx, direction = 'next') {
-  if (targetIdx < 0 || targetIdx >= panels.length || isTransitioning) return;
-  if (targetIdx === currentSection) return;
-
-  isTransitioning = true;
-  triggerHaptic(12);
-  const prevIdx = currentSection;
-  currentSection = targetIdx;
-
-  // Clean up Works interaction state if leaving the Works panel
-  if (prevIdx === 2 && targetIdx !== 2 && detailOverlayOpen) {
-    closeDetail();
-  }
-
-  // Immediately update UI states
-  updateUIStates(currentSection);
-
-  const targetX = -targetIdx * window.innerWidth;
-  track.classList.add('is-accelerating');
-
-  // Trigger parallax motion
-  animateSectionParallax(targetIdx, prevIdx, direction);
-
-  // Accelerated transition with GSAP power4.inOut
-  gsap.to(track, {
-    x: targetX,
-    duration: 1.15,
-    ease: 'power4.inOut',
-    force3D: true,
-    overwrite: 'auto',
-    onComplete: () => {
-      track.classList.remove('is-accelerating');
-      setTimeout(() => {
-        isTransitioning = false;
-      }, 50);
-    },
   });
 }
 
-/* ===================== GESTURE DETECTION & SCROLL HIJACKING ===================== */
-
 /**
- * Checks whether an element or any of its scrollable ancestors has room to scroll vertically in deltaY direction
+ * Update real-time vertical scroll progress and back-to-top button
  */
-function canScrollVertically(el, deltaY) {
-  let curr = el;
-  while (curr && curr !== document.body && curr !== document.documentElement) {
-    // Avoid treating worksTimeline as a generic vertical scroll container
-    // (Works section has dedicated scoping between post cards and whitespace)
-    if (curr.id === 'worksTimeline' || curr.classList.contains('works-timeline-zone')) {
-      return false;
-    }
-    const style = window.getComputedStyle(curr);
-    const overflowY = style.overflowY;
-    if ((overflowY === 'auto' || overflowY === 'scroll') && curr.scrollHeight > curr.clientHeight + 2) {
-      if (deltaY > 0 && curr.scrollTop + curr.clientHeight < curr.scrollHeight - 2) return true;
-      if (deltaY < 0 && curr.scrollTop > 2) return true;
-    }
-    curr = curr.parentElement;
+function updateScrollProgress() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+
+  if (progressFill) {
+    progressFill.style.width = `${pct}%`;
   }
-  return false;
+
+  if (scrollTopBtn) {
+    const shouldShow = scrollTop > 320;
+    scrollTopBtn.style.opacity = shouldShow ? '1' : '0.35';
+    scrollTopBtn.style.pointerEvents = shouldShow ? 'auto' : 'none';
+  }
 }
 
-// Mouse Wheel & Trackpad Gesture Hijacking
-window.addEventListener('wheel', e => {
-  // Do not hijack inside editable text fields or mobile drawer
-  if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-  if (e.target?.closest && e.target.closest('.mobile-drawer')) return;
+// Listen to Lenis smooth scroll and native scroll events
+lenis.on('scroll', () => {
+  updateScrollProgress();
+});
 
-  // When project detail full view is open: let it scroll naturally with full momentum, never switch section!
-  if (detailOverlayOpen) {
-    return;
+let isScrollTicking = false;
+window.addEventListener('scroll', () => {
+  if (!isScrollTicking) {
+    window.requestAnimationFrame(() => {
+      updateScrollProgress();
+      isScrollTicking = false;
+    });
+    isScrollTicking = true;
   }
+}, { passive: true });
 
-  // Works Showcase (Panel 2) Scope-Specific Scrolling:
-  // 1. TRONG CÁC Ô THUỘC PHẠM VI BÀI VIẾT (.timeline-project / .social-post-card):
-  //    Cuộn lên xuống để xem các bài viết; tuyệt đối không chuyển trang khi đang ở phạm vi bài viết.
-  // 2. KHOẢNG TRẮNG KHÔNG THUỘC PHẠM VI BÀI VIẾT:
-  //    Ngăn cuộn dọc bài viết, chuyển hướng cuộn ngang trái/phải để chuyển đổi giữa các trang website.
-  const postCard = e.target?.closest && e.target.closest('.timeline-project, .social-post-card');
-  const inWorksZone = Boolean(e.target?.closest && e.target.closest('#panel-works, .panel--works, .works-panel-container, .works-timeline-zone'));
-
-  if (currentSection === 2 || inWorksZone) {
-    if (postCard) {
-      // Trong phạm vi bài viết: cuộn dọc xem bài viết, không chuyển section
-      return;
-    } else {
-      // Trong khoảng trắng: cuộn ngang trái/phải để xem các trang khác của website
-      e.preventDefault();
-      if (isTransitioning) return;
-
-      const isHorizWheel = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-      const delta = isHorizWheel ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) < 6) return;
-
-      wheelDeltaBuffer += delta;
-
-      clearTimeout(wheelCooldown);
-      wheelCooldown = setTimeout(() => {
-        wheelDeltaBuffer = 0;
-      }, 120);
-
-      if (wheelDeltaBuffer > WHEEL_THRESHOLD) {
-        wheelDeltaBuffer = 0;
-        if (currentSection < panels.length - 1) {
-          goToSection(currentSection + 1, 'next');
-        }
-      } else if (wheelDeltaBuffer < -WHEEL_THRESHOLD) {
-        wheelDeltaBuffer = 0;
-        if (currentSection > 0) {
-          goToSection(currentSection - 1, 'prev');
-        }
+// IntersectionObserver to accurately track the active section in view
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = panels.indexOf(entry.target);
+      if (idx !== -1) {
+        updateUIStates(idx);
       }
-      return;
     }
-  }
-
-  // If the target element or any parent container has vertical room to scroll, let it scroll smoothly!
-  if (canScrollVertically(e.target, e.deltaY)) {
-    return;
-  }
-
-  // If transition is currently animating, prevent default to lock position
-  e.preventDefault();
-  if (isTransitioning) return;
-
-  // Extract vertical or horizontal scroll intent
-  const isHorizWheel = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-  const delta = isHorizWheel ? e.deltaX : e.deltaY;
-  if (Math.abs(delta) < 6) return;
-
-  wheelDeltaBuffer += delta;
-
-  clearTimeout(wheelCooldown);
-  wheelCooldown = setTimeout(() => {
-    wheelDeltaBuffer = 0;
-  }, 120);
-
-  // Trigger section transition when buffer threshold is reached
-  if (wheelDeltaBuffer > WHEEL_THRESHOLD) {
-    wheelDeltaBuffer = 0;
-    if (currentSection < panels.length - 1) {
-      goToSection(currentSection + 1, 'next');
-    }
-  } else if (wheelDeltaBuffer < -WHEEL_THRESHOLD) {
-    wheelDeltaBuffer = 0;
-    if (currentSection > 0) {
-      goToSection(currentSection - 1, 'prev');
-    }
-  }
-}, { passive: false });
-
-// Keyboard Navigation
-window.addEventListener('keydown', e => {
-  if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-  if (isTransitioning) return;
-
-  // When project full view is open, arrow/page keys scroll detail area naturally
-  if (detailOverlayOpen) {
-    if (e.key === 'ArrowDown') {
-      if (detailScrollArea) detailScrollArea.scrollTop += 60;
-      e.preventDefault();
-    } else if (e.key === 'ArrowUp') {
-      if (detailScrollArea) detailScrollArea.scrollTop -= 60;
-      e.preventDefault();
-    } else if (e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
-      if (detailScrollArea) detailScrollArea.scrollTop += 320;
-      e.preventDefault();
-    } else if (e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
-      if (detailScrollArea) detailScrollArea.scrollTop -= 320;
-      e.preventDefault();
-    } else if (e.key === 'Home') {
-      if (detailScrollArea) detailScrollArea.scrollTop = 0;
-      e.preventDefault();
-    } else if (e.key === 'End') {
-      if (detailScrollArea) detailScrollArea.scrollTop = detailScrollArea.scrollHeight;
-      e.preventDefault();
-    }
-    return;
-  }
-
-  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
-    e.preventDefault();
-    if (currentSection < panels.length - 1) {
-      goToSection(currentSection + 1, 'next');
-    }
-  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
-    e.preventDefault();
-    if (currentSection > 0) {
-      goToSection(currentSection - 1, 'prev');
-    }
-  } else if (e.key === 'Home') {
-    e.preventDefault();
-    goToSection(0, 'prev');
-  } else if (e.key === 'End') {
-    e.preventDefault();
-    goToSection(panels.length - 1, 'next');
-  }
+  });
+}, {
+  root: null,
+  rootMargin: '-20% 0px -40% 0px',
+  threshold: 0.1
 });
 
-// Mobile / Tablet Touch Swipe Support
-let touchStartY = 0;
-let touchStartX = 0;
-let touchActive = false;
+panels.forEach(panel => sectionObserver.observe(panel));
 
-window.addEventListener('touchstart', e => {
-  if (e.target.closest('input, textarea, button, a, [role="button"], .tab-nav-arrow')) return;
-  // Do not track section swipe inside carousels, showcase reels, or overlays
-  if (e.target.closest('.social-carousel, .showcase-track-wrap, .lightbox-modal, .works-detail-overlay, .mobile-drawer')) return;
-  touchStartY = e.touches[0].clientY;
-  touchStartX = e.touches[0].clientX;
-  touchActive = true;
-}, { passive: true });
-
-window.addEventListener('touchmove', e => {
-  if (!touchActive || isTransitioning) return;
-  if (detailOverlayOpen) { touchActive = false; return; }
-  if (e.target.closest && e.target.closest('.mobile-drawer, .works-detail-overlay, .social-carousel, .showcase-track-wrap, .lightbox-modal')) {
-    touchActive = false;
-    return;
-  }
-
-  const dy = touchStartY - e.touches[0].clientY;
-  const dx = touchStartX - e.touches[0].clientX;
-  const absDy = Math.abs(dy);
-  const absDx = Math.abs(dx);
-
-  // If user is scrolling vertically or diagonal with vertical intent, immediately yield to native vertical scroll
-  if (absDy > 10 && absDy * 1.25 > absDx) {
-    touchActive = false;
-    return;
-  }
-
-  // Only trigger horizontal section switch on a decisive horizontal swipe
-  if (absDx > 60 && absDx > absDy * 1.85) {
-    touchActive = false;
-    if (dx > 0 && currentSection < panels.length - 1) {
-      goToSection(currentSection + 1, 'next');
-    } else if (dx < 0 && currentSection > 0) {
-      goToSection(currentSection - 1, 'prev');
+// Persistent one-time reveal observer: elements stay open permanently once scrolled into view
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-revealed');
+      revealObserver.unobserve(entry.target);
     }
-  }
-}, { passive: true });
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-window.addEventListener('touchend', () => {
-  touchActive = false;
-}, { passive: true });
+document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
 
-// Window Resize Handling
-window.addEventListener('resize', () => {
-  gsap.set(track, { x: -currentSection * window.innerWidth });
-});
-
-// Navigation Anchor Links
+// Smooth momentum scroll to section on anchor clicks via Lenis
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
     const href = anchor.getAttribute('href');
     if (!href || href === '#') return;
 
-    let targetIdx = -1;
-    if (anchor.hasAttribute('data-panel')) {
-      targetIdx = parseInt(anchor.getAttribute('data-panel'), 10);
-    } else {
-      const targetEl = document.querySelector(href);
-      if (targetEl && targetEl.closest('.panel')) {
-        targetIdx = panels.indexOf(targetEl.closest('.panel'));
-      }
-    }
-
-    if (targetIdx !== -1) {
+    const targetEl = document.querySelector(href);
+    if (targetEl) {
       e.preventDefault();
-      const dir = targetIdx > currentSection ? 'next' : 'prev';
-      goToSection(targetIdx, dir);
+      triggerHaptic(10);
+      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 54;
+      lenis.scrollTo(targetEl, {
+        offset: -navH,
+        duration: 1.2,
+      });
       if (mobileDrawer?.classList.contains('open')) {
         toggleMobileMenu(false);
       }
@@ -1090,62 +778,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Bottom Control Buttons
-prevBtn?.addEventListener('click', () => goToSection(currentSection - 1, 'prev'));
-nextBtn?.addEventListener('click', () => goToSection(currentSection + 1, 'next'));
-
-// Mobile Retro Phone Navigation Bar Softkeys
-retroPrevBtn?.addEventListener('click', () => {
+// Smooth scroll to top button
+scrollTopBtn?.addEventListener('click', () => {
   triggerHaptic(12);
-  if (currentSection > 0) {
-    goToSection(currentSection - 1, 'prev');
-  }
-});
-retroNextBtn?.addEventListener('click', () => {
-  triggerHaptic(12);
-  if (currentSection < panels.length - 1) {
-    goToSection(currentSection + 1, 'next');
-  }
-});
-retroHomeBtn?.addEventListener('click', () => {
-  triggerHaptic(15);
-  if (currentSection !== 0) {
-    goToSection(0, 'prev');
-  } else {
-    toggleMobileMenu();
-  }
+  lenis.scrollTo(0, { duration: 1.2 });
 });
 
-// Floating Navigation Arrows
-tabNavArrowPrev?.addEventListener('click', () => {
-  if (currentSection > 0) {
-    goToSection(currentSection - 1, 'prev');
+// Programmatic goToSection helper with Lenis
+function goToSection(targetIdx) {
+  if (targetIdx < 0 || targetIdx >= panels.length) return;
+  const targetEl = panels[targetIdx];
+  if (targetEl) {
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 54;
+    lenis.scrollTo(targetEl, { offset: -navH, duration: 1.2 });
   }
-});
-
-tabNavArrowNext?.addEventListener('click', () => {
-  if (currentSection < panels.length - 1) {
-    goToSection(currentSection + 1, 'next');
-  }
-});
-
+}
 window.goToSection = goToSection;
 
 function handleHashChange() {
   const hash = window.location.hash;
   if (!hash) return;
   const targetEl = document.querySelector(hash);
-  if (targetEl && targetEl.closest('.panel')) {
-    const targetIdx = panels.indexOf(targetEl.closest('.panel'));
-    if (targetIdx !== -1 && targetIdx !== currentSection) {
-      goToSection(targetIdx, targetIdx > currentSection ? 'next' : 'prev');
-    }
+  if (targetEl) {
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 54;
+    lenis.scrollTo(targetEl, { offset: -navH, duration: 1.2 });
   }
 }
 window.addEventListener('hashchange', handleHashChange);
 if (window.location.hash) {
   setTimeout(handleHashChange, 150);
 }
+
+// Initial UI synchronization
+updateUIStates(0);
+updateScrollProgress();
 
 /* ===================== WORKS TIMELINE & LIGHTBOX DATA ===================== */
 const WORKS_DATA = {
@@ -1511,6 +1177,8 @@ function openDetail(id) {
   if (detailScrollArea) detailScrollArea.scrollTop = 0;
 
   worksDetailOverlay.classList.add('is-visible');
+  document.body.classList.add('modal-open');
+  lenis.stop();
   worksDetailOverlay.setAttribute('aria-hidden', 'false');
   detailOverlayOpen = true;
 }
@@ -1519,6 +1187,8 @@ function closeDetail() {
   if (!worksDetailOverlay || !detailOverlayOpen) return;
   triggerHaptic(8);
   worksDetailOverlay.classList.remove('is-visible');
+  document.body.classList.remove('modal-open');
+  lenis.start();
   worksDetailOverlay.setAttribute('aria-hidden', 'true');
   worksDetailOverlay.style.transform = '';
   worksDetailOverlay.style.transition = '';
@@ -1534,6 +1204,8 @@ function openLightbox(src, name) {
   lightboxImg.alt = name || 'Enlarged project asset';
   if (lightboxFilename) lightboxFilename.textContent = name || decodeURIComponent(src).split('/').pop() || 'asset.png';
   lightboxModal.classList.add('is-open');
+  document.body.classList.add('modal-open');
+  lenis.stop();
   lightboxModal.setAttribute('aria-hidden', 'false');
 }
 
@@ -1541,6 +1213,10 @@ function closeLightbox() {
   if (!lightboxModal) return;
   triggerHaptic(8);
   lightboxModal.classList.remove('is-open');
+  if (!detailOverlayOpen) {
+    document.body.classList.remove('modal-open');
+    lenis.start();
+  }
   lightboxModal.setAttribute('aria-hidden', 'true');
   if (lightboxImg) lightboxImg.src = '';
 }
@@ -1994,6 +1670,7 @@ function toggleMobileMenu(force) {
     mobileMenuBtn.classList.add('active');
     mobileMenuBtn.setAttribute('aria-expanded', 'true');
     document.body.classList.add('mobile-nav-open');
+    lenis.stop();
     if (mobileMenuIcon) mobileMenuIcon.innerHTML = closeSvg;
     if (mobileMenuLabel) mobileMenuLabel.textContent = dict.menu_close;
   } else {
@@ -2005,6 +1682,7 @@ function toggleMobileMenu(force) {
     mobileMenuBtn.classList.remove('active');
     mobileMenuBtn.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('mobile-nav-open');
+    lenis.start();
     if (mobileMenuIcon) mobileMenuIcon.innerHTML = hamburgerSvg;
     if (mobileMenuLabel) mobileMenuLabel.textContent = dict.menu;
   }

@@ -24,8 +24,10 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-logo">
-      <a href="#hero" class="nav-logo-link"><span class="pixel-text">DES</span><span class="dot">.</span><span
-          class="pixel-text accent">FOLIO</span></a>
+      <a href="#hero" class="nav-logo-link" data-panel="0" aria-label="Desfolio Home" title="Desfolio">
+        <img src="/assets/LIGHT_THEME_LOGO.png" alt="Desfolio Logo" class="nav-logo-img nav-logo-img--light" width="36" height="36" loading="eager" decoding="async" />
+        <img src="/assets/DARK_THEME_LOGO.png" alt="Desfolio Logo" class="nav-logo-img nav-logo-img--dark" width="36" height="36" loading="eager" decoding="async" />
+      </a>
     </div>
     <ul class="nav-links">
       <li><a href="#hero" class="nav-link pixel-text" data-panel="0" data-i18n="nav_showcase" data-text="HOME">HOME</a>
@@ -76,14 +78,14 @@
     </div>
   </nav>
 
-  <!-- HORIZONTAL SCROLL PROGRESS BAR -->
+  <!-- VERTICAL SCROLL PROGRESS BAR -->
   <div class="scroll-progress-bar" id="progressBar" aria-hidden="true">
     <div class="scroll-progress-fill" id="progressFill"></div>
   </div>
 
 
   <!-- MOBILE NAV DRAWER -->
-  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="mobile-drawer" id="mobileDrawer" data-lenis-prevent aria-hidden="true">
     <div class="mobile-drawer-inner">
       <div class="mobile-drawer-header">
         <span class="pixel-text mobile-drawer-title" data-i18n="mobile_nav_title">// NAVIGATION</span>
@@ -154,10 +156,9 @@
   <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" aria-hidden="true"></div>
 
   <!-- ╔══════════════════════════════════════════════╗ -->
-  <!-- ║  MAIN HORIZONTAL VIEWPORT & TRACK           ║ -->
+  <!-- ║  MAIN VERTICAL CONTENT FLOW                  ║ -->
   <!-- ╚══════════════════════════════════════════════╝ -->
-  <main class="horizontal-viewport" id="horizontalViewport">
-    <div class="horizontal-track" id="horizontalTrack">
+  <main class="main-content" id="mainContent">
 
       <!-- ╔══════════════════════════════╗ -->
       <!-- ║  PANEL 1 · HERO & SHOWCASE   ║ -->
@@ -697,7 +698,7 @@
           <div class="works-timeline-zone" id="worksTimeline" aria-label="Projects Timeline">
 
             <!-- ── PROJECT 1: Our Memories — Kỷ Yếu THPT Việt Trì ── -->
-            <article class="timeline-project social-post-card unified-card" data-work-id="3">
+            <article class="timeline-project social-post-card unified-card card--wide" data-work-id="3">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -870,7 +871,7 @@
             </article>
 
             <!-- ── PROJECT 2: CRC — CLB Robotics THPT Việt Trì ── -->
-            <article class="timeline-project social-post-card unified-card" data-work-id="1">
+            <article class="timeline-project social-post-card unified-card card--square" data-work-id="1">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -1043,7 +1044,7 @@
             </article>
 
             <!-- ── PROJECT 3: Unleash — Creative Event & Recruitment Campaign ── -->
-            <article class="timeline-project social-post-card unified-card" data-work-id="4">
+            <article class="timeline-project social-post-card unified-card card--portrait" data-work-id="4">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -1206,7 +1207,7 @@
             </article>
 
             <!-- ── PROJECT 4: SOV Media — Comprehensive Brand & Media Ecosystem ── -->
-            <article class="timeline-project social-post-card unified-card" data-work-id="2">
+            <article class="timeline-project social-post-card unified-card card--wide" data-work-id="2">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -1477,7 +1478,7 @@
           </div><!-- end works-timeline-zone -->
 
           <!-- ── DETAIL OVERLAY (initially hidden, slides in on scroll after zoom-select) ── -->
-          <div class="works-detail-overlay" id="worksDetailOverlay" aria-hidden="true">
+          <div class="works-detail-overlay" id="worksDetailOverlay" data-lenis-prevent aria-hidden="true">
             <div class="detail-swipe-indicator" id="detailSwipeIndicator" aria-hidden="true"><span class="detail-swipe-bar"></span></div>
             <div class="detail-chrome-bar">
               <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span
@@ -1486,7 +1487,7 @@
               <button class="detail-close-btn pixel-text" id="detailCloseBtn" aria-label="Close project detail">ESC
                 ✕</button>
             </div>
-            <div class="detail-scroll-area" id="detailScrollArea">
+            <div class="detail-scroll-area" id="detailScrollArea" data-lenis-prevent>
               <div class="detail-body">
                 <div class="detail-header-block">
                   <div class="detail-meta-row">
@@ -1548,47 +1549,55 @@
             <div class="contact-pitch" data-reveal>
               <div class="contact-avail-pill mono-text">
                 <span class="pulse-beacon"></span>
-                <span data-i18n="contact_status">● Đang nhận dự án mới</span>
+                <span data-i18n="contact_status">● Đang nhận dự án mới · Sẵn sàng làm việc</span>
               </div>
               <h2 class="contact-big-headline" data-i18n="contact_headline">Có ý tưởng hay dự án mới?<br>Nhắn <span class="accent2">Duy</span> ngay nhé.</h2>
-              <p class="contact-tagline mono-text" data-i18n="contact_tagline">// liên hệ qua mail hoặc zalo — phản hồi nhanh, không form phức tạp.</p>
+              <p class="contact-tagline mono-text" data-i18n="contact_tagline">// liên hệ qua email, zalo hoặc mạng xã hội — phản hồi nhanh, không thủ tục phức tạp.</p>
             </div>
 
-            <!-- Primary Channel Cards -->
+            <!-- Primary Channel Cards (2 Large Featured Cards) -->
             <div class="contact-cards" data-reveal>
 
               <!-- Email Card -->
-              <div class="reach-card reach-card--email">
-                <div class="reach-card-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <div class="reach-card reach-card--email unified-card">
+                <div class="reach-card-top-bar">
+                  <div class="reach-card-badge mono-text">// DIRECT_EMAIL</div>
+                  <div class="reach-card-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  </div>
                 </div>
                 <div class="reach-card-content">
-                  <span class="reach-card-label mono-text" data-i18n="contact_email_label">Email</span>
-                  <a href="mailto:hoangduy2126@gmail.com" class="reach-card-val mono-text" id="emailDisplayVal">hoangduy2126@gmail.com</a>
+                  <span class="reach-card-label mono-text" data-i18n="contact_email_label">Email Address</span>
+                  <a href="mailto:hoangduy2126@gmail.com" class="reach-card-val pixel-text" id="emailDisplayVal">hoangduy2126@gmail.com</a>
+                  <p class="reach-card-sub mono-text">// Phản hồi thư trong vòng 24 giờ</p>
                 </div>
                 <div class="reach-card-actions">
-                  <a href="mailto:hoangduy2126@gmail.com" class="reach-btn reach-btn--primary mono-text" id="btnSendMail" data-i18n="contact_btn_mail">Gửi mail</a>
+                  <a href="mailto:hoangduy2126@gmail.com" class="reach-btn reach-btn--primary mono-text" id="btnSendMail" data-i18n="contact_btn_mail">Gửi mail ngay ↗</a>
                   <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="hoangduy2126@gmail.com" id="btnCopyEmail">
-                    <svg class="copy-icon-default" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg class="copy-icon-default" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     <span class="copy-btn-text" data-i18n="contact_btn_copy">Sao chép</span>
                   </button>
                 </div>
               </div>
 
               <!-- Phone / Zalo Card -->
-              <div class="reach-card reach-card--phone">
-                <div class="reach-card-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <div class="reach-card reach-card--phone unified-card">
+                <div class="reach-card-top-bar">
+                  <div class="reach-card-badge mono-text">// ZALO_&amp;_HOTLINE</div>
+                  <div class="reach-card-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  </div>
                 </div>
                 <div class="reach-card-content">
                   <span class="reach-card-label mono-text" data-i18n="contact_phone_label">Zalo / Hotline</span>
-                  <a href="tel:0987654321" class="reach-card-val mono-text" id="phoneDisplayVal">+84 (0) 987 654 321</a>
+                  <a href="tel:0987654321" class="reach-card-val pixel-text" id="phoneDisplayVal">+84 (0) 987 654 321</a>
+                  <p class="reach-card-sub mono-text">// Trò chuyện trực tiếp &amp; trao đổi dự án nhanh</p>
                 </div>
                 <div class="reach-card-actions">
-                  <a href="https://zalo.me/0987654321" target="_blank" rel="noopener" class="reach-btn reach-btn--zalo mono-text" id="btnChatZalo" data-i18n="contact_btn_zalo">Chat Zalo</a>
-                  <a href="tel:0987654321" class="reach-btn reach-btn--ghost mono-text" id="btnCall" data-i18n="contact_btn_call">Gọi ngay</a>
+                  <a href="https://zalo.me/0987654321" target="_blank" rel="noopener" class="reach-btn reach-btn--zalo mono-text" id="btnChatZalo" data-i18n="contact_btn_zalo">Chat Zalo 💬</a>
+                  <a href="tel:0987654321" class="reach-btn reach-btn--ghost mono-text" id="btnCall" data-i18n="contact_btn_call">Gọi ngay 📞</a>
                   <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="0987654321" id="btnCopyPhone">
-                    <svg class="copy-icon-default" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg class="copy-icon-default" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     <span class="copy-btn-text" data-i18n="contact_btn_copy">Sao chép</span>
                   </button>
                 </div>
@@ -1596,44 +1605,34 @@
 
             </div>
 
-            <!-- Social / DM Strip -->
-            <div class="contact-socials" data-reveal>
-              <span class="contact-socials-label mono-text" data-i18n="contact_socials_label">// hoặc tìm mình ở đây —</span>
-              <div class="contact-socials-links">
-                <a href="https://m.me/moeedidauuu/" target="_blank" rel="noopener" class="social-link hover-msg pixel-text">MESSENGER</a>
-                <a href="https://www.facebook.com/moeedidauuu/" target="_blank" rel="noopener" class="social-link hover-fb pixel-text">FACEBOOK</a>
-                <a href="https://www.instagram.com/06s_.moe" target="_blank" rel="noopener" class="social-link hover-ig pixel-text">INSTAGRAM</a>
-                <a href="https://www.behance.net/hoangduy2126" target="_blank" rel="noopener" class="social-link hover-be pixel-text">BEHANCE</a>
-                <a href="https://www.linkedin.com/in/duy-ho%C3%A0ng-720699405/" target="_blank" rel="noopener" class="social-link hover-in pixel-text">LINKEDIN</a>
+            <!-- Social / Networks Featured Card -->
+            <div class="reach-social-card unified-card" data-reveal>
+              <div class="reach-social-card-head">
+                <span class="reach-social-badge mono-text" data-i18n="contact_socials_label">// CREATIVE_NETWORKS_&amp;_DIRECT_MESSAGES</span>
+                <span class="reach-social-hint mono-text">● DIRECT_MESSAGE_OPEN</span>
               </div>
+              <div class="contact-socials-links">
+                <a href="https://www.behance.net/hoangduy2126" target="_blank" rel="noopener" class="social-link hover-be pixel-text">BEHANCE ↗</a>
+                <a href="https://m.me/moeedidauuu/" target="_blank" rel="noopener" class="social-link hover-msg pixel-text">MESSENGER ↗</a>
+                <a href="https://www.instagram.com/06s_.moe" target="_blank" rel="noopener" class="social-link hover-ig pixel-text">INSTAGRAM ↗</a>
+                <a href="https://www.facebook.com/moeedidauuu/" target="_blank" rel="noopener" class="social-link hover-fb pixel-text">FACEBOOK ↗</a>
+                <a href="https://www.linkedin.com/in/duy-ho%C3%A0ng-720699405/" target="_blank" rel="noopener" class="social-link hover-in pixel-text">LINKEDIN ↗</a>
+                <a href="https://github.com/hoangduy2126" target="_blank" rel="noopener" class="social-link hover-gh pixel-text">GITHUB ↗</a>
+              </div>
+            </div>
+
+            <!-- Clean Signature Line -->
+            <div class="contact-signature-row mono-text" data-reveal>
+              <span class="contact-sig-brand pixel-text">DES<span class="dot">.</span><span class="accent">FOLIO</span></span>
+              <span class="contact-sig-copy" data-i18n="footer_copy">© 2026 HOÀNG DUY — ALL RIGHTS RESERVED</span>
+              <span class="contact-sig-ver" data-i18n="footer_version">v3.0.0 · VERTICAL FLOW</span>
             </div>
           </div>
 
-          <!-- Footer -->
-          <footer class="footer-inline" data-reveal>
-            <div class="footer-inner">
-              <span class="pixel-text footer-logo">DES<span class="dot">.</span><span class="accent">FOLIO</span></span>
-              <span class="mono-text footer-copy" data-i18n="footer_copy">© 2026 — Crafted with ♥ &amp; lots of ☕</span>
-              <span class="mono-text footer-version" data-i18n="footer_version">v2.2.0 · HORIZONTAL PAN</span>
-            </div>
-          </footer>
         </div>
       </section>
 
-    </div><!-- end horizontal-track -->
-  </main><!-- end horizontal-viewport -->
-
-  <!-- FLOATING MOVING NAVIGATION ARROWS (ACROSS ALL 4 TABS) -->
-  <aside class="tab-floating-nav" id="tabFloatingNav" aria-label="Section Navigation Arrows">
-    <button class="tab-nav-arrow tab-nav-arrow--prev mono-text is-disabled" id="tabNavArrowPrev" aria-label="Previous tab" title="Previous tab (or Left arrow key)">
-      <span class="arrow-bob arrow-bob--left" aria-hidden="true">◀</span>
-      <span class="arrow-text" id="arrowTextPrev">HOME</span>
-    </button>
-    <button class="tab-nav-arrow tab-nav-arrow--next mono-text" id="tabNavArrowNext" aria-label="Next tab" title="Next tab (or Right arrow key)">
-      <span class="arrow-text" id="arrowTextNext">INFO</span>
-      <span class="arrow-bob arrow-bob--right" aria-hidden="true">▶</span>
-    </button>
-  </aside>
+  </main><!-- end main-content -->
 
   <!-- BOTTOM STATUS BAR -->
   <footer class="topbar" id="topbar" aria-label="System status, navigation and time">
@@ -1652,19 +1651,12 @@
       </div>
     </div>
 
-    <!-- Center: Horizontal Slide Controls -->
-    <div class="topbar-center h-nav-controls" id="hNavControls" aria-label="Horizontal Navigation Controls">
-      <button class="h-nav-btn topbar-btn" id="hPrevBtn" title="Previous section (or Left arrow key)"
-        aria-label="Previous section">
-        <svg class="btn-svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
+    <!-- Center: Section Indicator & Scroll To Top -->
+    <div class="topbar-center v-nav-indicator" id="hNavControls" aria-label="Section Indicator">
       <div class="h-nav-indicator pixel-text" id="hIndicator">01 / 04 <span class="h-nav-title">HOME</span></div>
-      <button class="h-nav-btn topbar-btn" id="hNextBtn" title="Next section (or Right arrow key)"
-        aria-label="Next section">
+      <button class="scroll-top-btn topbar-btn" id="scrollTopBtn" title="Back to top" aria-label="Back to top">
         <svg class="btn-svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="9 18 15 12 9 6"></polyline>
+          <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
       </button>
     </div>
@@ -1681,24 +1673,8 @@
       </div>
     </div>
   </footer>
-
-  <!-- ── MOBILE RETRO PHONE NAV BAR (≤ 900px) ── -->
-  <nav class="retro-phone-nav" id="retroPhoneNav" aria-label="Mobile Navigation Bar">
-    <button class="retro-nav-btn retro-btn--prev" id="retroPrevBtn" aria-label="Previous Section">
-      <span class="retro-btn-arrow" aria-hidden="true">◀</span>
-      <span class="retro-btn-label mono-text" id="retroPrevLabel">PREV</span>
-    </button>
-    <button class="retro-nav-btn retro-btn--home" id="retroHomeBtn" aria-label="Current Section / Home">
-      <span class="retro-home-indicator pixel-text" id="retroIndicator">01 / 04</span>
-      <span class="retro-home-name mono-text" id="retroSectionName">HOME</span>
-    </button>
-    <button class="retro-nav-btn retro-btn--next" id="retroNextBtn" aria-label="Next Section">
-      <span class="retro-btn-label mono-text" id="retroNextLabel">NEXT</span>
-      <span class="retro-btn-arrow" aria-hidden="true">▶</span>
-    </button>
-  </nav>
   <!-- ── FULLSCREEN LIGHTBOX MODAL ── -->
-  <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog" aria-label="Fullscreen Image View">
+  <div class="lightbox-modal" id="lightboxModal" data-lenis-prevent aria-hidden="true" role="dialog" aria-label="Fullscreen Image View">
     <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
     <div class="lightbox-dialog">
       <div class="lightbox-chrome-bar">
