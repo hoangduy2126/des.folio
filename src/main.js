@@ -32,18 +32,37 @@ function triggerHaptic(duration = 10) {
   }
 }
 
+/* ===================== BRUTALIST TOAST NOTIFICATION ===================== */
+const toastContainer = document.getElementById('toastContainer');
+function showToast(message, duration = 2600) {
+  if (!toastContainer || !message) return;
+  const toast = document.createElement('div');
+  toast.className = 'brutalist-toast';
+  toast.innerHTML = `<span class="brutalist-toast-dot" aria-hidden="true"></span><span>${message}</span>`;
+  toastContainer.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('is-visible'));
+  setTimeout(() => {
+    toast.classList.remove('is-visible');
+    setTimeout(() => toast.remove(), 250);
+  }, duration);
+}
+
 /* ===================== CURSOR (Desktop Only) ===================== */
 const cursor = document.getElementById('cursor');
 const trail  = document.getElementById('cursorTrail');
 const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
 if (!isTouchDevice && cursor && trail) {
-  let mx = 0, my = 0;
+  const setCursorX = gsap.quickSetter(cursor, 'x', 'px');
+  const setCursorY = gsap.quickSetter(cursor, 'y', 'px');
+  const moveTrailX = gsap.quickTo(trail, 'x', { duration: 0.14, ease: 'power2.out' });
+  const moveTrailY = gsap.quickTo(trail, 'y', { duration: 0.14, ease: 'power2.out' });
   document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    gsap.to(cursor, { x: mx, y: my, duration: 0 });
-    gsap.to(trail,  { x: mx, y: my, duration: 0.12 });
-  });
+    setCursorX(e.clientX);
+    setCursorY(e.clientY);
+    moveTrailX(e.clientX);
+    moveTrailY(e.clientY);
+  }, { passive: true });
 
   document.addEventListener('mouseleave', () => {
     cursor.style.opacity = '0';
@@ -157,6 +176,7 @@ const translations = {
     tools_tech_title: '// 3D_CAD_&_CODE',
     tools_env_title: '// ENVIRONMENT',
     works_label: '03_MY_WORKS',
+    works_section_label: '03_SELECTED_WORKS',
     works_sub: '// SELECTED GRAPHIC DESIGN & BRANDING PROJECTS',
     btn_see_more: 'SEE MORE [FULL VIEW]',
     btn_close_detail: 'CLOSE [ESC]',
@@ -233,13 +253,16 @@ const translations = {
     contact_headline: 'Got an idea or project?<br>Let\'s talk, <span class="accent2">Duy</span>\'s here.',
     contact_tagline: '// reach out via email or zalo — quick replies, no complicated forms.',
     contact_email_label: 'Email',
+    contact_email_sub: '// Replies within 24 hours',
     contact_phone_label: 'Zalo / Phone',
+    contact_phone_sub: '// Direct chat & quick project inquiries',
     contact_btn_mail: 'Send mail',
     contact_btn_zalo: 'Chat Zalo',
     contact_btn_call: 'Call now',
     contact_btn_copy: 'Copy',
     contact_btn_copied: 'Copied ✓',
     contact_socials_label: '// or find me here —',
+    footer_copy: '© 2026 HOÀNG DUY — ALL RIGHTS RESERVED',
     footer_version: 'v3.0.0 · VERTICAL FLOW',
     topbar_tz: 'GMT+7 · INDOCHINA',
     panel_name_0: 'HOME',
@@ -254,25 +277,25 @@ const translations = {
     nav_info: 'GIỚI THIỆU & KỸ NĂNG',
     nav_works: 'DỰ ÁN TIÊU BIỂU',
     nav_contact: 'LIÊN HỆ',
-    nav_status: 'SẴN SÀNG NHẬN DỰ ÁN',
+    nav_status: 'SẴN SÀNG',
     theme_day: 'NGÀY',
     theme_night: 'ĐÊM',
     menu: 'MENU',
     menu_close: 'ĐÓNG',
     mobile_nav_title: '// ĐIỀU HƯỚNG',
     mobile_drawer_footer: '// HOÀNG DUY · NHÀ THIẾT KẾ ĐỒ HOẠ',
-    hero_tag: 'CHƯA BIẾT BẠN LÀ AI, NHƯNG CHÀO MỪNG NHÉ!',
+    hero_tag: 'CHÀO MỪNG ĐẾN PHÒNG THÍ NGHIỆM CỦA MOEE!',
     hero_hi: 'XIN CHÀO!',
-    hero_is_here: 'ĐÃ Ở ĐÂY',
+    hero_is_here: 'ĐÃ CÓ MẶT',
     btn_view_work: 'XEM_DỰ_ÁN',
-    btn_contact: 'LIÊN_HỆ_NGAY',
+    btn_contact: 'LIÊN_HỆ',
     stat_exp: 'NĂM_KN',
     stat_projects: 'DỰ_ÁN',
-    stat_open: 'SẴN_SÀNG_LÀM_VIỆC',
+    stat_open: 'NHẬN_DỰ_ÁN',
     stat_devotion: 'TẬN TÂM',
     profile_role: 'NHÀ THIẾT KẾ ĐỒ HOẠ',
     profile_loc: 'HÀ NỘI, VN 🇻🇳',
-    showcase_reel_label: '// DÒNG_TRÌNH_DIỄN_TIÊU_BIỂU',
+    showcase_reel_label: '// ẤN_PHẨM_TIÊU_BIỂU',
     info_about_label: '01_VỀ_BẢN_THÂN',
     info_about_bio: 'Xin chào, mình là Hoàng Duy (Randommoee06) — một graphic designer và sinh viên thiết kế đang học tập, làm việc tại Hà Nội. Với mình, thiết kế chưa bao giờ chỉ là làm cho mọi thứ trông bắt mắt; đó là cách chân thành nhất để kể một câu chuyện, giải quyết vấn đề và chạm tới cảm xúc của mọi người.',
     info_about_bio_sub: 'Dù là xây dựng bộ nhận diện thương hiệu từ con số không, sáng tạo chiến dịch mạng xã hội, hay thử nghiệm với typography và phong cách brutalism, mình luôn dành trọn tâm huyết cho từng chi tiết nhỏ. Mình luôn giữ tinh thần học hỏi, tò mò và tìm kiếm những cơ hội hợp tác ý nghĩa cùng những người tâm huyết với sản phẩm họ tạo ra.',
@@ -330,6 +353,7 @@ const translations = {
     tools_tech_title: '// 3D_CAD_&_LẬP_TRÌNH',
     tools_env_title: '// MÔI TRƯỜNG & NỀN TẢNG',
     works_label: '03_DỰ_ÁN_TIÊU_BIỂU',
+    works_section_label: '03_DỰ_ÁN_TIÊU_BIỂU',
     works_sub: '// CÁC DỰ ÁN THIẾT KẾ ĐỒ HOẠ & THƯƠNG HIỆU CHỌN LỌC',
     btn_see_more: 'XEM CHI TIẾT [ĐẦY ĐỦ]',
     btn_close_detail: 'ĐÓNG [ESC]',
@@ -402,19 +426,22 @@ const translations = {
     p4_slide_2: '// SLIDE 02 · ĐỒ HOẠ ĐẾM NGƯỢC 3 GIỜ',
     p4_slide_3: '// SLIDE 03 · THÔNG BÁO ĐÓNG ĐƠN ĐĂNG KÝ',
     contact_label: '04_LIÊN_HỆ_&_HỢP_TÁC',
-    contact_status: '● Đang nhận dự án mới',
+    contact_status: '● Đang nhận dự án mới · Sẵn sàng hợp tác',
     contact_headline: 'Có ý tưởng hay dự án mới?<br>Nhắn <span class="accent2">Duy</span> ngay nhé.',
-    contact_tagline: '// liên hệ qua mail hoặc zalo — phản hồi nhanh, không form phức tạp.',
-    contact_email_label: 'Email',
-    contact_phone_label: 'Zalo / Hotline',
-    contact_btn_mail: 'Gửi mail',
-    contact_btn_zalo: 'Chat Zalo',
-    contact_btn_call: 'Gọi ngay',
+    contact_tagline: '// liên hệ qua email hoặc zalo — phản hồi nhanh, không thủ tục rườm rà.',
+    contact_email_label: 'Địa chỉ Email',
+    contact_email_sub: '// Phản hồi thư trong vòng 24 giờ',
+    contact_phone_label: 'Zalo / Điện thoại',
+    contact_phone_sub: '// Trò chuyện trực tiếp & trao đổi dự án nhanh',
+    contact_btn_mail: 'Gửi email ↗',
+    contact_btn_zalo: 'Chat Zalo 💬',
+    contact_btn_call: 'Gọi ngay 📞',
     contact_btn_copy: 'Sao chép',
     contact_btn_copied: 'Đã chép ✓',
-    contact_socials_label: '// hoặc tìm mình ở đây —',
-    footer_version: 'v3.0.0 · CUỘN DỌC TỰ NHIÊN',
-    topbar_tz: 'GMT+7 · ĐÔNG DƯƠNG',
+    contact_socials_label: '// KẾT NỐI QUA MẠNG XÃ HỘI',
+    footer_copy: '© 2026 HOÀNG DUY — BẢN QUYỀN ĐƯỢC BẢO LƯU',
+    footer_version: "v3.0.0 · THE MOEE'S LAB",
+    topbar_tz: 'GMT+7 · HÀ NỘI',
     panel_name_0: 'TRANG CHỦ',
     panel_name_1: 'GIỚI THIỆU',
     panel_name_2: 'DỰ ÁN',
@@ -422,49 +449,71 @@ const translations = {
   }
 };
 
-const rolesEn = [
-  'Graphic Designer',
-  'Social & Branding Specialist',
-  'Brand Identity Designer',
-  'Visual Storyteller',
-  'Key Visual & Poster Artist',
+// TODO: Thay bằng các câu quotes cá nhân của bạn sau
+const quotesEn = [
+  'Ctrl + Z is my favorite cardio.',
+  'Powered by iced coffee and stubborn pixels.',
+  'Make it pop—just not with Comic Sans.',
+  'Good kerning is an act of kindness.',
+  '99% of design is knowing what to delete.',
+  'Pixels aligned, brain slightly caffeinated.',
+  'Less clutter, more character.',
+  'Warning: may spontaneously obsess over 1px.',
+  'Turning wild ideas into crisp visual stories.',
+  'Stay curious, keep shipping cool stuff.',
 ];
-const rolesVi = [
-  'Nhà Thiết Kế Đồ Hoạ',
-  'Chuyên Viên Nhận Diện & Social Media',
-  'Thiết Kế Bộ Nhận Diện Thương Hiệu',
-  'Kể Chuyện Bằng Hình Ảnh',
-  'Thiết Kế Key Visual & Poster',
+const quotesVi = [
+  'Ctrl + Z là bài tập cardio mỗi ngày.',
+  'Chạy bằng cà phê sữa đá và những pixel lì lợm.',
+  'Làm cho nó nổi bật — miễn đừng dùng Comic Sans.',
+  'Căn chỉnh từng pixel cho tới khi vừa mắt mới chịu.',
+  '99% thiết kế giỏi là biết nên bỏ bớt thứ gì.',
+  'Ít rườm rà, nhiều cá tính hơn.',
+  'Cảnh báo: có thể mất 30 phút chỉ để soi lệch 1px.',
+  'Biến ý tưởng táo bạo thành câu chuyện thị giác.',
+  'Deadline có thể dí, nhưng gu thẩm mỹ thì không vội.',
+  'Luôn tò mò, luôn thử nghiệm điều mới mẻ.',
 ];
 
 let currentLang = localStorage.getItem('des_lang') || 'en';
-let roles = currentLang === 'vi' ? rolesVi : rolesEn;
+let quotes = currentLang === 'vi' ? quotesVi : quotesEn;
 
-/* ===================== TYPEWRITER ===================== */
-let roleIdx = 0, charIdx = 0, deleting = false;
+/* ===================== TYPEWRITER (RANDOM QUOTES) ===================== */
+function pickRandomQuoteIdx(list, prevIdx) {
+  if (list.length <= 1) return 0;
+  let next;
+  do {
+    next = Math.floor(Math.random() * list.length);
+  } while (next === prevIdx);
+  return next;
+}
+
+let quoteIdx = pickRandomQuoteIdx(quotes, -1);
+let charIdx = 0;
+let deleting = false;
 const tw = document.getElementById('typewriter');
 let typeTimer = null;
 
 function typeLoop() {
   if (!tw) return;
-  const current = roles[roleIdx] || roles[0];
+  const current = quotes[quoteIdx] || quotes[0];
   tw.textContent = deleting ? current.slice(0, charIdx--) : current.slice(0, ++charIdx);
   if (!deleting && charIdx === current.length) {
-    typeTimer = setTimeout(() => { deleting = true; typeLoop(); }, 1800);
+    typeTimer = setTimeout(() => { deleting = true; typeLoop(); }, 2200);
     return;
   }
   if (deleting && charIdx === 0) {
     deleting = false;
-    roleIdx = (roleIdx + 1) % roles.length;
+    quoteIdx = pickRandomQuoteIdx(quotes, quoteIdx);
   }
-  typeTimer = setTimeout(typeLoop, deleting ? 40 : 80);
+  typeTimer = setTimeout(typeLoop, deleting ? 28 : 55);
 }
 typeLoop();
 
 function restartTypewriter() {
   clearTimeout(typeTimer);
-  roles = currentLang === 'vi' ? rolesVi : rolesEn;
-  roleIdx = 0;
+  quotes = currentLang === 'vi' ? quotesVi : quotesEn;
+  quoteIdx = pickRandomQuoteIdx(quotes, -1);
   charIdx = 0;
   deleting = false;
   if (tw) tw.textContent = '';
@@ -649,7 +698,12 @@ const lightboxModal      = document.getElementById('lightboxModal');
 const lightboxBackdrop   = document.getElementById('lightboxBackdrop');
 const lightboxCloseBtn   = document.getElementById('lightboxCloseBtn');
 const lightboxFilename   = document.getElementById('lightboxFilename');
+const lightboxCounter    = document.getElementById('lightboxCounter');
+const lightboxPrevBtn    = document.getElementById('lightboxPrevBtn');
+const lightboxNextBtn    = document.getElementById('lightboxNextBtn');
 const lightboxImg        = document.getElementById('lightboxImg');
+let lightboxItems        = [];
+let lightboxIndex        = 0;
 
 let currentSection    = 0;
 let detailOverlayOpen = false;
@@ -710,21 +764,10 @@ function updateScrollProgress() {
   }
 }
 
-// Listen to Lenis smooth scroll and native scroll events
+// Listen to Lenis smooth scroll events (single unified scroll callback)
 lenis.on('scroll', () => {
   updateScrollProgress();
 });
-
-let isScrollTicking = false;
-window.addEventListener('scroll', () => {
-  if (!isScrollTicking) {
-    window.requestAnimationFrame(() => {
-      updateScrollProgress();
-      isScrollTicking = false;
-    });
-    isScrollTicking = true;
-  }
-}, { passive: true });
 
 // IntersectionObserver to accurately track the active section in view
 const sectionObserver = new IntersectionObserver((entries) => {
@@ -836,27 +879,27 @@ const WORKS_DATA = {
     },
     gallery: [
       {
-        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Banner.png',
+        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Banner.webp',
         span: 'full',
         badge: { en: '// PANORAMIC IDENTITY BANNER', vi: '// BANNER NHẬN DIỆN TOÀN CẢNH' }
       },
       {
-        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/LOGO.png',
+        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/LOGO.webp',
         span: 'half',
         badge: { en: '// GEOMETRIC VECTOR LOGO', vi: '// BIỂU TRƯNG HÌNH HỌC VECTOR' }
       },
       {
-        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Recruitment.png',
+        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Recruitment.webp',
         span: 'half',
         badge: { en: '// GEN 1 RECRUITMENT POSTER', vi: '// ẤN PHẨM TUYỂN QUÂN GEN 1' }
       },
       {
-        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Members.png',
+        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Members.webp',
         span: 'half',
         badge: { en: '// MEMBER ROSTER INFOGRAPHIC', vi: '// INFOGRAPHIC DANH SÁCH THÀNH VIÊN' }
       },
       {
-        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%202%20Recruitment.png',
+        src: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%202%20Recruitment.webp',
         span: 'half',
         badge: { en: '// GEN 2 RECRUITMENT CAMPAIGN', vi: '// ẤN PHẨM TUYỂN QUÂN GEN 2' }
       }
@@ -865,7 +908,7 @@ const WORKS_DATA = {
       en: 'Established a recognizable identity that helped attract over 80 applicant submissions across two generations, positioning CRC as one of the most vibrant student academic clubs at Viet Tri High School.',
       vi: 'Xây dựng bản sắc thương hiệu nhận diện rõ nét, thu hút hơn 80 đơn ứng tuyển qua 2 mùa tuyển quân, đưa CRC trở thành một trong những câu lạc bộ học thuật kỹ thuật sôi nổi nhất trường THPT Việt Trì.'
     },
-    link: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Banner.png'
+    link: '/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Banner.webp'
   },
   2: {
     file: '04_sov_media_ecosystem.sys', year: '02/2023 — 07/2024', startDate: 'FEB 2023', endDate: 'JUL 2024', duration: '17 MONTHS',
@@ -889,44 +932,44 @@ const WORKS_DATA = {
     gallery: [
       // DIVISION 1: CAMPAIGNS & SOCIAL (7 items)
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.2.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.2.webp',
         span: 'full',
         division: 'campaigns',
         divisionLabel: { en: '01. CAMPAIGNS & KEY VISUALS', vi: '01. CHIẾN DỊCH & KEY VISUAL' },
         badge: { en: '// YOUTH MONTH 26/3 KEY VISUAL', vi: '// KEY VISUAL THÁNG THANH NIÊN 26/3' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Milestone.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Milestone.webp',
         span: 'full',
         division: 'campaigns',
         badge: { en: '// MILESTONE CAMPAIGN BANNER', vi: '// BANNER CỘT MỐC TRUYỀN THÔNG' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Poster.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Poster.webp',
         span: 'half',
         division: 'campaigns',
         badge: { en: '// FLAGSHIP EVENT POSTER', vi: '// POSTER SỰ KIỆN CHỦ ĐẠO' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Radio%202.jpg',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Radio%202.webp',
         span: 'half',
         division: 'campaigns',
         badge: { en: '// SOV RADIO EPISODE 02 COVER', vi: '// ẢNH BÌA SOV RADIO SỐ 02' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Th%C3%A1ng%20thanh%20ni%C3%AAn.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.webp',
         span: 'half',
         division: 'campaigns',
         badge: { en: '// YOUTH MONTH CAMPAIGN 01', vi: '// CHIẾN DỊCH THÁNG THANH NIÊN 01' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/TSMT.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/TSMT.webp',
         span: 'half',
         division: 'campaigns',
         badge: { en: '// EXAM SEASON SUPPORT CAMPAIGN', vi: '// CHIẾN DỊCH TIẾP SỨC MÙA THI' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Radio%201.jpg',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Request%20Radio.webp',
         span: 'half',
         division: 'campaigns',
         badge: { en: '// SOV RADIO EPISODE 01 COVER', vi: '// ẢNH BÌA SOV RADIO SỐ 01' }
@@ -934,53 +977,53 @@ const WORKS_DATA = {
 
       // DIVISION 2: CERTIFICATES & RECOGNITIONS (4 items)
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/Gen%202.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%202.webp',
         span: 'half',
         division: 'certificates',
         divisionLabel: { en: '02. CERTIFICATES & FORMAL AWARDS', vi: '02. BẰNG KHEN & VINH DANH' },
         badge: { en: '// GEN 2 MERIT CERTIFICATE', vi: '// GIẤY CHỨNG NHẬN THÀNH VIÊN GEN 2' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%201.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%201.webp',
         span: 'half',
         division: 'certificates',
-        badge: { en: '// DISTINGUISHED CONTRIBUTION AWARD', vi: '// BẰNG VINH DANH CỐNG HIẾN ĐẶC BIỆT' }
+        badge: { en: '// DISTINGUISHED CONTRIBUTION AWARD GEN 1', vi: '// BẰNG VINH DANH CỐNG HIẾN GEN 1' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/Gen%201%20fixed.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%202.webp',
         span: 'half',
         division: 'certificates',
-        badge: { en: '// GEN 1 MERIT CERTIFICATE (REFINED)', vi: '// GIẤY CHỨNG NHẬN GEN 1 (HIỆU CHỈNH)' }
+        badge: { en: '// DISTINGUISHED CONTRIBUTION AWARD GEN 2', vi: '// BẰNG VINH DANH CỐNG HIẾN GEN 2' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/Gen%201.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%201.webp',
         span: 'half',
         division: 'certificates',
-        badge: { en: '// GEN 1 MERIT CERTIFICATE (ORIGINAL)', vi: '// GIẤY CHỨNG NHẬN GEN 1 (GỐC)' }
+        badge: { en: '// GEN 1 MERIT CERTIFICATE', vi: '// GIẤY CHỨNG NHẬN THÀNH VIÊN GEN 1' }
       },
 
       // DIVISION 3: FRAMES & FAREWELL (4 items)
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/%C4%90H%C4%90B%20LXI.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/%C4%90H%C4%90B%20LXI.webp',
         span: 'quarter',
         division: 'frames',
         divisionLabel: { en: '03. AVATAR FRAMES & FAREWELL MEDIA', vi: '03. KHUNG ĐẠI DIỆN & TRI ÂN' },
         badge: { en: '// 61ST YOUTH CONGRESS PROFILE FRAME', vi: '// KHUNG ĐẠI DIỆN ĐHĐB LXI' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/Th%C3%A1ng%20thanh%20ni%C3%AAn%202023.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/Th%C3%A1ng%20thanh%20ni%C3%AAn%202023.webp',
         span: 'quarter',
         division: 'frames',
         badge: { en: '// YOUTH MONTH 2023 PROFILE FRAME', vi: '// KHUNG ĐẠI DIỆN THÁNG THANH NIÊN 2023' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K58.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K58.webp',
         span: 'quarter',
         division: 'frames',
         badge: { en: '// CLASS K58 FAREWELL TRIBUTE', vi: '// ẤN PHẨM TRI ÂN KHOÁ K58' }
       },
       {
-        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K59.png',
+        src: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K59.webp',
         span: 'quarter',
         division: 'frames',
         badge: { en: '// CLASS K59 FAREWELL TRIBUTE', vi: '// ẤN PHẨM TRI ÂN KHOÁ K59' }
@@ -990,7 +1033,7 @@ const WORKS_DATA = {
       en: 'Established visual design benchmarks across all student media channels at Viet Tri High School. Campaigns reached over 15,000 users, certificates of merit were officially presented at the school gala, and avatar frames achieved hundreds of simultaneous adoptions during major youth congresses.',
       vi: 'Thiết lập chuẩn mực thẩm mỹ chuyên nghiệp cho toàn bộ kênh truyền thông học đường tại THPT Việt Trì. Các chiến dịch tiếp cận hơn 15.000 lượt xem, toàn bộ bằng khen được in trang trọng trao tặng tại Gala thường niên và khung đại diện đạt hàng trăm lượt sử dụng đồng loạt trong các kỳ đại hội.'
     },
-    link: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.2.png'
+    link: '/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.2.webp'
   },
   3: {
     file: '01_our_memories_yearbook.sys', year: '05/2024', startDate: 'MAY 2024', endDate: 'MAY 2024', duration: '1 MONTH',
@@ -1013,27 +1056,27 @@ const WORKS_DATA = {
     },
     gallery: [
       {
-        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/1.png',
+        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/1.webp',
         span: 'full',
         badge: { en: '// HERO PANORAMIC DOUBLE SPREAD', vi: '// KỶ YẾU TOÀN CẢNH · TRANG TRẢI ĐÔI CHỦ ĐẠO' }
       },
       {
-        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%201.png',
+        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%201.webp',
         span: 'half',
         badge: { en: '// EDITORIAL SPREAD 01 · "OUR YOUTH"', vi: '// DÀN TRANG 01 · "THANH XUÂN CỦA CHÚNG TA"' }
       },
       {
-        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%202%20fix.png',
+        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%202%20fix.webp',
         span: 'half',
         badge: { en: '// EDITORIAL SPREAD 02 · PHOTO ESSAY', vi: '// DÀN TRANG 02 · KHOẢNH KHẮC THANH XUÂN' }
       },
       {
-        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%203.png',
+        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%203.webp',
         span: 'half',
         badge: { en: '// EDITORIAL SPREAD 03 · CLASSROOM NOSTALGIA', vi: '// DÀN TRANG 03 · KỶ NIỆM LỚP HỌC' }
       },
       {
-        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%204.png',
+        src: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%204.webp',
         span: 'half',
         badge: { en: '// EDITORIAL SPREAD 04 · COMMEMORATIVE FINALE', vi: '// DÀN TRANG 04 · LƯU BÚT TỐT NGHIỆP' }
       }
@@ -1042,7 +1085,7 @@ const WORKS_DATA = {
       en: 'Printed as a commemorative yearbook treasured by students, teachers, and parents, receiving extensive acclaim for its elegant editorial layout, typography harmony, and emotional storytelling.',
       vi: 'Xuất bản thành ấn phẩm kỷ yếu lưu niệm trang trọng được thầy cô, phụ huynh và tập thể lớp gìn giữ, nhận được nhiều lời khen ngợi về dàn trang tinh tế, typography hài hòa và chiều sâu cảm xúc.'
     },
-    link: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/1.png'
+    link: '/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/1.webp'
   },
   4: {
     file: '03_unleash_campaign.sys', year: '06/2023 — 07/2023', startDate: 'JUN 2023', endDate: 'JUL 2023', duration: '2 MONTHS',
@@ -1065,17 +1108,17 @@ const WORKS_DATA = {
     },
     gallery: [
       {
-        src: '/assets/Projects/Unleash/Coreteam%20Recruitment.png',
+        src: '/assets/Projects/Unleash/Coreteam%20Recruitment.webp',
         span: 'third',
         badge: { en: 'PHASE 01 · RECRUITMENT', vi: 'GIAI ĐOẠN 01 · TUYỂN NÒNG CỐT' }
       },
       {
-        src: '/assets/Projects/Unleash/3h%20left.png',
+        src: '/assets/Projects/Unleash/3h%20left.webp',
         span: 'third',
         badge: { en: 'PHASE 02 · 3-HOUR COUNTDOWN', vi: 'GIAI ĐOẠN 02 · ĐẾM NGƯỢC 3 GIỜ' }
       },
       {
-        src: '/assets/Projects/Unleash/Form%20Closed.png',
+        src: '/assets/Projects/Unleash/Form%20Closed.webp',
         span: 'third',
         badge: { en: 'PHASE 03 · APPLICATION CLOSED', vi: 'GIAI ĐOẠN 03 · ĐÓNG ĐƠN ĐĂNG KÝ' }
       }
@@ -1084,7 +1127,7 @@ const WORKS_DATA = {
       en: 'The promotional campaign generated viral countdown urgency in the final hours, securing top-tier core team applications and laying the foundation for a successful orientation event.',
       vi: 'Chiến dịch truyền thông tạo hiệu ứng đếm ngược lan tỏa mạnh mẽ trong những giờ chót, thu hút nhiều hồ sơ nòng cốt chất lượng cao và tạo tiền đề vững chắc cho chuỗi sự kiện chào tân học sinh.'
     },
-    link: '/assets/Projects/Unleash/Coreteam%20Recruitment.png'
+    link: '/assets/Projects/Unleash/Coreteam%20Recruitment.webp'
   }
 };
 
@@ -1196,17 +1239,48 @@ function closeDetail() {
   currentWorkId = null;
 }
 
-/* Lightbox Modal Controller */
+/* Lightbox Modal Controller with Prev / Next Gallery Navigation */
+function renderLightboxAt(idx) {
+  if (!lightboxImg || lightboxItems.length === 0) return;
+  lightboxIndex = (idx + lightboxItems.length) % lightboxItems.length;
+  const item = lightboxItems[lightboxIndex];
+  lightboxImg.src = item.src;
+  lightboxImg.alt = item.name || 'Enlarged project asset';
+  if (lightboxFilename) lightboxFilename.textContent = item.name || decodeURIComponent(item.src).split('/').pop() || 'asset.webp';
+  if (lightboxCounter) {
+    lightboxCounter.textContent = lightboxItems.length > 1 ? `${lightboxIndex + 1} / ${lightboxItems.length}` : '';
+  }
+  const hideNav = lightboxItems.length <= 1;
+  lightboxPrevBtn?.classList.toggle('is-hidden', hideNav);
+  lightboxNextBtn?.classList.toggle('is-hidden', hideNav);
+}
+
 function openLightbox(src, name) {
   if (!lightboxModal || !lightboxImg) return;
   triggerHaptic(10);
-  lightboxImg.src = src;
-  lightboxImg.alt = name || 'Enlarged project asset';
-  if (lightboxFilename) lightboxFilename.textContent = name || decodeURIComponent(src).split('/').pop() || 'asset.png';
+  const galleryEls = detailGallery ? Array.from(detailGallery.querySelectorAll('.detail-gallery-item[data-src]')) : [];
+  if (galleryEls.length > 0) {
+    lightboxItems = galleryEls.map(el => ({
+      src: el.getAttribute('data-src'),
+      name: el.getAttribute('data-name') || ''
+    }));
+    const foundIdx = lightboxItems.findIndex(i => i.src === src);
+    lightboxIndex = foundIdx >= 0 ? foundIdx : 0;
+  } else {
+    lightboxItems = [{ src, name: name || '' }];
+    lightboxIndex = 0;
+  }
+  renderLightboxAt(lightboxIndex);
   lightboxModal.classList.add('is-open');
   document.body.classList.add('modal-open');
   lenis.stop();
   lightboxModal.setAttribute('aria-hidden', 'false');
+}
+
+function navigateLightbox(delta) {
+  if (lightboxItems.length <= 1) return;
+  triggerHaptic(8);
+  renderLightboxAt(lightboxIndex + delta);
 }
 
 function closeLightbox() {
@@ -1220,6 +1294,9 @@ function closeLightbox() {
   lightboxModal.setAttribute('aria-hidden', 'true');
   if (lightboxImg) lightboxImg.src = '';
 }
+
+lightboxPrevBtn?.addEventListener('click', e => { e.stopPropagation(); navigateLightbox(-1); });
+lightboxNextBtn?.addEventListener('click', e => { e.stopPropagation(); navigateLightbox(1); });
 
 /* Swipe-down-to-dismiss gestures for mobile detail modal and lightbox */
 let detailTouchStartY = 0;
@@ -1277,10 +1354,13 @@ lightboxModal?.addEventListener('touchstart', e => {
 lightboxModal?.addEventListener('touchend', e => {
   if (!lightboxModal.classList.contains('is-open') || !e.changedTouches || !e.changedTouches[0]) return;
   const dy = e.changedTouches[0].clientY - lightboxTouchStartY;
-  const dx = Math.abs(e.changedTouches[0].clientX - lightboxTouchStartX);
-  if (dy > 60 && dy > dx * 1.3) {
+  const rawDx = e.changedTouches[0].clientX - lightboxTouchStartX;
+  const absDx = Math.abs(rawDx);
+  if (dy > 60 && dy > absDx * 1.3) {
     triggerHaptic(10);
     closeLightbox();
+  } else if (absDx > 45 && absDx > Math.abs(dy) * 1.2) {
+    navigateLightbox(rawDx < 0 ? 1 : -1);
   }
 }, { passive: true });
 
@@ -1497,6 +1577,36 @@ function initSocialInteractions() {
     });
   });
 
+  // Comment buttons -> open full project details overlay
+  document.querySelectorAll('.btn-comment').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      triggerHaptic(10);
+      const card = btn.closest('.timeline-project');
+      const id = card ? parseInt(card.dataset.workId, 10) : null;
+      if (id) openDetail(id);
+    });
+  });
+
+  // Works category filter buttons
+  const filterBtns = document.querySelectorAll('.works-filter-btn');
+  const workCards = document.querySelectorAll('.timeline-project');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      triggerHaptic(10);
+      const cat = btn.dataset.filter || 'all';
+      filterBtns.forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', String(active));
+      });
+      workCards.forEach(card => {
+        const match = cat === 'all' || card.dataset.category === cat;
+        card.classList.toggle('is-filtered-out', !match);
+      });
+    });
+  });
+
   // Bookmark save buttons
   document.querySelectorAll('.btn-bookmark').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -1520,8 +1630,8 @@ function initSocialInteractions() {
         }).catch(() => {});
       } else if (navigator.clipboard) {
         navigator.clipboard.writeText(window.location.href).then(() => {
-          const msg = currentLang === 'vi' ? 'Đã sao chép liên kết dự án vào bộ nhớ tạm!' : 'Project link copied to clipboard!';
-          alert(msg);
+          const msg = currentLang === 'vi' ? 'Đã sao chép liên kết dự án!' : 'Project link copied to clipboard!';
+          showToast(msg);
         }).catch(() => {});
       }
     });
@@ -1543,16 +1653,15 @@ worksDetailOverlay?.addEventListener('click', e => {
   }
 });
 
-// Escape key closes lightbox or detail modal
+// Keyboard navigation for Lightbox & Detail modal
 window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    if (lightboxModal?.classList.contains('is-open')) {
-      closeLightbox();
-      return;
-    }
-    if (detailOverlayOpen) {
-      closeDetail();
-    }
+  if (lightboxModal?.classList.contains('is-open')) {
+    if (e.key === 'Escape') { closeLightbox(); return; }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); navigateLightbox(-1); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); navigateLightbox(1); return; }
+  }
+  if (e.key === 'Escape' && detailOverlayOpen) {
+    closeDetail();
   }
 });
 
@@ -1578,6 +1687,7 @@ document.querySelectorAll('.copy-trigger').forEach(btn => {
     const doFeedback = () => {
       btn.classList.add('is-copied');
       if (textEl) textEl.textContent = copiedLabel;
+      showToast(currentLang === 'vi' ? `Đã sao chép: ${copyText}` : `Copied: ${copyText}`);
       setTimeout(() => {
         btn.classList.remove('is-copied');
         if (textEl) textEl.textContent = dict.contact_btn_copy || origLabel;
@@ -1608,27 +1718,32 @@ const DAYS_FULL_EN = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
 const MONTHS_VI    = ['THG 1','THG 2','THG 3','THG 4','THG 5','THG 6','THG 7','THG 8','THG 9','THG 10','THG 11','THG 12'];
 const DAYS_FULL_VI = ['CN','T2','T3','T4','T5','T6','T7'];
 
+const bkkFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Asia/Bangkok',
+  year: 'numeric', month: 'numeric', day: 'numeric',
+  weekday: 'short', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+});
+const WEEKDAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+const tbDigitsEl = document.getElementById('tbDigits');
+const tbAmpmEl   = document.getElementById('tbAmpm');
+const tbDateEl   = document.getElementById('tbDate');
+
 function updateTopbarClock() {
-  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }));
-  let h = now.getHours();
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  h = h % 12 || 12;
-  const hh = String(h).padStart(2, '0');
-  const mm = String(now.getMinutes()).padStart(2, '0');
-  const ss = String(now.getSeconds()).padStart(2, '0');
-
-  const digits = document.getElementById('tbDigits');
-  if (digits) digits.innerHTML = `${hh}<span class="topbar-colon">:</span>${mm}<span class="topbar-colon">:</span>${ss}`;
-
-  const ampmEl = document.getElementById('tbAmpm');
-  if (ampmEl) ampmEl.textContent = ampm;
-
-  const dateEl = document.getElementById('tbDate');
-  if (dateEl) {
+  const parts = {};
+  for (const p of bkkFormatter.formatToParts(new Date())) {
+    parts[p.type] = p.value;
+  }
+  if (tbDigitsEl) {
+    tbDigitsEl.innerHTML = `${parts.hour}<span class="topbar-colon">:</span>${parts.minute}<span class="topbar-colon">:</span>${parts.second}`;
+  }
+  if (tbAmpmEl) tbAmpmEl.textContent = (parts.dayPeriod || 'AM').toUpperCase();
+  if (tbDateEl) {
     const isVi = currentLang === 'vi';
-    const dayName = isVi ? DAYS_FULL_VI[now.getDay()] : DAYS_FULL_EN[now.getDay()];
-    const monthName = isVi ? MONTHS_VI[now.getMonth()] : MONTHS_EN[now.getMonth()];
-    dateEl.textContent = `${dayName} · ${now.getDate()} ${monthName} ${now.getFullYear()}`;
+    const dayIdx = WEEKDAY_INDEX[parts.weekday] ?? 0;
+    const monthIdx = (parseInt(parts.month, 10) || 1) - 1;
+    const dayName = isVi ? DAYS_FULL_VI[dayIdx] : DAYS_FULL_EN[dayIdx];
+    const monthName = isVi ? MONTHS_VI[monthIdx] : MONTHS_EN[monthIdx];
+    tbDateEl.textContent = `${dayName} · ${parts.day} ${monthName} ${parts.year}`;
   }
 }
 
@@ -1751,3 +1866,209 @@ document.querySelectorAll('.sc-card').forEach(card => {
 
 // Initialize language (restores saved language or defaults to 'en')
 applyLanguage(currentLang);
+
+/* ===================== PIXEL POP MINIGAME (LANDING PAGE) ===================== */
+(function initPixelPopGame() {
+  const layer = document.getElementById('pixelGameLayer');
+  const scoreEl = document.getElementById('pixelGameScore');
+  const toggleBtn = document.getElementById('pixelGameToggle');
+  if (!layer || !scoreEl || !toggleBtn) return;
+
+  const BALLOON_COLOR_VARS = ['--pop-c1', '--pop-c2', '--pop-c3', '--pop-c4', '--pop-c5'];
+  const getMaxTargets = () => (window.innerWidth <= 600 ? 4 : 6);
+  const getSpawnMs = () => (window.innerWidth <= 600 ? 1850 : 1550);
+
+  let score = 0;
+  let bestScore = parseInt(localStorage.getItem('des_pop_best') || '0', 10) || 0;
+  let isActive = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let spawnTimer = null;
+  let rafId = null;
+  let audioCtx = null;
+  const targets = [];
+
+  function playPopSound(isStar) {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      if (!audioCtx) audioCtx = new Ctx();
+      if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = isStar ? 'triangle' : 'square';
+      osc.frequency.setValueAtTime(isStar ? 580 : 340, now);
+      osc.frequency.exponentialRampToValueAtTime(isStar ? 1040 : 680, now + 0.08);
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } catch (_) {}
+  }
+
+  function createPixelBalloonSvg(colorVar) {
+    return `<svg width="28" height="36" viewBox="0 0 7 9" shape-rendering="crispEdges" aria-hidden="true">
+      <rect x="2" y="0" width="3" height="1" fill="var(${colorVar})"/>
+      <rect x="1" y="1" width="5" height="4" fill="var(${colorVar})"/>
+      <rect x="2" y="2" width="1" height="1" fill="var(--pop-shine)"/>
+      <rect x="2" y="5" width="3" height="1" fill="var(${colorVar})"/>
+      <rect x="3" y="6" width="1" height="1" fill="var(${colorVar})"/>
+      <rect x="3" y="7" width="1" height="2" fill="var(--pop-string)"/>
+    </svg>`;
+  }
+
+  function createPixelStarSvg() {
+    return `<svg width="28" height="28" viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true">
+      <rect x="3" y="0" width="1" height="7" fill="var(--pop-star)"/>
+      <rect x="0" y="3" width="7" height="1" fill="var(--pop-star)"/>
+      <rect x="2" y="1" width="3" height="5" fill="var(--pop-star)"/>
+      <rect x="1" y="2" width="5" height="3" fill="var(--pop-star)"/>
+      <rect x="3" y="2" width="1" height="1" fill="var(--pop-star-core)"/>
+    </svg>`;
+  }
+
+  function updateHud() {
+    const formatted = String(score).padStart(2, '0');
+    scoreEl.textContent = `★ ${formatted}`;
+    scoreEl.title = bestScore > 0 ? `Best: ${bestScore}` : 'Click floating pixel balloons & stars!';
+    toggleBtn.setAttribute('aria-pressed', String(isActive));
+    toggleBtn.textContent = isActive ? 'PLAY: ON' : 'PLAY: OFF';
+  }
+
+  function spawnConfetti(x, y, colorVar, label) {
+    const particleCount = window.innerWidth <= 600 ? 6 : 8;
+    for (let i = 0; i < particleCount; i++) {
+      const p = document.createElement('span');
+      p.className = 'pixel-particle';
+      p.style.background = `var(${colorVar})`;
+      layer.appendChild(p);
+      const angle = (Math.PI * 2 * i) / particleCount + Math.random() * 0.35;
+      const dist = 22 + Math.random() * 26;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist;
+      gsap.fromTo(p,
+        { x, y, scale: 1, opacity: 1 },
+        { x: x + dx, y: y + dy, scale: 0.2, opacity: 0, duration: 0.45, ease: 'power2.out', onComplete: () => p.remove() }
+      );
+    }
+    const text = document.createElement('span');
+    text.className = 'pixel-pop-float';
+    text.textContent = label;
+    text.style.color = `var(${colorVar})`;
+    layer.appendChild(text);
+    gsap.fromTo(text,
+      { x: x - 8, y: y - 10, opacity: 1, scale: 0.8 },
+      { y: y - 42, opacity: 0, scale: 1.2, duration: 0.65, ease: 'power2.out', onComplete: () => text.remove() }
+    );
+  }
+
+  function spawnTarget() {
+    if (!isActive || targets.length >= getMaxTargets()) return;
+    const rect = layer.getBoundingClientRect();
+    if (rect.width < 60 || rect.height < 60) return;
+
+    const isStar = Math.random() < 0.25;
+    const colorVar = isStar ? '--pop-star' : BALLOON_COLOR_VARS[Math.floor(Math.random() * BALLOON_COLOR_VARS.length)];
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'pixel-target';
+    btn.setAttribute('aria-label', isStar ? 'Pop pixel star (+3 points)' : 'Pop pixel balloon (+1 point)');
+    btn.innerHTML = isStar ? createPixelStarSvg() : createPixelBalloonSvg(colorVar);
+
+    const startX = 18 + Math.random() * Math.max(40, rect.width - 64);
+    const startY = rect.height + 10;
+    const item = {
+      el: btn,
+      x: startX,
+      y: startY,
+      baseX: startX,
+      speedY: (isStar ? 1.15 : 0.72) + Math.random() * 0.45,
+      swayAmp: 8 + Math.random() * 14,
+      swayFreq: 0.015 + Math.random() * 0.015,
+      phase: Math.random() * Math.PI * 2,
+      isStar,
+      colorVar,
+      popped: false,
+    };
+
+    btn.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+    btn.addEventListener('pointerdown', e => {
+      e.stopPropagation();
+      if (item.popped) return;
+      item.popped = true;
+      triggerHaptic(12);
+      playPopSound(item.isStar);
+      const pts = item.isStar ? 3 : 1;
+      score += pts;
+      if (score > bestScore) {
+        bestScore = score;
+        localStorage.setItem('des_pop_best', String(bestScore));
+      }
+      updateHud();
+      spawnConfetti(item.x + 14, item.y + 14, item.colorVar, item.isStar ? '+3 ★' : '+1');
+      if (score === 10 || score === 25 || score === 50) {
+        const msg = currentLang === 'vi'
+          ? `Combo ${score} điểm Pixel Pop! Tuyệt vời 🎉`
+          : `Reached ${score} Pixel Pop points! 🎉`;
+        showToast(msg);
+      }
+      btn.remove();
+      const idx = targets.indexOf(item);
+      if (idx !== -1) targets.splice(idx, 1);
+    });
+
+    layer.appendChild(btn);
+    targets.push(item);
+  }
+
+  function tick() {
+    if (!isActive) return;
+    for (let i = targets.length - 1; i >= 0; i--) {
+      const t = targets[i];
+      if (t.popped) continue;
+      t.y -= t.speedY;
+      t.phase += t.swayFreq;
+      t.x = t.baseX + Math.sin(t.phase) * t.swayAmp;
+      if (t.y < -48) {
+        t.el.remove();
+        targets.splice(i, 1);
+      } else {
+        t.el.style.transform = `translate3d(${t.x.toFixed(1)}px, ${t.y.toFixed(1)}px, 0)`;
+      }
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function startGame() {
+    clearInterval(spawnTimer);
+    cancelAnimationFrame(rafId);
+    isActive = true;
+    updateHud();
+    spawnTarget();
+    setTimeout(spawnTarget, 450);
+    spawnTimer = setInterval(spawnTarget, getSpawnMs());
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function stopGame() {
+    isActive = false;
+    clearInterval(spawnTimer);
+    cancelAnimationFrame(rafId);
+    while (targets.length) {
+      const t = targets.pop();
+      t?.el.remove();
+    }
+    updateHud();
+  }
+
+  toggleBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    triggerHaptic(10);
+    if (isActive) stopGame();
+    else startGame();
+  });
+
+  if (isActive) startGame();
+  else updateHud();
+})();

@@ -11,11 +11,38 @@
   <link
     href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
+  <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Desfolio - The Moee's Lab | Hoàng Duy Portfolio" />
+  <meta property="og:description" content="Graphic Designer portfolio focusing on Brand Identity, Social Media Campaigns, Editorial Design & Visual Storytelling." />
+  <meta property="og:image" content="/assets/anh1.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Desfolio - The Moee's Lab | Hoàng Duy Portfolio" />
+  <meta name="twitter:description" content="Graphic Designer portfolio focusing on Brand Identity, Social Media Campaigns & Editorial Design." />
+  <meta name="twitter:image" content="/assets/anh1.webp" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
-  <link rel="stylesheet" href="/src/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hoàng Duy",
+    "alternateName": "Randommoee06",
+    "jobTitle": "Graphic Designer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Hanoi", "addressCountry": "VN" },
+    "sameAs": [
+      "https://www.behance.net/hoangduy2126",
+      "https://github.com/hoangduy2126",
+      "https://www.linkedin.com/in/duy-ho%C3%A0ng-720699405/",
+      "https://www.instagram.com/06s_.moe",
+      "https://www.facebook.com/moeedidauuu/"
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
 
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
@@ -25,8 +52,8 @@
   <nav class="nav" id="nav">
     <div class="nav-logo">
       <a href="#hero" class="nav-logo-link" data-panel="0" aria-label="Desfolio Home" title="Desfolio">
-        <img src="/assets/LIGHT_THEME_LOGO.png" alt="Desfolio Logo" class="nav-logo-img nav-logo-img--light" width="36" height="36" loading="eager" decoding="async" />
-        <img src="/assets/DARK_THEME_LOGO.png" alt="Desfolio Logo" class="nav-logo-img nav-logo-img--dark" width="36" height="36" loading="eager" decoding="async" />
+        <img src="/assets/LIGHT_THEME_LOGO.png" alt="Desfolio Logo" class="nav-logo-img nav-logo-img--light" width="28" height="28" loading="eager" decoding="async" />
+        <img src="/assets/DARK_THEME_LOGO.png" alt="Desfolio Logo" class="nav-logo-img nav-logo-img--dark" width="28" height="28" loading="eager" decoding="async" />
       </a>
     </div>
     <ul class="nav-links">
@@ -176,8 +203,14 @@
               <span class="ww-dot g"></span>
             </div>
             <span class="window-title mono-text">hoangduy_identity.sys</span>
+            <div class="pixel-game-hud" id="pixelGameHud">
+              <span class="pixel-game-score mono-text" id="pixelGameScore" title="Click floating pixel balloons &amp; stars!">★ 00</span>
+              <button type="button" class="pixel-game-toggle mono-text" id="pixelGameToggle" aria-pressed="true" title="Toggle Pixel Pop Minigame">PLAY: ON</button>
+            </div>
             <span class="window-id mono-text">01</span>
           </div>
+          <!-- Pixel Pop Minigame Canvas Layer -->
+          <div class="pixel-game-layer" id="pixelGameLayer" aria-hidden="true"></div>
           <div class="p-identity-body">
             <div class="hero-tag mono-text" id="heroTag" data-i18n="hero_tag">DUNNO WHO YOU ARE, BUT WELCOME!</div>
             <h1 class="hero-name pixel-text" id="heroName">
@@ -259,42 +292,42 @@
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">crc_banner.png</span>
                 </div>
-                <img src="/assets/crc_banner.png" alt="CRC Robotics Panoramic Banner" loading="eager">
+                <img src="/assets/crc_banner.webp" alt="CRC Robotics Panoramic Banner" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">anh1.png</span>
                 </div>
-                <img src="/assets/anh1.png" alt="Our Memories Yearbook Spread" loading="eager">
+                <img src="/assets/anh1.webp" alt="Our Memories Yearbook Spread" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">sov_milestone.png</span>
                 </div>
-                <img src="/assets/sov_milestone.png" alt="SOV Milestone Celebration" loading="eager">
+                <img src="/assets/sov_milestone.webp" alt="SOV Milestone Celebration" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">w25poster.png</span>
                 </div>
-                <img src="/assets/w25poster.png" alt="W25 Event Poster" loading="eager">
+                <img src="/assets/w25poster.webp" alt="W25 Event Poster" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">recruitsov.png</span>
                 </div>
-                <img src="/assets/recruitsov.png" alt="Recruit SOV Campaign" loading="eager">
+                <img src="/assets/recruitsov.webp" alt="Recruit SOV Campaign" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-short">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">ul23fc.png</span>
                 </div>
-                <img src="/assets/ul23fc.png" alt="Unleash Program Visual" loading="eager">
+                <img src="/assets/ul23fc.webp" alt="Unleash Program Visual" loading="eager" decoding="async">
               </div>
 
               <!-- set B (duplicate for seamless loop) -->
@@ -303,42 +336,42 @@
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">crc_banner.png</span>
                 </div>
-                <img src="/assets/crc_banner.png" alt="CRC Robotics Panoramic Banner" loading="lazy">
+                <img src="/assets/crc_banner.webp" alt="CRC Robotics Panoramic Banner" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">anh1.png</span>
                 </div>
-                <img src="/assets/anh1.png" alt="Our Memories Yearbook Spread" loading="lazy">
+                <img src="/assets/anh1.webp" alt="Our Memories Yearbook Spread" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">sov_milestone.png</span>
                 </div>
-                <img src="/assets/sov_milestone.png" alt="SOV Milestone Celebration" loading="lazy">
+                <img src="/assets/sov_milestone.webp" alt="SOV Milestone Celebration" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">w25poster.png</span>
                 </div>
-                <img src="/assets/w25poster.png" alt="W25 Event Poster" loading="lazy">
+                <img src="/assets/w25poster.webp" alt="W25 Event Poster" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">recruitsov.png</span>
                 </div>
-                <img src="/assets/recruitsov.png" alt="Recruit SOV Campaign" loading="lazy">
+                <img src="/assets/recruitsov.webp" alt="Recruit SOV Campaign" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-short">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">ul23fc.png</span>
                 </div>
-                <img src="/assets/ul23fc.png" alt="Unleash Program Visual" loading="lazy">
+                <img src="/assets/ul23fc.webp" alt="Unleash Program Visual" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -352,42 +385,42 @@
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">sovposter.png</span>
                 </div>
-                <img src="/assets/sovposter.png" alt="SOV Poster Key Visual" loading="eager">
+                <img src="/assets/sovposter.webp" alt="SOV Poster Key Visual" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">tsmt.png</span>
                 </div>
-                <img src="/assets/tsmt.png" alt="TSMT Campaign Project" loading="eager">
+                <img src="/assets/tsmt.webp" alt="TSMT Campaign Project" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">crc_gen1.png</span>
                 </div>
-                <img src="/assets/crc_gen1.png" alt="CRC Robotics Gen 1 Recruitment Poster" loading="eager">
+                <img src="/assets/crc_gen1.webp" alt="CRC Robotics Gen 1 Recruitment Poster" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">anh2fix.png</span>
                 </div>
-                <img src="/assets/anh2fix.png" alt="Our Memories Photo Essay" loading="eager">
+                <img src="/assets/anh2fix.webp" alt="Our Memories Photo Essay" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-short">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">ul233h.png</span>
                 </div>
-                <img src="/assets/ul233h.png" alt="UL233H Countdown" loading="eager">
+                <img src="/assets/ul233h.webp" alt="UL233H Countdown" loading="eager" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">unleash_core.png</span>
                 </div>
-                <img src="/assets/unleash_core.png" alt="Unleash Coreteam Recruitment" loading="eager">
+                <img src="/assets/unleash_core.webp" alt="Unleash Coreteam Recruitment" loading="eager" decoding="async">
               </div>
 
               <!-- set B duplicate -->
@@ -396,42 +429,42 @@
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">sovposter.png</span>
                 </div>
-                <img src="/assets/sovposter.png" alt="SOV Poster Key Visual" loading="lazy">
+                <img src="/assets/sovposter.webp" alt="SOV Poster Key Visual" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">tsmt.png</span>
                 </div>
-                <img src="/assets/tsmt.png" alt="TSMT Campaign Project" loading="lazy">
+                <img src="/assets/tsmt.webp" alt="TSMT Campaign Project" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">crc_gen1.png</span>
                 </div>
-                <img src="/assets/crc_gen1.png" alt="CRC Robotics Gen 1 Recruitment Poster" loading="lazy">
+                <img src="/assets/crc_gen1.webp" alt="CRC Robotics Gen 1 Recruitment Poster" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-tall">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">anh2fix.png</span>
                 </div>
-                <img src="/assets/anh2fix.png" alt="Our Memories Photo Essay" loading="lazy">
+                <img src="/assets/anh2fix.webp" alt="Our Memories Photo Essay" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-short">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">ul233h.png</span>
                 </div>
-                <img src="/assets/ul233h.png" alt="UL233H Countdown" loading="lazy">
+                <img src="/assets/ul233h.webp" alt="UL233H Countdown" loading="lazy" decoding="async">
               </div>
               <div class="sc-card sc-wide">
                 <div class="sc-bar">
                   <div class="ww-dots"><span class="ww-dot r"></span><span class="ww-dot y"></span><span class="ww-dot g"></span></div>
                   <span class="sc-name mono-text">unleash_core.png</span>
                 </div>
-                <img src="/assets/unleash_core.png" alt="Unleash Coreteam Recruitment" loading="lazy">
+                <img src="/assets/unleash_core.webp" alt="Unleash Coreteam Recruitment" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -694,11 +727,23 @@
       <section class="panel panel--works" id="panel-works" data-panel-index="2" data-panel-name="WORKS">
         <div class="works-panel-container">
 
+          <!-- Works Header & Category Filter -->
+          <div class="works-header-bar">
+            <div class="cell-label mono-text" data-i18n="works_section_label">03_SELECTED_WORKS</div>
+            <div class="works-filter-bar" role="tablist" aria-label="Filter projects by category">
+              <button class="works-filter-btn is-active" type="button" data-filter="all" role="tab" aria-selected="true">ALL (4)</button>
+              <button class="works-filter-btn" type="button" data-filter="editorial" role="tab" aria-selected="false">EDITORIAL</button>
+              <button class="works-filter-btn" type="button" data-filter="branding" role="tab" aria-selected="false">BRANDING</button>
+              <button class="works-filter-btn" type="button" data-filter="event" role="tab" aria-selected="false">EVENT</button>
+              <button class="works-filter-btn" type="button" data-filter="ecosystem" role="tab" aria-selected="false">ECOSYSTEM</button>
+            </div>
+          </div>
+
           <!-- Project Windows Scroll Zone -->
           <div class="works-timeline-zone" id="worksTimeline" aria-label="Projects Timeline">
 
             <!-- ── PROJECT 1: Our Memories — Kỷ Yếu THPT Việt Trì ── -->
-            <article class="timeline-project social-post-card unified-card card--wide" data-work-id="3">
+            <article class="timeline-project social-post-card unified-card card--wide" data-work-id="3" data-category="editorial">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -749,23 +794,23 @@
                       <div class="social-carousel-viewport">
                         <div class="social-carousel-slides">
                           <div class="social-slide is-active" data-slide-index="0">
-                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/1.png" alt="Our Memories Yearbook Master Cover Layout" loading="lazy" />
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/1.webp" alt="Our Memories Yearbook Master Cover Layout" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p3_slide_1">// SLIDE 01 · MASTER DOUBLE-PAGE SPREAD</div>
                           </div>
                           <div class="social-slide" data-slide-index="1">
-                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%201.png" alt="Our Memories Yearbook Photo Spread 1" loading="lazy" />
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%201.webp" alt="Our Memories Yearbook Photo Spread 1" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p3_slide_2">// SLIDE 02 · SPREAD 01 "OUR YOUTH"</div>
                           </div>
                           <div class="social-slide" data-slide-index="2">
-                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%202%20fix.png" alt="Our Memories Yearbook Photo Spread 2" loading="lazy" />
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%202%20fix.webp" alt="Our Memories Yearbook Photo Spread 2" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p3_slide_3">// SLIDE 03 · SPREAD 02 "FRIENDSHIP MOMENTS"</div>
                           </div>
                           <div class="social-slide" data-slide-index="3">
-                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%203.png" alt="Our Memories Yearbook Photo Spread 3" loading="lazy" />
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%203.webp" alt="Our Memories Yearbook Photo Spread 3" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p3_slide_4">// SLIDE 04 · SPREAD 03 "CLASSROOM NOSTALGIA"</div>
                           </div>
                           <div class="social-slide" data-slide-index="4">
-                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%204.png" alt="Our Memories Yearbook Photo Spread 4" loading="lazy" />
+                            <img src="/assets/Projects/Our%20Memories%20-%20K%E1%BB%B7%20y%E1%BA%BFu/anh%204.webp" alt="Our Memories Yearbook Photo Spread 4" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p3_slide_5">// SLIDE 05 · SPREAD 04 "GRADUATION MEMOIR"</div>
                           </div>
                         </div>
@@ -871,7 +916,7 @@
             </article>
 
             <!-- ── PROJECT 2: CRC — CLB Robotics THPT Việt Trì ── -->
-            <article class="timeline-project social-post-card unified-card card--square" data-work-id="1">
+            <article class="timeline-project social-post-card unified-card card--square" data-work-id="1" data-category="branding">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -922,23 +967,23 @@
                       <div class="social-carousel-viewport">
                         <div class="social-carousel-slides">
                           <div class="social-slide is-active" data-slide-index="0">
-                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Banner.png" alt="CRC Robotics Official Banner" loading="lazy" />
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Banner.webp" alt="CRC Robotics Official Banner" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p1_slide_1">// SLIDE 01 · OFFICIAL CLUB BANNER</div>
                           </div>
                           <div class="social-slide" data-slide-index="1">
-                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/LOGO.png" alt="CRC Robotics Geometric Vector Logo" loading="lazy" />
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/LOGO.webp" alt="CRC Robotics Geometric Vector Logo" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p1_slide_2">// SLIDE 02 · VECTOR LOGO MARK</div>
                           </div>
                           <div class="social-slide" data-slide-index="2">
-                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Recruitment.png" alt="CRC Gen 1 Recruitment Poster" loading="lazy" />
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Recruitment.webp" alt="CRC Gen 1 Recruitment Poster" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p1_slide_3">// SLIDE 03 · GEN 1 RECRUITMENT POSTER</div>
                           </div>
                           <div class="social-slide" data-slide-index="3">
-                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%202%20Recruitment.png" alt="CRC Gen 2 Recruitment Poster" loading="lazy" />
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%202%20Recruitment.webp" alt="CRC Gen 2 Recruitment Poster" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p1_slide_4">// SLIDE 04 · GEN 2 RECRUITMENT POSTER</div>
                           </div>
                           <div class="social-slide" data-slide-index="4">
-                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Members.png" alt="CRC Gen 1 Members Infographic" loading="lazy" />
+                            <img src="/assets/Projects/CRC%20-%20CLB%20Robotics%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/GEN%201%20Members.webp" alt="CRC Gen 1 Members Infographic" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p1_slide_5">// SLIDE 05 · MEMBER ROSTER INFOGRAPHIC</div>
                           </div>
                         </div>
@@ -1044,7 +1089,7 @@
             </article>
 
             <!-- ── PROJECT 3: Unleash — Creative Event & Recruitment Campaign ── -->
-            <article class="timeline-project social-post-card unified-card card--portrait" data-work-id="4">
+            <article class="timeline-project social-post-card unified-card card--portrait" data-work-id="4" data-category="event">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -1095,15 +1140,15 @@
                       <div class="social-carousel-viewport">
                         <div class="social-carousel-slides">
                           <div class="social-slide is-active" data-slide-index="0">
-                            <img src="/assets/Projects/Unleash/Coreteam%20Recruitment.png" alt="Unleash Coreteam Recruitment Poster" loading="lazy" />
+                            <img src="/assets/Projects/Unleash/Coreteam%20Recruitment.webp" alt="Unleash Coreteam Recruitment Poster" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p4_slide_1">// SLIDE 01 · CORETEAM RECRUITMENT HERO POSTER</div>
                           </div>
                           <div class="social-slide" data-slide-index="1">
-                            <img src="/assets/Projects/Unleash/3h%20left.png" alt="Unleash 3h Left Countdown Teaser" loading="lazy" />
+                            <img src="/assets/Projects/Unleash/3h%20left.webp" alt="Unleash 3h Left Countdown Teaser" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p4_slide_2">// SLIDE 02 · 3-HOUR COUNTDOWN URGENCY VISUAL</div>
                           </div>
                           <div class="social-slide" data-slide-index="2">
-                            <img src="/assets/Projects/Unleash/Form%20Closed.png" alt="Unleash Registration Form Closed Visual" loading="lazy" />
+                            <img src="/assets/Projects/Unleash/Form%20Closed.webp" alt="Unleash Registration Form Closed Visual" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p4_slide_3">// SLIDE 03 · FORM CLOSURE ANNOUNCEMENT</div>
                           </div>
                         </div>
@@ -1207,7 +1252,7 @@
             </article>
 
             <!-- ── PROJECT 4: SOV Media — Comprehensive Brand & Media Ecosystem ── -->
-            <article class="timeline-project social-post-card unified-card card--wide" data-work-id="2">
+            <article class="timeline-project social-post-card unified-card card--wide" data-work-id="2" data-category="ecosystem">
               <div class="card-window-bar">
                 <div class="ww-dots">
                   <span class="ww-dot r"></span>
@@ -1275,91 +1320,91 @@
                         <div class="social-carousel-slides">
                           <!-- SLIDE 01: 26.3.2 (Tháng Thanh Niên 2023 - Fit-Width Hero Banner) -->
                           <div class="social-slide social-slide--fit-width is-active" data-slide-index="0" data-division="campaigns">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.2.png" alt="SOV Tháng Thanh Niên 2023 Key Visual" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.2.webp" alt="SOV Tháng Thanh Niên 2023 Key Visual" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_1">// [CAMPAIGNS] 01 · THÁNG THANH NIÊN 2023 KEY VISUAL</div>
                           </div>
 
                           <!-- SLIDE 02: Milestone (2:1 Panoramic Banner) -->
                           <div class="social-slide" data-slide-index="1" data-division="campaigns">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Milestone.png" alt="SOV Milestone Achievement Banner" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Milestone.webp" alt="SOV Milestone Achievement Banner" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_2">// [CAMPAIGNS] 02 · 2:1 PANORAMIC MILESTONE BANNER</div>
                           </div>
 
                           <!-- SLIDE 03: Poster (3D Angled Mockup) -->
                           <div class="social-slide" data-slide-index="2" data-division="campaigns">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Poster.png" alt="SOV Flagship Campaign Poster" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Poster.webp" alt="SOV Flagship Campaign Poster" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_3">// [CAMPAIGNS] 03 · 3D DUAL-FLYER EVENT POSTER</div>
                           </div>
 
                           <!-- SLIDE 04: SOV Award Gen 1 (Gold Foil A4) -->
                           <div class="social-slide" data-slide-index="3" data-division="certificates">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%201.png" alt="SOV Award Certificate Gen 1" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%201.webp" alt="SOV Award Certificate Gen 1" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_4">// [AWARDS] 04 · GEN 1 EXCELLENCE AWARD (A4 FOIL)</div>
                           </div>
 
                           <!-- SLIDE 05: SOV Award Gen 2 (Gold Foil A4) -->
                           <div class="social-slide" data-slide-index="4" data-division="certificates">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%202.png" alt="SOV Award Certificate Gen 2" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20Award%20GEN%202.webp" alt="SOV Award Certificate Gen 2" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_5">// [AWARDS] 05 · GEN 2 EXCELLENCE AWARD (A4 FOIL)</div>
                           </div>
 
                           <!-- SLIDE 06: TSMT (Vibrant Summer Scrapbook) -->
                           <div class="social-slide" data-slide-index="5" data-division="campaigns">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/TSMT.png" alt="SOV Tiếp Sức Mùa Thi Campaign" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/TSMT.webp" alt="SOV Tiếp Sức Mùa Thi Campaign" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_6">// [CAMPAIGNS] 06 · TIẾP SỨC MÙA THI EXAM SUPPORT</div>
                           </div>
 
                           <!-- SLIDE 07: Radio 2 (Bokeh Podcast Cover) -->
                           <div class="social-slide" data-slide-index="6" data-division="campaigns">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Radio%202.jpg" alt="SOV Radio Series Visual" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Radio%202.webp" alt="SOV Radio Series Visual" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_7">// [CAMPAIGNS] 07 · SOV RADIO PODCAST COVER</div>
                           </div>
 
                           <!-- SLIDE 08: ĐHĐB LXI (Congress Profile Avatar Frame) -->
                           <div class="social-slide" data-slide-index="7" data-division="frames">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/%C4%90H%C4%90B%20LXI.png" alt="ĐHĐB LXI Avatar Campaign Frame" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/%C4%90H%C4%90B%20LXI.webp" alt="ĐHĐB LXI Avatar Campaign Frame" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_8">// [FRAMES] 08 · ĐHĐB LXI CONGRESS CAMPAIGN FRAME</div>
                           </div>
 
                           <!-- SLIDE 09: Tháng thanh niên 2023 Frame -->
                           <div class="social-slide" data-slide-index="8" data-division="frames">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/Th%C3%A1ng%20thanh%20ni%C3%AAn%202023.png" alt="Youth Month 2023 Avatar Frame" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Avatar%20Frames/Th%C3%A1ng%20thanh%20ni%C3%AAn%202023.webp" alt="Youth Month 2023 Avatar Frame" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_9">// [FRAMES] 09 · YOUTH MONTH 2023 AVATAR FRAME</div>
                           </div>
 
                           <!-- SLIDE 10: Request Radio -->
                           <div class="social-slide" data-slide-index="9" data-division="campaigns">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Request%20Radio.png" alt="SOV Request Radio Interactive Feed" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/Request%20Radio.webp" alt="SOV Request Radio Interactive Feed" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_10">// [CAMPAIGNS] 10 · REQUEST RADIO INTERACTIVE FEED</div>
                           </div>
 
                           <!-- SLIDE 11: 26.3 Part 1 -->
                           <div class="social-slide" data-slide-index="10" data-division="campaigns">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.png" alt="SOV 26.3 Commemorative Visual Part 1" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Social%20Posts/26.3.webp" alt="SOV 26.3 Commemorative Visual Part 1" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_11">// [CAMPAIGNS] 11 · 26/3 YOUTH MONTH SERIES (PART I)</div>
                           </div>
 
                           <!-- SLIDE 12: K58 Farewell -->
                           <div class="social-slide" data-slide-index="11" data-division="frames">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K58.png" alt="K58 Graduation Commemorative Graphic" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K58.webp" alt="K58 Graduation Commemorative Graphic" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_12">// [FAREWELL] 12 · K58 SENIOR FAREWELL COMMEMORATION</div>
                           </div>
 
                           <!-- SLIDE 13: K59 Farewell -->
                           <div class="social-slide" data-slide-index="12" data-division="frames">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K59.png" alt="K59 Graduation Commemorative Graphic" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Commemorative%20Posts/K59.webp" alt="K59 Graduation Commemorative Graphic" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_13">// [FAREWELL] 13 · K59 SENIOR FAREWELL COMMEMORATION</div>
                           </div>
 
                           <!-- SLIDE 14: SOV GEN 1 Member -->
                           <div class="social-slide" data-slide-index="13" data-division="certificates">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%201.png" alt="SOV Member Certificate Gen 1" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%201.webp" alt="SOV Member Certificate Gen 1" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_14">// [AWARDS] 14 · GEN 1 MEMBER RECOGNITION CERTIFICATE</div>
                           </div>
 
                           <!-- SLIDE 15: SOV GEN 2 Member -->
                           <div class="social-slide" data-slide-index="14" data-division="certificates">
-                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%202.png" alt="SOV Member Certificate Gen 2" loading="lazy" />
+                            <img src="/assets/Projects/SOV%20-%20CLB%20Truy%E1%BB%81n%20th%C3%B4ng%20THPT%20Vi%E1%BB%87t%20Tr%C3%AC/Certificates/SOV%20GEN%202.webp" alt="SOV Member Certificate Gen 2" loading="lazy" decoding="async" />
                             <div class="social-slide-caption mono-text" data-i18n="p2_slide_15">// [AWARDS] 15 · GEN 2 MEMBER RECOGNITION CERTIFICATE</div>
                           </div>
                         </div>
@@ -1568,12 +1613,12 @@
                 </div>
                 <div class="reach-card-content">
                   <span class="reach-card-label mono-text" data-i18n="contact_email_label">Email Address</span>
-                  <a href="mailto:hoangduy2126@gmail.com" class="reach-card-val pixel-text" id="emailDisplayVal">hoangduy2126@gmail.com</a>
-                  <p class="reach-card-sub mono-text">// Phản hồi thư trong vòng 24 giờ</p>
+                  <a href="mailto:contact@themoeeslab.win" class="reach-card-val pixel-text" id="emailDisplayVal">contact@themoeeslab.win</a>
+                  <p class="reach-card-sub mono-text" data-i18n="contact_email_sub">// Phản hồi thư trong vòng 24 giờ</p>
                 </div>
                 <div class="reach-card-actions">
-                  <a href="mailto:hoangduy2126@gmail.com" class="reach-btn reach-btn--primary mono-text" id="btnSendMail" data-i18n="contact_btn_mail">Gửi mail ngay ↗</a>
-                  <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="hoangduy2126@gmail.com" id="btnCopyEmail">
+                  <a href="mailto:contact@themoeeslab.win" class="reach-btn reach-btn--primary mono-text" id="btnSendMail" data-i18n="contact_btn_mail">Gửi mail ngay ↗</a>
+                  <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="contact@themoeeslab.win" id="btnCopyEmail">
                     <svg class="copy-icon-default" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     <span class="copy-btn-text" data-i18n="contact_btn_copy">Sao chép</span>
                   </button>
@@ -1590,13 +1635,13 @@
                 </div>
                 <div class="reach-card-content">
                   <span class="reach-card-label mono-text" data-i18n="contact_phone_label">Zalo / Hotline</span>
-                  <a href="tel:0987654321" class="reach-card-val pixel-text" id="phoneDisplayVal">+84 (0) 987 654 321</a>
-                  <p class="reach-card-sub mono-text">// Trò chuyện trực tiếp &amp; trao đổi dự án nhanh</p>
+                  <a href="tel:0942060821" class="reach-card-val pixel-text" id="phoneDisplayVal">+84 (0) 942 060 821</a>
+                  <p class="reach-card-sub mono-text" data-i18n="contact_phone_sub">// Trò chuyện trực tiếp &amp; trao đổi dự án nhanh</p>
                 </div>
                 <div class="reach-card-actions">
-                  <a href="https://zalo.me/0987654321" target="_blank" rel="noopener" class="reach-btn reach-btn--zalo mono-text" id="btnChatZalo" data-i18n="contact_btn_zalo">Chat Zalo 💬</a>
-                  <a href="tel:0987654321" class="reach-btn reach-btn--ghost mono-text" id="btnCall" data-i18n="contact_btn_call">Gọi ngay 📞</a>
-                  <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="0987654321" id="btnCopyPhone">
+                  <a href="https://zalo.me/0942060821" target="_blank" rel="noopener" class="reach-btn reach-btn--zalo mono-text" id="btnChatZalo" data-i18n="contact_btn_zalo">Chat Zalo 💬</a>
+                  <a href="tel:0942060821" class="reach-btn reach-btn--ghost mono-text" id="btnCall" data-i18n="contact_btn_call">Gọi ngay 📞</a>
+                  <button type="button" class="reach-btn reach-btn--copy mono-text copy-trigger" data-copy-target="0942060821" id="btnCopyPhone">
                     <svg class="copy-icon-default" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     <span class="copy-btn-text" data-i18n="contact_btn_copy">Sao chép</span>
                   </button>
@@ -1684,13 +1729,23 @@
           <span class="ww-dot g"></span>
         </div>
         <span class="lightbox-filename mono-text" id="lightboxFilename">asset.png</span>
+        <span class="lightbox-counter mono-text" id="lightboxCounter"></span>
         <button class="lightbox-close-btn pixel-text" id="lightboxCloseBtn" aria-label="Close lightbox">ESC ✕</button>
       </div>
       <div class="lightbox-content">
-        <img class="lightbox-img" id="lightboxImg" src="" alt="Zoomed view" />
+        <button class="lightbox-nav-btn lightbox-nav-btn--prev" id="lightboxPrevBtn" type="button" aria-label="Previous image">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Zoomed view" decoding="async" />
+        <button class="lightbox-nav-btn lightbox-nav-btn--next" id="lightboxNextBtn" type="button" aria-label="Next image">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- ── BRUTALIST TOAST NOTIFICATIONS ── -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
